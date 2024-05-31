@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player
 {
@@ -54,6 +51,7 @@ namespace Player
             if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), targetAnimation)) return;
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), targetAnimation) && Enum.IsDefined(typeof(Attacks), CurrentAnimation)) { return; }
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), targetAnimation) == true) { return; }
+            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Dash), targetAnimation) == true) { return; }
 
             animator.Play(targetAnimation);
             Debug.Log("playing " + targetAnimation);
