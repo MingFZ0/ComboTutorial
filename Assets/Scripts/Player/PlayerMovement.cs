@@ -130,15 +130,17 @@ namespace Player
 
         private void Dashing(Dash dash)
         {
-            Debug.Log(dash.ToString());
-            if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
-            else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
-            
             if (playerScript.Action(dash.ToString()))
             {
                 dashBuffer = Movement.Player_Idle;
                 IsDashing = true;
             }
+            else return;
+            Debug.Log(dash.ToString());
+            if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
+            else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
+            
+            
 
         }
 

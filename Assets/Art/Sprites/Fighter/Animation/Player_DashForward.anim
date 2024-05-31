@@ -22,14 +22,12 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -1774657775, guid: 4a8beec8314e1e746b216752294be222, type: 3}
-    - time: 0.083333336
+    - time: 0.06666667
       value: {fileID: -1752840431, guid: 4a8beec8314e1e746b216752294be222, type: 3}
-    - time: 0.2
+    - time: 0.16666667
       value: {fileID: 1392795472, guid: 4a8beec8314e1e746b216752294be222, type: 3}
-    - time: 0.38333333
+    - time: 0.28333333
       value: {fileID: 133482611, guid: 4a8beec8314e1e746b216752294be222, type: 3}
-    - time: 0.5
-      value: {fileID: -1774657775, guid: 4a8beec8314e1e746b216752294be222, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -56,13 +54,12 @@ AnimationClip:
     - {fileID: -1752840431, guid: 4a8beec8314e1e746b216752294be222, type: 3}
     - {fileID: 1392795472, guid: 4a8beec8314e1e746b216752294be222, type: 3}
     - {fileID: 133482611, guid: 4a8beec8314e1e746b216752294be222, type: 3}
-    - {fileID: -1774657775, guid: 4a8beec8314e1e746b216752294be222, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5833333
+    m_StopTime: 0.3
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -82,77 +79,35 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.2
+  - time: 0.1
     functionName: CutSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.31666666
+  - time: 0.21666667
     functionName: CutSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.38333333
+  - time: 0.25
     functionName: CutSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
+  - time: 0.26666668
     functionName: CutSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.41666666
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.43333334
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.45
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.46666667
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.48333332
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
-    functionName: CutSpeed
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5833333
+  - time: 0.28333333
     functionName: FinishedDashing
     data: 
     objectReferenceParameter: {fileID: 0}

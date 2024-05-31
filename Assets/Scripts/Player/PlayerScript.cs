@@ -23,6 +23,7 @@ namespace Player
 
         public bool Action(string action)
         {
+            if (playerAttack.IsAttacking) { return false; }
             if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) return false;
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) return false;
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) return false;
