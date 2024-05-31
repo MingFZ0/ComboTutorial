@@ -10,7 +10,6 @@ namespace Player
         //Fields
         private Rigidbody2D rb2d;
         private PlayerControlsInput playerControlsInput;
-        private Vector2 previousMovement;
         private bool held;
 
         private PlayerAnimator playerAnimator;
@@ -23,12 +22,10 @@ namespace Player
         private Movement dashBuffer;
         [SerializeField] private float dashBufferMemory;
         private float dashBufferTime;
-        private float dashTimer;
 
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
         [SerializeField] private float dashSpeed;
-        [SerializeField] private float dashDuration;
 
         private void Awake()
         {
@@ -40,79 +37,39 @@ namespace Player
 
             playerControlsInput = new PlayerControlsInput();
             playerControlsInput.Player.Enable();
-            playerControlsInput.Player.Move.performed += Moving => held = true;
-            playerControlsInput.Player.Move.canceled += _ => held = false;
           
         }
 
         private void Update()
         {
-            if (IsDashing)
+           
+            if (IsDashing) { return; }
+            if (held) PrepareDash();
+            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && IsDashing == false) StoreDashBuffer();
+            
+            
+
+            //Check for Attacking
+            if (playerAttack.IsAttacking)
             {
-                dashTimer -= Time.deltaTime;
-                if (dashTimer < 0) 
-                { 
-                    IsDashing = false;
-                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                }
-            }
-            else if (IsDashing == false)
-            {
-                if (IsDashing == false && dashBufferTime == 0)
-                {
-                    dashBufferTime = dashBufferMemory;
-                }
-                else if (playerControlsInput.Player.Right.WasPerformedThisFrame() && dashBuffer == Movement.Player_WalkForward && dashBufferTime > 0 && IsDashing == false) Dashing(Dash.Player_DashForward);
-                else if (playerControlsInput.Player.Left.WasPerformedThisFrame() && dashBuffer == Movement.Player_WalkBackward && dashBufferTime > 0 && IsDashing == false) Dashing(Dash.Player_DashBackward);
-
-                if (dashBufferTime > 0) { dashBufferTime -= Time.deltaTime; }
-                else { dashBuffer = Movement.Player_Idle; }
-
-
-                if (playerAttack.IsAttacking)
-                {
-                    rb2d.velocity = new Vector2(0, 0);
-                    return;
-                }
-                if (held) Moving(previousMovement);
-                else
-                {
-                    previousMovement = new Vector2(0, 0);
-                    playerAnimator.Moving("Idle");
-                }
-
-                if (dashBufferTime >= 0) dashBufferTime -= Time.deltaTime;
-                else dashBuffer = Movement.Player_Idle;
+                rb2d.velocity = new Vector2(0, 0);
+                return;
             }
 
-        }
-
-        public void Moving(InputAction.CallbackContext context)
-        {
-            if (IsDashing) return;
-            Vector2 movement = context.ReadValue<Vector2>();
-
-            if (movement.x == 0 || movement.y < 0)
-            {
-                previousMovement = new Vector2(0, rb2d.velocity.y);
-            }
-            else if (movement.x != 0)
-            {
-                if (movement.x > 0) { playerAnimator.Moving("Forward"); }
-                else { playerAnimator.Moving("Backward"); }
-
-                previousMovement = new Vector2(movement.x * speed, rb2d.velocity.y);
-            }
+            //Check for Movement
+            if (playerControlsInput.Player.Move.IsPressed()) Moving();
             else
             {
-                previousMovement = new Vector2(0, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(0, 0);
+                playerAnimator.Moving("Idle");
             }
 
-            rb2d.velocity = previousMovement;
         }
 
-        public void Moving(Vector2 movement)
+
+        private void Moving()
         {
+            Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
             if (IsDashing) return;
             if (movement.x != 0)
             {
@@ -124,10 +81,49 @@ namespace Player
                     playerAnimator.Moving("Backward");
                     dashBuffer = Movement.Player_WalkBackward;
                 }
-                dashBufferTime = dashBufferMemory;
             }
 
-            rb2d.velocity = previousMovement;
+            rb2d.velocity = new Vector2(movement.x * speed, rb2d.velocity.y);
+        }
+
+        /// <summary>
+        /// Storing Buffer for Dash && Start BufferTimer if the player moves
+        /// </summary>
+        /// <returns></returns>
+        private void StoreDashBuffer()
+        {
+            Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
+
+            if (movement.x > 0) dashBuffer = Movement.Player_WalkForward;
+            if (movement.x < 0) dashBuffer = Movement.Player_WalkBackward;
+            else if (movement.x == 0)
+            {
+                dashBuffer = Movement.Player_Idle;
+                return;
+            }
+
+            dashBufferTime = dashBufferMemory;
+            held = true;
+        }
+        
+        private void PrepareDash()
+        {
+            if (playerControlsInput.Player.Move.WasPressedThisFrame() && IsDashing == false && dashBufferTime >= 0)
+            {
+                Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
+                if (movement.x > 0 && dashBuffer.ToString() == Movement.Player_WalkForward.ToString()) Dashing(Dash.Player_DashForward);
+                else if (movement.x < 0 && dashBuffer.ToString() == Movement.Player_WalkBackward.ToString()) Dashing(Dash.Player_DashBackward);
+                Debug.Log("Dash Ready!");
+                return;
+            }
+
+            if (dashBufferTime < 0)
+            {
+                held = false;
+                dashBufferTime = dashBufferMemory;
+            }
+            else dashBufferTime -= Time.deltaTime;
+            return;
         }
 
         private void Dashing(Dash dash)
@@ -135,13 +131,21 @@ namespace Player
             Debug.Log(dash.ToString());
             if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
             else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
+            playerAnimator.Dashing(dash);
 
-            //previousMovement = new Vector2(dashSpeed, 0);
             dashBuffer = Movement.Player_Idle;
-            dashTimer = dashDuration;
             IsDashing = true;
 
         }
-    }
 
+        public void CutSpeed()
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);
+        }
+
+        public void FinishedDashing()
+        {
+            IsDashing = false;
+        }
+    }
 }

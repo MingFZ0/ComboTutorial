@@ -9,6 +9,7 @@ namespace Player
     public class PlayerAnimator : MonoBehaviour
     {
         private PlayerAttack playerAttack;
+        private PlayerMovement playerMovement;
 
         private Animator animator;
 
@@ -17,6 +18,7 @@ namespace Player
 
         private void Awake()
         {
+            playerMovement = GetComponent<PlayerMovement>();
             playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
         }
@@ -40,10 +42,16 @@ namespace Player
             else { ChangeAnimation(move.ToString()); }
         }
 
+        public void Dashing(Dash dash)
+        {
+            ChangeAnimation(dash.ToString());
+        }
+
         private void ChangeAnimation(string targetAnimation)
         {
             if (CurrentAnimation == targetAnimation) return;
-            
+
+            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), targetAnimation)) return;
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), targetAnimation) && Enum.IsDefined(typeof(Attacks), CurrentAnimation)) { return; }
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), targetAnimation) == true) { return; }
 

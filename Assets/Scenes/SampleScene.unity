@@ -454,8 +454,7 @@ MonoBehaviour:
   dashBufferMemory: 0.2
   speed: 3
   jumpForce: 1
-  dashSpeed: 6
-  dashDuration: 0.3
+  dashSpeed: 8
 --- !u!114 &1149195080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
