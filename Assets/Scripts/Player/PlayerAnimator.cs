@@ -25,33 +25,28 @@ namespace Player
             Debug.Log("Jumping!");
         }
 
-        public void Moving(string dir)
-        {
-            //Debug.Log(dir);
-            if (dir == "Forward") ChangeAnimation(Movement.Player_WalkForward.ToString());
-            else if (dir == "Backward") ChangeAnimation(Movement.Player_WalkForward.ToString());
-            else ChangeAnimation(Movement.Player_Idle.ToString());
-        }
+        //public void Moving(string dir)
+        //{
+        //    //Debug.Log(dir);
+        //    if (dir == "Forward") ChangeAnimation(Movement.Player_WalkForward.ToString());
+        //    else if (dir == "Backward") ChangeAnimation(Movement.Player_WalkForward.ToString());
+        //    else ChangeAnimation(Movement.Player_Idle.ToString());
+        //}
 
-        public void Attacking(Attacks move)
-        {
-            if (move == Attacks.Player_None) ChangeAnimation(Movement.Player_Idle.ToString());
-            else { ChangeAnimation(move.ToString()); }
-        }
+        //public void Attacking(Attacks move)
+        //{
+        //    if (move == Attacks.Player_None) ChangeAnimation(Movement.Player_Idle.ToString());
+        //    else { ChangeAnimation(move.ToString()); }
+        //}
 
-        public void Dashing(Dash dash)
-        {
-            ChangeAnimation(dash.ToString());
-        }
+        //public void Dashing(Dash dash)
+        //{
+        //    ChangeAnimation(dash.ToString());
+        //}
 
-        private void ChangeAnimation(string targetAnimation)
+        public void ChangeAnimation(string targetAnimation)
         {
             if (CurrentAnimation == targetAnimation) return;
-
-            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), targetAnimation)) return;
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), targetAnimation) && Enum.IsDefined(typeof(Attacks), CurrentAnimation)) { return; }
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), targetAnimation) == true) { return; }
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Dash), targetAnimation) == true) { return; }
 
             animator.Play(targetAnimation);
             Debug.Log("playing " + targetAnimation);

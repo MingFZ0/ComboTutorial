@@ -12,6 +12,7 @@ namespace Player
         private PlayerControlsInput playerControlsInput;
         private bool held;
 
+        private PlayerScript playerScript;
         private PlayerAnimator playerAnimator;
         private PlayerAttack playerAttack;
 
@@ -29,6 +30,7 @@ namespace Player
 
         private void Awake()
         {
+            playerScript = GetComponent<PlayerScript>();
             playerAnimator = GetComponent<PlayerAnimator>();
             playerAttack = GetComponent<PlayerAttack>();
 
@@ -61,7 +63,7 @@ namespace Player
             else
             {
                 rb2d.velocity = new Vector2(0, 0);
-                playerAnimator.Moving("Idle");
+                playerScript.Action(Movement.Player_Idle.ToString());
             }
 
         }
@@ -74,11 +76,11 @@ namespace Player
             if (movement.x != 0)
             {
                 if (movement.x > 0) { 
-                    playerAnimator.Moving("Forward");
+                    playerScript.Action(Movement.Player_WalkForward.ToString());
                     dashBuffer = Movement.Player_WalkForward;
                 }
-                else { 
-                    playerAnimator.Moving("Backward");
+                else {
+                    playerScript.Action(Movement.Player_WalkBackward.ToString());
                     dashBuffer = Movement.Player_WalkBackward;
                 }
             }
@@ -131,10 +133,12 @@ namespace Player
             Debug.Log(dash.ToString());
             if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
             else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
-            playerAnimator.Dashing(dash);
-
-            dashBuffer = Movement.Player_Idle;
-            IsDashing = true;
+            
+            if (playerScript.Action(dash.ToString()))
+            {
+                dashBuffer = Movement.Player_Idle;
+                IsDashing = true;
+            }
 
         }
 

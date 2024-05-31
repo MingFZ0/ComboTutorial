@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     //Script References
+    private PlayerScript playerScript;
     private PlayerAnimator playerAnimator;
     private PlayerControlsInput playerControlsInput;
 
@@ -16,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
+        playerScript = GetComponent<PlayerScript>();
 
         playerControlsInput = new PlayerControlsInput();
         playerControlsInput.Player.Enable();
@@ -32,19 +34,19 @@ public class PlayerAttack : MonoBehaviour
     private void LightAttack5L()
     {
         Debug.Log("5L");
-        playerAnimator.Attacking(Attacks.Player_5L);
+        playerScript.Action(Attacks.Player_5L.ToString());
     }
 
     private void LightAttack2L()
     {
         Debug.Log("2L");
-        playerAnimator.Attacking(Attacks.Player_2L);
+        playerScript.Action(Attacks.Player_2L.ToString());
     }
 
     public void FinishAttack()
     {
         IsAttacking = false;
-        playerAnimator.Moving(Movement.Player_Idle.ToString());
+        playerScript.Action(Movement.Player_Idle.ToString());
     }
 
 }
