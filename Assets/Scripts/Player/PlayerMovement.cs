@@ -115,7 +115,7 @@ namespace Player
                 Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
                 if (movement.x > 0 && dashBuffer.ToString() == Movement.Player_WalkForward.ToString()) Dashing(Dash.Player_DashForward);
                 else if (movement.x < 0 && dashBuffer.ToString() == Movement.Player_WalkBackward.ToString()) Dashing(Dash.Player_DashBackward);
-                Debug.Log("Dash Ready!");
+                //Debug.Log("Dash Ready!");
                 return;
             }
 
@@ -132,11 +132,10 @@ namespace Player
         {
             if (playerScript.Action(dash.ToString()))
             {
+                //Debug.Log(dash.ToString());
                 dashBuffer = Movement.Player_Idle;
                 IsDashing = true;
-            }
-            else return;
-            Debug.Log(dash.ToString());
+            } else return;
             if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
             else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
             
@@ -151,7 +150,9 @@ namespace Player
 
         public void FinishedDashing()
         {
+            //Debug.Log("Dash Ended");
             IsDashing = false;
+            playerScript.Action(Movement.Player_Idle.ToString());
         }
     }
 }

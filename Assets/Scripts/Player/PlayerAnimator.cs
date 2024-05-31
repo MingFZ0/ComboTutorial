@@ -49,7 +49,7 @@ namespace Player
             if (CurrentAnimation == targetAnimation) return;
 
             animator.Play(targetAnimation);
-            Debug.Log("playing " + targetAnimation);
+            //Debug.Log("playing " + targetAnimation);
             CurrentAnimation = targetAnimation;
         }
     }

@@ -31,7 +31,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.31666666
+        time: 0.23333333
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -54,13 +54,13 @@ AnimationClip:
       value: {fileID: 419026269, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
     - time: 0
       value: {fileID: 1140762848, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
-    - time: 0.05
+    - time: 0.033333335
       value: {fileID: 1073030397, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
     - time: 0.16666667
       value: {fileID: 260991860, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
-    - time: 0.28333333
+    - time: 0.2
       value: {fileID: -1911216825, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
-    - time: 0.31666666
+    - time: 0.23333333
       value: {fileID: -1911216825, guid: d276a1c7f7c963e42815251b96b825a1, type: 3}
     attribute: m_Sprite
     path: 
@@ -104,7 +104,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -134,7 +134,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.31666666
+        time: 0.23333333
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -154,7 +154,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.31666666
+  - time: 0.23333333
     functionName: FinishAttack
     data: 
     objectReferenceParameter: {fileID: 0}

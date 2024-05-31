@@ -7,6 +7,8 @@ public enum Attacks
     Player_None,
     Player_5L,
     Player_2L,
+    Player_5H,
+    Player_2H,
 
 }
 
