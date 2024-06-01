@@ -44,12 +44,11 @@ namespace Player
 
         private void Update()
         {
-            if (IsDashing) return;
             if (held) PrepareDash();
-            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && IsDashing == false && playerAttack.IsAttacking == false) StoreDashBuffer();
+            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
 
-
+            if (IsDashing) return;
             //Check for Attacking
             if (playerAttack.IsAttacking)
             {
@@ -119,6 +118,7 @@ namespace Player
                 Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
                 if (movement.x > 0 && dashBuffer.ToString() == Movement.Player_WalkForward.ToString()) Dashing(Dash.Player_DashForward);
                 else if (movement.x < 0 && dashBuffer.ToString() == Movement.Player_WalkBackward.ToString()) Dashing(Dash.Player_DashBackward);
+                held = false;
                 //Debug.Log("Dash Ready!");
                 return;
             }
