@@ -60,11 +60,11 @@ public class PlayerAttack : MonoBehaviour
         if (playerScript.Action(Attacks.Player_2H.ToString())) IsAttacking = true;
     }
 
-    public void FinishAttack()
-    {
-        //Debug.Log("Attack Finished");
-        IsAttacking = false;
-        playerScript.Action(Movement.Player_Idle.ToString());
-    }
+    //public void FinishAttack()
+    //{
+    //    //Debug.Log("Attack Finished");
+    //    IsAttacking = false;
+    //    playerScript.Action(Movement.Player_Idle.ToString());
+    //}
 
 }

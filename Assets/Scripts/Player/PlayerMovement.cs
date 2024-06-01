@@ -44,12 +44,11 @@ namespace Player
 
         private void Update()
         {
-           
-            if (IsDashing) { return; }
+            if (IsDashing) return;
             if (held) PrepareDash();
-            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && IsDashing == false) StoreDashBuffer();
-            
-            
+            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && IsDashing == false && playerAttack.IsAttacking == false) StoreDashBuffer();
+
+
 
             //Check for Attacking
             if (playerAttack.IsAttacking)
@@ -78,6 +77,11 @@ namespace Player
                 if (movement.x > 0) { 
                     playerScript.Action(Movement.Player_WalkForward.ToString());
                     dashBuffer = Movement.Player_WalkForward;
+                }
+                else if (movement.y != 0)
+                {
+                    //placeholder for now
+                    playerScript.Action(Movement.Player_Idle.ToString());
                 }
                 else {
                     playerScript.Action(Movement.Player_WalkBackward.ToString());
@@ -138,21 +142,11 @@ namespace Player
             } else return;
             if (dash == Dash.Player_DashForward) rb2d.velocity = new Vector2(dashSpeed, 0);
             else if (dash == Dash.Player_DashBackward) rb2d.velocity = new Vector2(-dashSpeed, 0);
-            
-            
-
         }
 
         public void CutSpeed()
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);
-        }
-
-        public void FinishedDashing()
-        {
-            //Debug.Log("Dash Ended");
-            IsDashing = false;
-            playerScript.Action(Movement.Player_Idle.ToString());
         }
     }
 }

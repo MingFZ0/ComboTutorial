@@ -47,12 +47,9 @@ namespace Player
             if (result && action == Movement.Player_Idle.ToString() && bufferedAction != Movement.Player_Idle.ToString() && bufferedTimer >= 0)
             {
                 Debug.Log("Replacing Current Action " + action + "With Buffered Action " + bufferedAction);
-                Debug.Log(bufferedTimer);
                 action = bufferedAction;
                 bufferedAction = Movement.Player_Idle.ToString();
                 bufferedTimer = -1;
-                playerAnimator.ChangeAnimation(action);
-                return true;
             }
 
             playerAnimator.ChangeAnimation(action);

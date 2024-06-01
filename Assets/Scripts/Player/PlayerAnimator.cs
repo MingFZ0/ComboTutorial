@@ -44,12 +44,16 @@ namespace Player
         //    ChangeAnimation(dash.ToString());
         //}
 
+        public void ResetAnimation()
+        {
+            ChangeAnimation(Movement.Player_Idle.ToString());
+        }
+
         public void ChangeAnimation(string targetAnimation)
         {
             if (CurrentAnimation == targetAnimation) return;
 
             animator.Play(targetAnimation);
-            //Debug.Log("playing " + targetAnimation);
             CurrentAnimation = targetAnimation;
         }
     }
