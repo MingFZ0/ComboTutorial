@@ -15,7 +15,6 @@ namespace Player
         private string currentAction;
         private string bufferedAction;
         private float bufferedTimer;
-        [SerializeField] private float bufferedMemory;
 
         private void Awake()
         {
@@ -40,13 +39,14 @@ namespace Player
             if (result == false)
             {
                 bufferedAction = action;
-                bufferedTimer = bufferedMemory;
+                bufferedTimer = playerAnimator.CurrentAnimationClip.length;
+                if (bufferedAction == Dash.Player_DashForward.ToString()) Debug.Log("Buffering Dash");
                 return result;
             }
 
             if (result && action == Movement.Player_Idle.ToString() && bufferedAction != Movement.Player_Idle.ToString() && bufferedTimer >= 0)
             {
-                Debug.Log("Replacing Current Action " + action + "With Buffered Action " + bufferedAction);
+                Debug.Log("Replacing Current Action " + action + " With Buffered Action " + bufferedAction);
                 action = bufferedAction;
                 bufferedAction = Movement.Player_Idle.ToString();
                 bufferedTimer = -1;

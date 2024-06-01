@@ -11,6 +11,7 @@ namespace Player
         private Animator animator;
 
         public string CurrentAnimation { get; private set; }
+        public AnimationClip CurrentAnimationClip { get; private set; }
 
 
         private void Awake()
@@ -55,6 +56,16 @@ namespace Player
 
             animator.Play(targetAnimation);
             CurrentAnimation = targetAnimation;
+            AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+            foreach (AnimationClip clip in clips)
+            {
+                //O(n) Operation
+                if (clip.name == CurrentAnimation)
+                {
+                    CurrentAnimationClip = clip;
+                    return;
+                }
+            }
         }
     }
 }
