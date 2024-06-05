@@ -52,13 +52,13 @@ namespace Player
         public bool Action(string action)
         {
             bool result = true;
-            if (playerAttack.IsAttacking) result = false;
-            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) result = false;
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) result = false;
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) result = false;
-            if (playerAnimator.IsResettingAnimation) result = false;
+            if (playerAttack.IsAttacking) { result = false; }
+            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
+            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
+            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
+            if (playerAnimator.IsResettingAnimation) { result = false; }
 
-            if (playerAttack.IsAttacking && isCancelable == true && Enum.IsDefined(typeof(Attacks), action)) result = true;
+            if (playerAttack.IsAttacking && isCancelable == true && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
 
             if (result == false) { return false; }
 
