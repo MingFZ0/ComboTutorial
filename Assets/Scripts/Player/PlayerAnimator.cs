@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player
@@ -7,8 +8,10 @@ namespace Player
     {
         private PlayerAttack playerAttack;
         private PlayerMovement playerMovement;
+        private ActionScript actionScript; 
 
         private Animator animator;
+        public bool IsResettingAnimation;
 
         public string CurrentAnimation { get; private set; }
         public AnimationClip CurrentAnimationClip { get; private set; }
@@ -16,6 +19,7 @@ namespace Player
 
         private void Awake()
         {
+            actionScript = GetComponent<ActionScript>();
             playerMovement = GetComponent<PlayerMovement>();
             playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
@@ -26,33 +30,21 @@ namespace Player
             Debug.Log("Jumping!");
         }
 
-        //public void Moving(string dir)
-        //{
-        //    //Debug.Log(dir);
-        //    if (dir == "Forward") ChangeAnimation(Movement.Player_WalkForward.ToString());
-        //    else if (dir == "Backward") ChangeAnimation(Movement.Player_WalkForward.ToString());
-        //    else ChangeAnimation(Movement.Player_Idle.ToString());
-        //}
-
-        //public void Attacking(Attacks move)
-        //{
-        //    if (move == Attacks.Player_None) ChangeAnimation(Movement.Player_Idle.ToString());
-        //    else { ChangeAnimation(move.ToString()); }
-        //}
-
-        //public void Dashing(Dash dash)
-        //{
-        //    ChangeAnimation(dash.ToString());
-        //}
-
         public void ResetAnimation()
         {
-            ChangeAnimation(Movement.Player_Idle.ToString());
+            if (ChangeAnimation(Movement.Player_Idle.ToString()))
+            {
+                IsResettingAnimation = true;
+                Debug.Log("Reset Animation to Idle");
+                //actionScript.Action(Movement.Player_Idle.ToString());
+                
+            };
+            
         }
 
-        public void ChangeAnimation(string targetAnimation)
+        public bool ChangeAnimation(string targetAnimation)
         {
-            if (CurrentAnimation == targetAnimation) return;
+            if (CurrentAnimation == targetAnimation) return false;
 
             animator.Play(targetAnimation);
             CurrentAnimation = targetAnimation;
@@ -63,9 +55,10 @@ namespace Player
                 if (clip.name == CurrentAnimation)
                 {
                     CurrentAnimationClip = clip;
-                    return;
+                    return true;
                 }
             }
+            return true;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Player
         private PlayerControlsInput playerControlsInput;
         private bool held;
 
-        private PlayerScript playerScript;
+        private ActionScript actionScript;
         private PlayerAnimator playerAnimator;
         private PlayerAttack playerAttack;
 
@@ -30,7 +30,7 @@ namespace Player
 
         private void Awake()
         {
-            playerScript = GetComponent<PlayerScript>();
+            actionScript = GetComponent<ActionScript>();
             playerAnimator = GetComponent<PlayerAnimator>();
             playerAttack = GetComponent<PlayerAttack>();
 
@@ -61,7 +61,7 @@ namespace Player
             else
             {
                 rb2d.velocity = new Vector2(0, 0);
-                playerScript.Action(Movement.Player_Idle.ToString());
+                actionScript.Action(Movement.Player_Idle.ToString());
             }
 
         }
@@ -74,16 +74,16 @@ namespace Player
             if (movement.x != 0)
             {
                 if (movement.x > 0) { 
-                    playerScript.Action(Movement.Player_WalkForward.ToString());
+                    actionScript.Action(Movement.Player_WalkForward.ToString());
                     dashBuffer = Movement.Player_WalkForward;
                 }
                 else if (movement.y != 0)
                 {
                     //placeholder for now
-                    playerScript.Action(Movement.Player_Idle.ToString());
+                    actionScript.Action(Movement.Player_Idle.ToString());
                 }
                 else {
-                    playerScript.Action(Movement.Player_WalkBackward.ToString());
+                    actionScript.Action(Movement.Player_WalkBackward.ToString());
                     dashBuffer = Movement.Player_WalkBackward;
                 }
             }
@@ -134,7 +134,7 @@ namespace Player
 
         private void Dashing(Dash dash)
         {
-            if (playerScript.Action(dash.ToString()))
+            if (actionScript.Action(dash.ToString()))
             {
                 //Debug.Log(dash.ToString());
                 dashBuffer = Movement.Player_Idle;

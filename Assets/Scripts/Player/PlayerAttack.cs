@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     //Script References
-    private PlayerScript playerScript;
+    private ActionScript actionScript;
     private PlayerAnimator playerAnimator;
     private PlayerControlsInput playerControlsInput;
 
@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
-        playerScript = GetComponent<PlayerScript>();
+        actionScript = GetComponent<ActionScript>();
 
         playerControlsInput = new PlayerControlsInput();
         playerControlsInput.Player.Enable();
@@ -39,32 +39,32 @@ public class PlayerAttack : MonoBehaviour
     private void LightAttack5L()
     {
         //Debug.Log("5L");
-        if(playerScript.Action(Attacks.Player_5L.ToString())) IsAttacking = true;
+        if(actionScript.Action(Attacks.Player_5L.ToString())) IsAttacking = true;
     }
 
     private void LightAttack2L()
     {
         //Debug.Log("2L");
-        if(playerScript.Action(Attacks.Player_2L.ToString())) IsAttacking = true;
+        if(actionScript.Action(Attacks.Player_2L.ToString())) IsAttacking = true;
     }
 
     private void HeavyAttack5H()
     {
         //Debug.Log("5H");
-        if (playerScript.Action(Attacks.Player_5H.ToString())) IsAttacking = true;
+        if (actionScript.Action(Attacks.Player_5H.ToString())) IsAttacking = true;
     }
 
     private void HeavyAttack2H()
     {
         //Debug.Log("2H");
-        if (playerScript.Action(Attacks.Player_2H.ToString())) IsAttacking = true;
+        if (actionScript.Action(Attacks.Player_2H.ToString())) IsAttacking = true;
     }
 
     //public void FinishAttack()
     //{
     //    //Debug.Log("Attack Finished");
     //    IsAttacking = false;
-    //    playerScript.Action(Movement.Player_Idle.ToString());
+    //    actionScript.Action(Movement.Player_Idle.ToString());
     //}
 
 }
