@@ -12,15 +12,15 @@ public class HitBoxCollision : MonoBehaviour
     {
         actionScript = GetComponentInParent<ActionScript>();
         collider = GetComponent<BoxCollider2D>();
+        collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != GetComponentInParent<Collider2D>().gameObject)
-        {
-            Debug.Log("hit");
-            actionScript.OnHitBoxCollide();
-        }
+        GameObject parent = gameObject.transform.parent.gameObject;
+        if (collision.gameObject == parent) { return; }
+        Debug.Log("hit " + collision.gameObject.name);
+        actionScript.OnHitBoxCollide();
         //Debug.Log(collider.gameObject.name);
 
     }
