@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 369779859}
   - component: {fileID: 369779860}
   - component: {fileID: 369779861}
+  - component: {fileID: 369779862}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
@@ -385,6 +386,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &369779862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369779858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48950c14740ef5548ae914f8c0f4648b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
