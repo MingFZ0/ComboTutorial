@@ -21,8 +21,13 @@ public class HitBoxCollision : MonoBehaviour
             Debug.Log("hit");
             actionScript.OnHitBoxCollide();
         }
-        Debug.Log(collider.gameObject.name);
-        
+        //Debug.Log(collider.gameObject.name);
+
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        //Debug.Log(other.gameObject.name);
     }
 
 

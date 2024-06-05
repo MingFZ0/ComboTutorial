@@ -80,7 +80,7 @@ namespace Player
             //}
 
             bool changedAnimation = playerAnimator.ChangeAnimation(action);
-            if (changedAnimation) Debug.Log("Changed Animation to " + action + " " + changedAnimation);
+            //if (changedAnimation) Debug.Log("Changed Animation to " + action + " " + changedAnimation);
             IsAttacking = playerAttack.IsAttacking;
             currentAction = action;
             return result;

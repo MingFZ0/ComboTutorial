@@ -35,7 +35,7 @@ namespace Player
             if (ChangeAnimation(Movement.Player_Idle.ToString()))
             {
                 IsResettingAnimation = true;
-                Debug.Log("Reset Animation to Idle");
+                //Debug.Log("Reset Animation to Idle");
                 //actionScript.Action(Movement.Player_Idle.ToString());
                 
             };
