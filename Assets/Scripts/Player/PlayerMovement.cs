@@ -60,14 +60,14 @@ namespace Player
                     movementVector.y = jumpVector.y;
                 }
             if (dashHeld) PrepareDash();
-            if (dashHeld == false && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
+            if (!dashHeld && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
 
             if (IsDashing) return;
             //Check for Attacking
             if (playerAttack.IsAttacking)
             {
-                rb2d.velocity = new Vector2(0, 0);
+                movementVector.x = 0;
                 return;
             }
 
