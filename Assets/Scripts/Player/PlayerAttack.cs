@@ -8,7 +8,6 @@ public class PlayerAttack : MonoBehaviour
 {
     //Script References
     private ActionScript actionScript;
-    private PlayerAnimator playerAnimator;
     private PlayerControlsInput playerControlsInput;
 
     //Fields
@@ -16,7 +15,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Awake()
     {
-        playerAnimator = GetComponent<PlayerAnimator>();
         actionScript = GetComponent<ActionScript>();
 
         playerControlsInput = new PlayerControlsInput();

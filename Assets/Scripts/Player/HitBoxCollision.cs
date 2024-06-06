@@ -6,13 +6,13 @@ using UnityEngine;
 public class HitBoxCollision : MonoBehaviour
 {
     private ActionScript actionScript;
-    private BoxCollider2D collider;
+    //private BoxCollider2D collider;
 
     private void Awake()
     {
         actionScript = GetComponentInParent<ActionScript>();
-        collider = GetComponent<BoxCollider2D>();
-        collider = gameObject.GetComponent<BoxCollider2D>();
+        //collider = GetComponent<BoxCollider2D>();
+        //collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,12 +24,6 @@ public class HitBoxCollision : MonoBehaviour
         //Debug.Log(collider.gameObject.name);
 
     }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        //Debug.Log(other.gameObject.name);
-    }
-
 
     private void OnTriggerExit2D(Collider2D collision)
     { 

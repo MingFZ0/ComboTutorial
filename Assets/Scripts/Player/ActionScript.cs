@@ -13,43 +13,55 @@ namespace Player
         private PlayerMovement playerMovement;
         private PlayerAnimator playerAnimator;
 
-        private string currentAction;
-        private string bufferedAction;
-        private float bufferedTimer;
-
-        private bool isCancelable;
-
-        public bool IsBlocking ;
-
-        public bool IsAttacking;
-
-        public float Health;
+        private PlayerActionScriptBehavior playerActionScriptBehavior;
 
         private void Awake()
         {
             playerAttack = GetComponent<PlayerAttack>();
             playerMovement = GetComponent<PlayerMovement>();
             playerAnimator = GetComponent<PlayerAnimator>();
+            playerActionScriptBehavior = new PlayerActionScriptBehavior(playerAttack, playerMovement, playerAnimator);
         }
 
-        private void Update()
-        {
-            if (bufferedTimer >= 0) { bufferedTimer -= Time.deltaTime; }
-        }
+        //private void Update()
+        //{
+        //    //if (bufferedTimer >= 0) { bufferedTimer -= Time.deltaTime; }
+        //}
 
 
         public void OnHitBoxCollide()
         {
             Debug.Log("hit");
-            isCancelable = true;
+            //isCancelable = true;
         }
 
         public void OnHitBoxExit()
         {
-            isCancelable = false; 
+            //isCancelable = false; 
         }
 
         public bool Action(string action)
+        {
+            return playerActionScriptBehavior.Action(action);
+        }
+    }
+
+    public class PlayerActionScriptBehavior: ActionScriptBehavior
+    {
+        private readonly PlayerAttack playerAttack;
+        private readonly PlayerMovement playerMovement;
+        private readonly PlayerAnimator playerAnimator;
+
+        private string currentAction;
+
+        public PlayerActionScriptBehavior(PlayerAttack playerAttack, PlayerMovement playerMovement, PlayerAnimator playerAnimator)
+        {
+            this.playerAttack = playerAttack;
+            this.playerMovement = playerMovement;
+            this.playerAnimator = playerAnimator;
+        }
+
+        public override bool Action(string action)
         {
             bool result = true;
             if (playerAttack.IsAttacking) { result = false; }
@@ -58,49 +70,40 @@ namespace Player
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
             if (playerAnimator.IsResettingAnimation) { result = false; }
 
-            if (playerAttack.IsAttacking && isCancelable == true && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
+            //if (playerAttack.IsAttacking && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
 
             if (result == false) { return false; }
 
-            //if (result == false)
-            //{
-            //    bufferedAction = action;
-            //    bufferedTimer = playerAnimator.CurrentAnimationClip.length;
-            //    if (bufferedAction == Dash.Player_DashForward.ToString()) Debug.Log("Buffering Dash");
-            //    return result;
-            //}
+                #region Unused BufferSystem Code
+                //if (result == false)
+                //{
+                //    bufferedAction = action;
+                //    bufferedTimer = playerAnimator.CurrentAnimationClip.length;
+                //    if (bufferedAction == Dash.Player_DashForward.ToString()) Debug.Log("Buffering Dash");
+                //    return result;
+                //}
 
-            //if (result && action == Movement.Player_Idle.ToString() && bufferedAction != Movement.Player_Idle.ToString() && bufferedTimer >= 0)
-            //{
-            //    Debug.Log("Replacing Current Action " + action + " With Buffered Action " + bufferedAction);
-            //    if (bufferedAction == action) { playerAnimator.ChangeAnimation(Movement.Player_Idle.ToString()); }
-            //    action = bufferedAction;
-            //    bufferedAction = Movement.Player_Idle.ToString();
-            //    bufferedTimer = -1;
-            //}
+                //if (result && action == Movement.Player_Idle.ToString() && bufferedAction != Movement.Player_Idle.ToString() && bufferedTimer >= 0)
+                //{
+                //    Debug.Log("Replacing Current Action " + action + " With Buffered Action " + bufferedAction);
+                //    if (bufferedAction == action) { playerAnimator.ChangeAnimation(Movement.Player_Idle.ToString()); }
+                //    action = bufferedAction;
+                //    bufferedAction = Movement.Player_Idle.ToString();
+                //    bufferedTimer = -1;
+                //}
+                #endregion
 
-            bool changedAnimation = playerAnimator.ChangeAnimation(action);
+            playerAnimator.ChangeAnimation(action);
+            //bool changedAnimation = playerAnimator.ChangeAnimation(action);
             //if (changedAnimation) Debug.Log("Changed Animation to " + action + " " + changedAnimation);
-            IsAttacking = playerAttack.IsAttacking;
+            //IsAttacking = playerAttack.IsAttacking;
             currentAction = action;
             return result;
         }
     }
 
-    public class BufferSystem
+    public abstract class ActionScriptBehavior
     {
-        private string bufferedAnimation;
-        private float bufferedTimer;
-
-        public BufferSystem(float bufferedTimer)
-        {
-            this.bufferedTimer = bufferedTimer;
-        }
-
-        public void Start(float deltaTime)
-        {
-            bufferedTimer -= deltaTime;
-        }
-
+        public abstract bool Action(string action);
     }
 }

@@ -13,7 +13,6 @@ namespace Player
         private bool held;
 
         private ActionScript actionScript;
-        private PlayerAnimator playerAnimator;
         private PlayerAttack playerAttack;
 
         //Attributes
@@ -31,7 +30,6 @@ namespace Player
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
-            playerAnimator = GetComponent<PlayerAnimator>();
             playerAttack = GetComponent<PlayerAttack>();
 
             rb2d = gameObject.GetComponent<Rigidbody2D>();

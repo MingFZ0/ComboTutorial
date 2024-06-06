@@ -6,10 +6,6 @@ namespace Player
 {
     public class PlayerAnimator : MonoBehaviour
     {
-        private PlayerAttack playerAttack;
-        private PlayerMovement playerMovement;
-        private ActionScript actionScript; 
-
         private Animator animator;
         public bool IsResettingAnimation;
 
@@ -19,9 +15,6 @@ namespace Player
 
         private void Awake()
         {
-            actionScript = GetComponent<ActionScript>();
-            playerMovement = GetComponent<PlayerMovement>();
-            playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
         }
 
