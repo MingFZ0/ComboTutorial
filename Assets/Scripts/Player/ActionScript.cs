@@ -53,6 +53,7 @@ namespace Player
         private readonly PlayerAnimator playerAnimator;
 
         private string currentAction;
+        private Boolean HitBoxCollided;
 
         public PlayerActionScriptBehavior(PlayerAttack playerAttack, PlayerMovement playerMovement, PlayerAnimator playerAnimator)
         {
@@ -66,9 +67,12 @@ namespace Player
             bool result = true;
             if (playerAttack.IsAttacking) { result = false; }
             if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
+            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
             if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
             if (playerAnimator.IsResettingAnimation) { result = false; }
+
+            //Check for Button Canceling
+            if (playerAttack.IsAttacking == true && HitBoxCollided && Enum.IsDefined(typeof(Attacks), currentAction)) 
 
             //if (playerAttack.IsAttacking && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
 

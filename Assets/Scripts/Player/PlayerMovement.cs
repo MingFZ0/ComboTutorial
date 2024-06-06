@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Player
         //Attributes
 
         public bool IsDashing;
+        private Boolean IsDash;
 
         private Movement dashBuffer;
         [SerializeField] private float dashBufferMemory;
