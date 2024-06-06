@@ -11,7 +11,7 @@ namespace Player
         //Fields
         private Rigidbody2D rb2d;
         private PlayerControlsInput playerControlsInput;
-        private bool held;
+        private bool dashHeld;
 
         private ActionScript actionScript;
         private PlayerAttack playerAttack;
@@ -21,13 +21,20 @@ namespace Player
         public bool IsDashing;
         private Boolean IsDash;
 
+        // jumpuing variables
+        private bool airborne;
+        private bool jumpHeld;
+        private float jumpForce;
+        private float currentJumpDisplacement;
+
         private Movement dashBuffer;
         [SerializeField] private float dashBufferMemory;
         private float dashBufferTime;
 
         [SerializeField] private float speed;
-        [SerializeField] private float jumpForce;
+        [SerializeField] private float jumpHeight;
         [SerializeField] private float dashSpeed;
+        [SerializeField] private Rigidbody2D floor;
 
         private void Awake()
         {
@@ -44,8 +51,10 @@ namespace Player
 
         private void Update()
         {
-            if (held) PrepareDash();
-            if (held == false && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
+            if (jumpHeld) 
+            if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame() && !airborne)
+            if (dashHeld) PrepareDash();
+            if (dashHeld == false && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
 
             if (IsDashing) return;
@@ -108,7 +117,7 @@ namespace Player
             }
 
             dashBufferTime = dashBufferMemory;
-            held = true;
+            dashHeld = true;
         }
         
         private void PrepareDash()
@@ -118,14 +127,14 @@ namespace Player
                 Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
                 if (movement.x > 0 && dashBuffer.ToString() == Movement.Player_WalkForward.ToString()) Dashing(Dash.Player_DashForward);
                 else if (movement.x < 0 && dashBuffer.ToString() == Movement.Player_WalkBackward.ToString()) Dashing(Dash.Player_DashBackward);
-                held = false;
+                dashHeld = false;
                 //Debug.Log("Dash Ready!");
                 return;
             }
 
             if (dashBufferTime < 0)
             {
-                held = false;
+                dashHeld = false;
                 dashBufferTime = dashBufferMemory;
             }
             else dashBufferTime -= Time.deltaTime;
@@ -147,6 +156,15 @@ namespace Player
         public void CutSpeed()
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);
+        }
+
+        /// <summary>
+        /// checks to see if the jump key has been pressed long enough for a full height jump
+        /// </summary>
+        /// <returns></returns>
+        private bool isFullJump()
+        {
+            return false;
         }
     }
 }

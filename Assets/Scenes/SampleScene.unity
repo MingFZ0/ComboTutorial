@@ -570,10 +570,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101b51ed7edb2f64dbf3a61900ad56fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floor: {fileID: 273582390}
   IsDashing: 0
   dashBufferMemory: 0.4
   speed: 3
-  jumpForce: 1
+  fullJumpHeight: 0
   dashSpeed: 8
 --- !u!114 &1149195080
 MonoBehaviour:
