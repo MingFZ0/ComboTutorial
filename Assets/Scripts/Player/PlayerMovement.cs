@@ -166,13 +166,5 @@ namespace Player
             rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);
         }
 
-        /// <summary>
-        /// checks to see if the jump key has been pressed long enough for a full height jump
-        /// </summary>
-        /// <returns></returns>
-        private bool isFullJump()
-        {
-            return false;
-        }
     }
 }
