@@ -551,7 +551,7 @@ Transform:
   m_GameObject: {fileID: 1149195074}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -1.17, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -570,12 +570,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101b51ed7edb2f64dbf3a61900ad56fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: {fileID: 273582390}
   IsDashing: 0
   dashBufferMemory: 0.4
   speed: 3
-  fullJumpHeight: 0
+  jumpHeight: 5
   dashSpeed: 8
+  floor: {fileID: 273582390}
 --- !u!114 &1149195080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAttacking: 0
+  IsCancelable: 0
 --- !u!114 &1149195086
 MonoBehaviour:
   m_ObjectHideFlags: 0
