@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Physics2D;
 
 namespace Player
 {
+
     public class PlayerMovement : MonoBehaviour
     {
         //Fields
@@ -25,6 +25,9 @@ namespace Player
         private bool jumpHeld;
         private float jumpForce;
         private float currentJumpDisplacement;
+        private Vector2 jumpVector;
+        private Vector2 dashVector;
+        private Vector2 movementVector;
 
         private Movement dashBuffer;
         [SerializeField] private float dashBufferMemory;
@@ -45,13 +48,17 @@ namespace Player
 
             playerControlsInput = new PlayerControlsInput();
             playerControlsInput.Player.Enable();
+            jumpVector = new Vector2(0, jumpHeight);
+            dashVector = new Vector2(dashSpeed, 0);
           
         }
 
         private void Update()
         {
-            if (jumpHeld) 
-            if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame() && !airborne)
+            if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame())
+                {
+                    movementVector.y = jumpVector.y;
+                }
             if (dashHeld) PrepareDash();
             if (dashHeld == false && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
@@ -68,16 +75,17 @@ namespace Player
             if (playerControlsInput.Player.Move.IsPressed()) Moving();
             else
             {
-                rb2d.velocity = new Vector2(0, 0);
+                movementVector.x = 0;
                 actionScript.Action(Movement.Player_Idle.ToString());
             }
-
+            rb2d.velocity = movementVector;
         }
 
 
         private void Moving()
         {
             Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
+            movement.y = 0;
             if (IsDashing) return;
             if (movement.x != 0)
             {
@@ -96,6 +104,7 @@ namespace Player
                 }
             }
 
+            // TODO: change later
             rb2d.velocity = new Vector2(movement.x * speed, rb2d.velocity.y);
         }
 
@@ -106,7 +115,7 @@ namespace Player
         private void StoreDashBuffer()
         {
             Vector2 movement = playerControlsInput.Player.Move.ReadValue<Vector2>();
-
+            movement.y = 0;
             if (movement.x > 0) dashBuffer = Movement.Player_WalkForward;
             if (movement.x < 0) dashBuffer = Movement.Player_WalkBackward;
             else if (movement.x == 0)
