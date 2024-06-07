@@ -57,30 +57,30 @@ namespace Player
 
         private void Update()
         {
-            if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame())
-                {
-                    movementVector.y = jumpVector.y;
-                }
-            if (dashHeld) PrepareDash();
-            if (!dashHeld && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
+            //if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame())
+            //    {
+            //        movementVector.y = jumpVector.y;
+            //    }
+            //if (dashHeld) PrepareDash();
+            //if (!dashHeld && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
 
-            if (IsDashing) return;
-            //Check for Attacking
-            if (playerAttack.IsAttacking)
-            {
-                movementVector.x = 0;
-                return;
-            }
+            //if (IsDashing) return;
+            ////Check for Attacking
+            //if (playerAttack.IsAttacking)
+            //{
+            //    movementVector.x = 0;
+            //    return;
+            //}
 
-            //Check for Movement
-            if (playerControlsInput.Player.Move.IsPressed()) Moving();
-            else
-            {
-                movementVector.x = 0;
-                actionScript.Action(Movement.Player_Idle.ToString());
-            }
-            rb2d.velocity = movementVector;
+            ////Check for Movement
+            //if (playerControlsInput.Player.Move.IsPressed()) Moving();
+            //else
+            //{
+            //    movementVector.x = 0;
+            //    actionScript.Action(Movement.Player_Idle.ToString());
+            //}
+            //rb2d.velocity = movementVector;
         }
 
 

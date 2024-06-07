@@ -53,13 +53,27 @@ namespace Player
         private readonly PlayerAnimator playerAnimator;
 
         private string currentAction;
+        private int currentCancelLevel;
         private Boolean HitBoxCollided;
+
+        public Dictionary<int, string[]> CancelLevels = new Dictionary<int, string[]>();
+        private HashSet<string> UsedMoves = new HashSet<string>();
+
 
         public PlayerActionScriptBehavior(PlayerAttack playerAttack, PlayerMovement playerMovement, PlayerAnimator playerAnimator)
         {
             this.playerAttack = playerAttack;
             this.playerMovement = playerMovement;
             this.playerAnimator = playerAnimator;
+
+            string[] lights = { Attacks.Player_2L.ToString(), Attacks.Player_5L.ToString(), Attacks.Player_4L.ToString() };
+            CancelLevels.Add(1, lights);
+
+            string[] mediums = { Attacks.Player_5M.ToString(), Attacks.Player_2M.ToString() };
+            CancelLevels.Add(2, mediums);
+
+            string[] heavies = { Attacks.Player_5H.ToString(), Attacks.Player_2H.ToString() };
+            CancelLevels.Add(3, heavies);
         }
 
         public override bool Action(string action)
@@ -72,7 +86,15 @@ namespace Player
             if (playerAnimator.IsResettingAnimation) { result = false; }
 
             //Check for Button Canceling
-            if (playerAttack.IsAttacking == true && HitBoxCollided && Enum.IsDefined(typeof(Attacks), currentAction)) 
+            if (playerAttack.IsAttacking == true && HitBoxCollided && Enum.IsDefined(typeof(Attacks), currentAction) && playerAttack.IsCancelable) 
+            {
+                if (CheckCancelLevel(action) < currentCancelLevel) { result = false; }
+                else if (UsedMoves.Contains(action)) { result = false; }
+                else
+                {
+                    result = true;
+                }
+            }
 
             //if (playerAttack.IsAttacking && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
 
@@ -101,8 +123,23 @@ namespace Player
             //bool changedAnimation = playerAnimator.ChangeAnimation(action);
             //if (changedAnimation) Debug.Log("Changed Animation to " + action + " " + changedAnimation);
             //IsAttacking = playerAttack.IsAttacking;
+            
+            if (currentAction != null && Enum.IsDefined(typeof(Attacks), currentAction)) { currentCancelLevel = CheckCancelLevel(currentAction); }
+            else 
+            {
+                currentCancelLevel = 0;
+                UsedMoves.Clear();
+            }
             currentAction = action;
+            
             return result;
+        }
+
+        private int CheckCancelLevel(string action)
+        {
+            if (Enum.IsDefined(typeof(Lights), action)) { return 1; }
+            if (Enum.IsDefined(typeof(Mediums), action)) { return 2; }
+            else { return 3; }
         }
     }
 

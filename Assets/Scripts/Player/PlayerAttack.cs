@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
 
         playerControlsInput = new PlayerControlsInput();
         playerControlsInput.Player.Enable();
+
     }
 
     private void Update()
@@ -59,12 +60,4 @@ public class PlayerAttack : MonoBehaviour
         //Debug.Log("2H");
         if (actionScript.Action(Attacks.Player_2H.ToString())) IsAttacking = true;
     }
-
-    //public void FinishAttack()
-    //{
-    //    //Debug.Log("Attack Finished");
-    //    IsAttacking = false;
-    //    actionScript.Action(Movement.Player_Idle.ToString());
-    //}
-
 }
