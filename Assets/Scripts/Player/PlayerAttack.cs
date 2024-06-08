@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
 {
     //Script References
     private ActionScript actionScript;
+    [SerializeField] private MovesetMap movesetMap;
+    private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
     private PlayerControlsInput playerControlsInput;
 
     //Fields
@@ -22,11 +24,17 @@ public class PlayerAttack : MonoBehaviour
         playerControlsInput = new PlayerControlsInput();
         playerControlsInput.Player.Enable();
 
+        movesetPriorityMap = movesetMap.MovesetPriorityMap;
+
     }
 
     private void Update()
     {
-        StartAttack();
+        //StartAttack();
+        for (int i = 3; i < movesetPriorityMap.Keys.Count; i++)
+        {
+            MovesetPriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
+        }
     }
 
     private void StartAttack()

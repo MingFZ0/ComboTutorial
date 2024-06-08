@@ -9,16 +9,16 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Characters/MovesetMap")]
 public class MovesetMap: ScriptableObject
 {
-    public AnimatorController controller;
+    public RuntimeAnimatorController controller;
 
-    [SerializeField] private MoveSetLevel Movement = new(0);
-    [SerializeField] private MoveSetLevel Dash = new(1);
-    [SerializeField] private MoveSetLevel Light = new(2);
-    [SerializeField] private MoveSetLevel Medium = new(3);
-    [SerializeField] private MoveSetLevel HeavyAndUnique = new(4);
-    public Dictionary<int, List<Move>> MovesetPriorityMap;
+    [SerializeField] private MovesetPriorityLevel Movement = new(0);
+    [SerializeField] private MovesetPriorityLevel Dash = new(1);
+    [SerializeField] private MovesetPriorityLevel Light = new(2);
+    [SerializeField] private MovesetPriorityLevel Medium = new(3);
+    [SerializeField] private MovesetPriorityLevel HeavyAndUnique = new(4);
 
     //public readonly Dictionary<string, Move> AllMovesByName = new Dictionary<string, Move>();
+    public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap;
     public List<string> AllMappedMoves { get;  private set; } = new();
     public readonly List<Move> AllAttack = new();
     public readonly List<Move> AllMovement = new();
@@ -37,23 +37,23 @@ public class MovesetMap: ScriptableObject
 
         AllMappedMoves = VerifyMappedMoveSet();
 
-        MoveSetLevel[] attacks = { Light, Medium, HeavyAndUnique };
-        foreach (MoveSetLevel attack in attacks) { AllAttack.AddRange(attack.Moves); }
+        MovesetPriorityLevel[] attacks = { Light, Medium, HeavyAndUnique };
+        foreach (MovesetPriorityLevel attack in attacks) { AllAttack.AddRange(attack.Moves); }
         foreach (Move move in Movement.Moves) { AllMovement.Add(move); }
         foreach (Move move in Dash.Moves) { AllDash.Add(move); }
         
         //foreach (string name in AllMappedMoves) {Debug.Log(name); }
     }
 
-    public Dictionary<int, List<Move>> ToDictionary()
+    public Dictionary<int, MovesetPriorityLevel> ToDictionary()
     {
-        Dictionary<int, List<Move>> dict = new();
-        MoveSetLevel[] moveSet = { Movement, Dash, Light, Medium };
+        Dictionary<int, MovesetPriorityLevel> dict = new();
+        MovesetPriorityLevel[] moveSet = { Movement, Dash, Light, Medium };
 
         if (moveSet == null) { return null; }
-        foreach (MoveSetLevel moveSetLevel in moveSet)
+        foreach (MovesetPriorityLevel moveSetLevel in moveSet)
         {
-            dict.Add(moveSetLevel.PriorityLevel, moveSetLevel.Moves);
+            dict.Add(moveSetLevel.PriorityLevel, moveSetLevel);
         }
         return dict;
     }
@@ -67,10 +67,11 @@ public class MovesetMap: ScriptableObject
             allClips.Add(clip.name);
         }
 
-        List<List<Move>> mappedMoveLevels = MovesetPriorityMap.Values.ToList();
+        List<MovesetPriorityLevel> mappedMoveLevels = MovesetPriorityMap.Values.ToList();
         List<string> allMappedMoves = new();
-        foreach (List<Move> movesInCurrentLevel in mappedMoveLevels) 
-        { 
+        foreach (MovesetPriorityLevel currentLevel in mappedMoveLevels) 
+        {
+            List<Move> movesInCurrentLevel = currentLevel.Moves;
             foreach (Move move in movesInCurrentLevel)
             {
                 allMappedMoves.Add(move.MoveName);
@@ -79,7 +80,8 @@ public class MovesetMap: ScriptableObject
 
         foreach (int priorityLevel in MovesetPriorityMap.Keys)
         {
-            List<Move> movesInCurrentLevel = MovesetPriorityMap[priorityLevel];
+            MovesetPriorityLevel currentLevel = MovesetPriorityMap[priorityLevel];
+            List<Move> movesInCurrentLevel = currentLevel.Moves;
             foreach (Move move in movesInCurrentLevel)
             {
                 string currentMoveName = move.MoveName;
@@ -101,12 +103,13 @@ public class MovesetMap: ScriptableObject
 }
 
 [Serializable]
-public class MoveSetLevel
+public class MovesetPriorityLevel
 {
-     public MoveSetLevel(int level) 
+     public MovesetPriorityLevel(int level) 
     { 
         this.PriorityLevel = level; }
 
+    [SerializeField] public InputActionReference LevelInput;
     [HideInInspector] public int PriorityLevel { get; private set; }
     [SerializeField] public List<Move> Moves;
 }
