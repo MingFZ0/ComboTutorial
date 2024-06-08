@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 9100000, guid: 5cc3f9a159ea88f43860e1fa87a1e978, type: 2}
   Movement:
-    Moves: []
+    Moves:
+    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_DashForward
+    - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_DashBackward
+    - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_Jump
   Dash:
     Moves: []
   Light:

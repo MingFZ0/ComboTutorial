@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 
 [CreateAssetMenu(menuName = "Characters/MovesetMap")]
-public class MovesetMap: ScriptableObject
+public class MovesetMap:ScriptableObject
 {
     public AnimatorController controller;
 
