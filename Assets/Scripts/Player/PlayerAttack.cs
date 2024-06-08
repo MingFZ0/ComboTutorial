@@ -30,7 +30,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        //StartAttack();
         for (int i = 3; i < movesetPriorityMap.Keys.Count; i++)
         {
             MovesetPriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
@@ -44,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
                     {
                         IsAttacking = true;
                         actionScript.Action(move.MoveName);
+                        return;
                     }
                 }
             }
