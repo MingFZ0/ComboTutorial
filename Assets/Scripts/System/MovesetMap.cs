@@ -48,7 +48,7 @@ public class MovesetMap:ScriptableObject
     public Dictionary<int, MovesetPriorityLevel> ToDictionary()
     {
         Dictionary<int, MovesetPriorityLevel> dict = new();
-        MovesetPriorityLevel[] moveSet = { Movement, Dash, Light, Medium };
+        MovesetPriorityLevel[] moveSet = { Movement, Dash, Light, Medium, HeavyAndUnique };
 
         if (moveSet == null) { return null; }
         foreach (MovesetPriorityLevel moveSetLevel in moveSet)
