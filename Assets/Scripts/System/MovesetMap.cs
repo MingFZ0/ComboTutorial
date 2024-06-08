@@ -57,6 +57,14 @@ public class MovesetMap:ScriptableObject
         return dict;
     }
 
+    
+    public Dictionary<InputActionReference, Move> GetMappings()
+    {
+        Dictionary<InputActionReference, Move> keyValuePairs = new Dictionary<InputActionReference, Move>();
+        keyValuePairs.Add(PlayerJump.)
+        return keyValuePairs;
+    }
+
     private List<string> VerifyMappedMoveSet()
     {
         AnimationClip[] clips = controller.animationClips;
@@ -113,11 +121,15 @@ public class MovesetPriorityLevel
     [SerializeField] public List<Move> Moves;
 }
 
+
+
+
 [Serializable]
 public class Move
 {
     [SerializeField] public InputActionReference DirectionalInput;
     [SerializeField] public string MoveName;
+    [SerializeField] public short Priority;
 
     public override bool Equals(object obj)
     {
@@ -135,6 +147,28 @@ public class Move
     {
         return MoveName;
     }
+
+    public virtual void OnKeyPress()
+    {
+
+    }
 }
+
+
+[Serializable]
+public class PlayerJump : Move 
+{
+}
+[Serializable]
+public class PlayerDash : Move { }
+[Serializable]
+public class PlayerLight : Move { }
+[Serializable]
+public class PlayerMedium : Move { }
+[Serializable]
+public class PlayerHeavySpecial : Move { }
+[Serializable]
+
+
 
 
