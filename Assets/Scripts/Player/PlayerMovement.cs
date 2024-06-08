@@ -1,4 +1,5 @@
 using System;
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,6 +18,9 @@ namespace Player
 
         private ActionScript actionScript;
         private PlayerAttack playerAttack;
+
+        [SerializeField] private MovesetMap movesetMap;
+        private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
 
         //Attributes
 
@@ -53,35 +57,41 @@ namespace Player
             playerControlsInput.Player.Enable();
             jumpVector = new Vector2(0, jumpHeight);
             dashVector = new Vector2(dashSpeed, 0);
-          
+            movesetPriorityMap = movesetMap.MovesetPriorityMap;
+
         }
 
         private void Update()
         {
-            //if (!jumpHeld && playerControlsInput.Player.Up.WasPressedThisFrame())
-            //    {
-            //        movementVector.y = jumpVector.y;
-            //    }
-            //if (dashHeld) PrepareDash();
-            //if (!dashHeld && playerControlsInput.Player.Move.WasPressedThisFrame() && playerAttack.IsAttacking == false) StoreDashBuffer();
 
+            for (int i = 0; i <= 0; i++)
+            {
+                MovesetPriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
+                InputActionReference movesetLevelInput = movesetPriorityLevel.LevelInput;
 
-            //if (IsDashing) return;
-            ////Check for Attacking
-            //if (playerAttack.IsAttacking)
-            //{
-            //    movementVector.x = 0;
-            //    return;
-            //}
-
-            ////Check for Movement
-            //if (playerControlsInput.Player.Move.IsPressed()) Moving();
-            //else
-            //{
-            //    movementVector.x = 0;
-            //    actionScript.Action(Movement.Player_Idle.ToString());
-            //}
-            //rb2d.velocity = movementVector;
+                if (movesetLevelInput.action.WasPressedThisFrame())
+                {
+                    foreach (Move move in movesetPriorityLevel.Moves)
+                    {
+                        if (move.DirectionalInput.action.IsPressed())
+                        {
+                            if (actionScript.Action(move.MoveName))
+                            {
+                                switch (move.DirectionalInput.action.name)
+                                {
+                                    case "Left":
+                                        rb2d.velocity = new Vector2(-1, 0);
+                                        break;
+                                    case "Right":
+                                        rb2d.velocity = new Vector2(1, 0);
+                                        break;
+                                }
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
         }
 
 

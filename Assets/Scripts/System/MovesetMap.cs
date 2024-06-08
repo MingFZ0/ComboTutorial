@@ -58,12 +58,7 @@ public class MovesetMap:ScriptableObject
     }
 
     
-    public Dictionary<InputActionReference, Move> GetMappings()
-    {
-        Dictionary<InputActionReference, Move> keyValuePairs = new Dictionary<InputActionReference, Move>();
-        keyValuePairs.Add(PlayerJump.)
-        return keyValuePairs;
-    }
+  
 
     private List<string> VerifyMappedMoveSet()
     {
@@ -154,20 +149,6 @@ public class Move
     }
 }
 
-
-[Serializable]
-public class PlayerJump : Move 
-{
-}
-[Serializable]
-public class PlayerDash : Move { }
-[Serializable]
-public class PlayerLight : Move { }
-[Serializable]
-public class PlayerMedium : Move { }
-[Serializable]
-public class PlayerHeavySpecial : Move { }
-[Serializable]
 
 
 

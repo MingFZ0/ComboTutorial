@@ -49,7 +49,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-
     //private void StartAttack()
     //{
     //    if (playerControlsInput.Player.Down.IsPressed() && playerControlsInput.Player.HeavyAttack.WasPressedThisFrame()) HeavyAttack2H();
