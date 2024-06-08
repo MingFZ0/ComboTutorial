@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0181a8f8912b5e488ba6737f9b12319, type: 3}
+  m_Name: CharacterMoveset
+  m_EditorClassIdentifier: 
+  controller: {fileID: 9100000, guid: 5cc3f9a159ea88f43860e1fa87a1e978, type: 2}
+  Movement:
+    LevelInput: {fileID: 0}
+    Moves:
+    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_WalkBackward
+    - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_WalkForward
+    - DirectionalInput: {fileID: 0}
+      MoveName: Player_Idle
+  Dash:
+    LevelInput: {fileID: 0}
+    Moves:
+    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_DashBackward
+    - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_DashForward
+  Light:
+    LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+    Moves:
+    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_2L
+    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_4L
+    - DirectionalInput: {fileID: 0}
+      MoveName: Player_5L
+  Medium:
+    LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+    Moves:
+    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_2M
+    - DirectionalInput: {fileID: 0}
+      MoveName: Player_5M
+  HeavyAndUnique:
+    LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+    Moves:
+    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Player_2H
+    - DirectionalInput: {fileID: 0}
+      MoveName: Player_5H

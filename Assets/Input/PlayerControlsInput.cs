@@ -46,6 +46,15 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""MediumAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebef02ab-71fa-4617-8702-ad819b27d858"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""HeavyAttack"",
                     ""type"": ""Button"",
                     ""id"": ""ad334743-8113-40a8-8490-e587c8178794"",
@@ -170,7 +179,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dd708a83-49d9-4b70-b1d4-1f6482283525"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,6 +241,17 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81e1dc90-53cd-4fa2-ace0-97ced57c3c90"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MediumAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -242,6 +262,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
+        m_Player_MediumAttack = m_Player.FindAction("MediumAttack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
         m_Player_Up = m_Player.FindAction("Up", throwIfNotFound: true);
@@ -311,6 +332,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_LightAttack;
+    private readonly InputAction m_Player_MediumAttack;
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_SpecialAttack;
     private readonly InputAction m_Player_Up;
@@ -323,6 +345,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerControlsInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
+        public InputAction @MediumAttack => m_Wrapper.m_Player_MediumAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
         public InputAction @Up => m_Wrapper.m_Player_Up;
@@ -344,6 +367,9 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
             @LightAttack.started += instance.OnLightAttack;
             @LightAttack.performed += instance.OnLightAttack;
             @LightAttack.canceled += instance.OnLightAttack;
+            @MediumAttack.started += instance.OnMediumAttack;
+            @MediumAttack.performed += instance.OnMediumAttack;
+            @MediumAttack.canceled += instance.OnMediumAttack;
             @HeavyAttack.started += instance.OnHeavyAttack;
             @HeavyAttack.performed += instance.OnHeavyAttack;
             @HeavyAttack.canceled += instance.OnHeavyAttack;
@@ -372,6 +398,9 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
             @LightAttack.started -= instance.OnLightAttack;
             @LightAttack.performed -= instance.OnLightAttack;
             @LightAttack.canceled -= instance.OnLightAttack;
+            @MediumAttack.started -= instance.OnMediumAttack;
+            @MediumAttack.performed -= instance.OnMediumAttack;
+            @MediumAttack.canceled -= instance.OnMediumAttack;
             @HeavyAttack.started -= instance.OnHeavyAttack;
             @HeavyAttack.performed -= instance.OnHeavyAttack;
             @HeavyAttack.canceled -= instance.OnHeavyAttack;
@@ -411,6 +440,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
+        void OnMediumAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
