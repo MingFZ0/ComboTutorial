@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     //Fields
     public bool IsAttacking;
     public Boolean IsCancelable;
+    public Boolean HitBoxCollided { get; private set; }
 
     void Awake()
     {
@@ -51,4 +52,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
+    public void OnHitBoxCollide() { HitBoxCollided = true; }
+    public void OnHitBoxExit() {HitBoxCollided=false; }
 }

@@ -9,154 +9,81 @@ namespace Player
 
     public class ActionScript : MonoBehaviour
     {
+        [SerializeField] private MovesetMap movesetMap;
+        private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
+
         private PlayerAttack playerAttack;
         private PlayerMovement playerMovement;
         private PlayerAnimator playerAnimator;
 
-        private PlayerActionScriptBehavior playerActionScriptBehavior;
+        private string currentAction;
+        private int currentCancelLevel;
 
-        private string bufferedAnimation;
-        private string currentAnimation;
+        private List<string> usedMoves;
+        private int currentMovePriorityLevel;
 
 
         private void Awake()
         {
+            movesetPriorityMap = movesetMap.MovesetPriorityMap;
             playerAttack = GetComponent<PlayerAttack>();
             playerMovement = GetComponent<PlayerMovement>();
-            playerAnimator = GetComponent<PlayerAnimator>();
-            playerActionScriptBehavior = new PlayerActionScriptBehavior(playerAttack, playerMovement, playerAnimator);
-        }
-        public void OnHitBoxCollide()
-        {
-            //Debug.Log("HitboxCollide on");
-            playerActionScriptBehavior.SetHitBoxCollided(true);
-            Debug.Log("HitboxCollide on");
-            //isCancelable = true;
-        }
-
-        public void OnHitBoxExit()
-        {
-            //isCancelable = false;
-            playerActionScriptBehavior.SetHitBoxCollided(false);
-            Debug.Log("HitboxCollide off");
+            playerAnimator = GetComponent<PlayerAnimator>(); 
         }
 
         public bool Action(string action)
         {
-            return playerActionScriptBehavior.Action(action);
+            bool result = true;
+            if (playerAttack.IsAttacking) { result = false; }
+            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
+            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
+            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
+            if (playerAnimator.IsResettingAnimation) { result = false; }
+
+            //Check for Button Canceling
+            Debug.Log(playerAttack.IsAttacking + " " + playerAttack.HitBoxCollided + " " + Enum.IsDefined(typeof(Attacks), action));
+            Debug.Log(playerAttack.IsAttacking == true && playerAttack.HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable);
+            if (playerAttack.IsAttacking == true && playerAttack.HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable)
+            {
+                Debug.Log(currentCancelLevel);
+                int movePriorityLevel = CheckPriorityLevel(action);
+                if (movePriorityLevel == 5) { movePriorityLevel = 4; }
+                if (CheckPriorityLevel(action) < currentCancelLevel) { result = false; }
+
+                else if (usedMoves.Contains(action)) { result = false; }
+                else
+                {
+                    result = true;
+                }
+            }
+
+            if (result == false) { return false; }
+
+            playerAnimator.ChangeAnimation(action);
+            if (currentAction != null && Enum.IsDefined(typeof(Attacks), currentAction)) { currentCancelLevel = CheckPriorityLevel(currentAction); }
+            else
+            {
+                currentCancelLevel = 0;
+                usedMoves.Clear();
+            }
+            currentAction = action;
+
+            return result;
+        }
+
+        private int CheckPriorityLevel(string moveName)
+        {
+            foreach (int priorityLevel in movesetPriorityMap.Keys)
+            {
+                MovesetPriorityLevel level = movesetPriorityMap[priorityLevel];
+                if (level.Contains(moveName)) return priorityLevel;
+            }
+            throw new UndefinedMoveName(gameObject.name + ": Unable to find the move name of " + moveName + " within the provided movesetMap of " + movesetMap.name);
         }
     }
+}
 
-    public class PlayerActionScriptBehavior: ActionScriptBehavior
-    {
-        private readonly PlayerAttack playerAttack;
-        private readonly PlayerMovement playerMovement;
-        private readonly PlayerAnimator playerAnimator;
-
-        private string currentAction;
-        private int currentCancelLevel;
-        private Boolean HitBoxCollided;
-
-        public Dictionary<int, string[]> CancelLevels = new Dictionary<int, string[]>();
-        private HashSet<string> UsedMoves = new HashSet<string>();
-
-
-        public PlayerActionScriptBehavior(PlayerAttack playerAttack, PlayerMovement playerMovement, PlayerAnimator playerAnimator)
-        {
-            this.playerAttack = playerAttack;
-            this.playerMovement = playerMovement;
-            this.playerAnimator = playerAnimator;
-
-            string[] lights = { Attacks.Player_2L.ToString(), Attacks.Player_5L.ToString(), Attacks.Player_4L.ToString() };
-            CancelLevels.Add(1, lights);
-
-            string[] mediums = { Attacks.Player_5M.ToString(), Attacks.Player_2M.ToString() };
-            CancelLevels.Add(2, mediums);
-
-            string[] heavies = { Attacks.Player_5H.ToString(), Attacks.Player_2H.ToString() };
-            CancelLevels.Add(3, heavies);
-        }
-
-        public void SetHitBoxCollided(bool boolean) { HitBoxCollided = boolean; }
-
-        public override bool Action(string action)
-        {
-            
-            return true;
-        }
-
-        //public override bool Action(string action)
-        //{
-        //    bool result = true;
-        //    if (playerAttack.IsAttacking) { result = false; }
-        //    if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-        //    //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
-        //    if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
-        //    if (playerAnimator.IsResettingAnimation) { result = false; }
-
-        //    //Check for Button Canceling
-        //    Debug.Log(playerAttack.IsAttacking + " " + HitBoxCollided + " " + Enum.IsDefined(typeof(Attacks), action));
-        //    Debug.Log(playerAttack.IsAttacking == true && HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable);
-        //    if (playerAttack.IsAttacking == true && HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable) 
-        //    {
-        //        Debug.Log(currentCancelLevel);
-        //        if (CheckCancelLevel(action) < currentCancelLevel) { result = false; }
-        //        else if (UsedMoves.Contains(action)) { result = false; }
-        //        else
-        //        {
-        //            result = true;
-        //        }
-        //    }
-
-        //    //if (playerAttack.IsAttacking && Enum.IsDefined(typeof(Attacks), action)) { result = true; }
-
-        //    if (result == false) { return false; }
-
-        //        #region Unused BufferSystem Code
-        //        //if (result == false)
-        //        //{
-        //        //    bufferedAction = action;
-        //        //    bufferedTimer = playerAnimator.CurrentAnimationClip.length;
-        //        //    if (bufferedAction == Dash.Player_DashForward.ToString()) Debug.Log("Buffering Dash");
-        //        //    return result;
-        //        //}
-
-        //        //if (result && action == Movement.Player_Idle.ToString() && bufferedAction != Movement.Player_Idle.ToString() && bufferedTimer >= 0)
-        //        //{
-        //        //    Debug.Log("Replacing Current Action " + action + " With Buffered Action " + bufferedAction);
-        //        //    if (bufferedAction == action) { playerAnimator.ChangeAnimation(Movement.Player_Idle.ToString()); }
-        //        //    action = bufferedAction;
-        //        //    bufferedAction = Movement.Player_Idle.ToString();
-        //        //    bufferedTimer = -1;
-        //        //}
-        //        #endregion
-
-        //    playerAnimator.ChangeAnimation(action);
-        //    //bool changedAnimation = playerAnimator.ChangeAnimation(action);
-        //    //if (changedAnimation) Debug.Log("Changed Animation to " + action + " " + changedAnimation);
-        //    //IsAttacking = playerAttack.IsAttacking;
-
-        //    if (currentAction != null && Enum.IsDefined(typeof(Attacks), currentAction)) { currentCancelLevel = CheckCancelLevel(currentAction); }
-        //    else 
-        //    {
-        //        currentCancelLevel = 0;
-        //        UsedMoves.Clear();
-        //    }
-        //    currentAction = action;
-
-        //    return result;
-        //}
-
-        private int CheckCancelLevel(string action)
-        {
-            if (Enum.IsDefined(typeof(Lights), action)) { return 1; }
-            if (Enum.IsDefined(typeof(Mediums), action)) { return 2; }
-            else { return 3; }
-        }
-    }
-
-    public abstract class ActionScriptBehavior
-    {
-        public abstract bool Action(string action);
-    }
+public class UndefinedMoveName : Exception
+{
+    public UndefinedMoveName(string message) : base(message) { }
 }

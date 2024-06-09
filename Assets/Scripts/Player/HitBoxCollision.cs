@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class HitBoxCollision : MonoBehaviour
 {
-    private ActionScript actionScript;
+    private PlayerAttack playerAttack;
     //private BoxCollider2D collider;
 
     private void Awake()
     {
-        actionScript = GetComponentInParent<ActionScript>();
+        playerAttack = GetComponentInParent<PlayerAttack>();
         //collider = GetComponent<BoxCollider2D>();
         //collider = gameObject.GetComponent<BoxCollider2D>();
     }
@@ -20,13 +20,13 @@ public class HitBoxCollision : MonoBehaviour
         GameObject parent = gameObject.transform.parent.gameObject;
         if (collision.gameObject == parent) { return; }
         Debug.Log("hit " + collision.gameObject.name);
-        actionScript.OnHitBoxCollide();
+        playerAttack.OnHitBoxCollide();
         //Debug.Log(collider.gameObject.name);
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     { 
-        actionScript.OnHitBoxExit();
+        playerAttack.OnHitBoxExit();
     }
 }

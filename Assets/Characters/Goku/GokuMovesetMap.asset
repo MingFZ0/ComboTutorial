@@ -12,43 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0181a8f8912b5e488ba6737f9b12319, type: 3}
   m_Name: GokuMovesetMap
   m_EditorClassIdentifier: 
-  controller: {fileID: 9100000, guid: 5cc3f9a159ea88f43860e1fa87a1e978, type: 2}
+  controller: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
   Movement:
-    LevelInput: {fileID: 0}
+    LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_WalkBackward
+      MoveName: Walk_Backward
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_WalkForward
-    - DirectionalInput: {fileID: 0}
-      MoveName: Player_Idle
+      MoveName: Walk_Forward
+    - DirectionalInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Idle
   Dash:
     LevelInput: {fileID: 0}
     Moves:
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_DashBackward
+      MoveName: Dash_Backward
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_DashForward
+      MoveName: Dash_Forward
   Light:
     LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_2L
-    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_4L
-    - DirectionalInput: {fileID: 0}
-      MoveName: Player_5L
+      MoveName: Attack_2L
+    - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_5L
   Medium:
     LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_2M
-    - DirectionalInput: {fileID: 0}
-      MoveName: Player_5M
-  HeavyAndUnique:
+      MoveName: Attack_2M
+    - DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_5M
+  Heavy:
     LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Player_2H
-    - DirectionalInput: {fileID: 0}
-      MoveName: Player_5H
+      MoveName: Attack_2H
+    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_4H
+    - DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_5H
+  Unique:
+    LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+    Moves:
+    - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_5S

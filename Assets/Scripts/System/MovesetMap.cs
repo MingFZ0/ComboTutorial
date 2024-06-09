@@ -89,7 +89,7 @@ public class MovesetMap:ScriptableObject
             foreach (Move move in movesInCurrentLevel)
             {
                 string currentMoveName = move.MoveName;
-                if (allClips.Contains(currentMoveName) == false) throw new MissingReferenceException(this.name + ": " + move + " In Move Priority " + priorityLevel + " Cannot be found in the provided animation controller, did you misspelled something?");
+                if (allClips.Contains(currentMoveName) == false) throw new UndefinedMovesetException(this.name + ": " + move + " In Move Priority " + priorityLevel + " Cannot be found in the provided animation controller, did you misspelled something?");
             }
         }
 
@@ -122,6 +122,15 @@ public class MovesetPriorityLevel
     {
         return PriorityLevel.ToString() + ": " + string.Join(",", Moves);
     }
+
+    public bool Contains(string moveName)
+    {
+        foreach (Move move in Moves)
+        {
+            if (move.MoveName == moveName) return true;
+        }
+        return false;
+    }
 }
 
 
@@ -151,6 +160,11 @@ public class Move
     }
 }
 
+public class UndefinedMovesetException : Exception
+{
+    public UndefinedMovesetException(string message) : base(message) { }
+    public UndefinedMovesetException() { }
+}
 
 
 
