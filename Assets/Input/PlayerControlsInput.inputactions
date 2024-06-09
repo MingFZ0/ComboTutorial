@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialAttack",
+                    "name": "UniqueAttack",
                     "type": "Button",
                     "id": "a0d819a5-b4c3-40e6-915b-18da03dfd218",
                     "expectedControlType": "Button",
@@ -117,7 +117,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialAttack",
+                    "action": "UniqueAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
