@@ -102,10 +102,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: Attack_5S_1
       rect:
         serializedVersion: 2
-        x: 115
+        x: 126
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: Attack_5S_2
       rect:
         serializedVersion: 2
-        x: 230
+        x: 252
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: Attack_5S_3
       rect:
         serializedVersion: 2
-        x: 345
+        x: 378
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Attack_5S_4
       rect:
         serializedVersion: 2
-        x: 460
+        x: 504
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Attack_5S_5
       rect:
         serializedVersion: 2
-        x: 575
+        x: 630
         y: 0
-        width: 115
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 126
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4296875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

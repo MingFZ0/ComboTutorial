@@ -33,42 +33,19 @@ namespace Player
 
         public bool Action(string action)
         {
-            bool result = true;
-            if (playerAttack.IsAttacking) { result = false; }
-            if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
+            //bool result = true;
+            //if (playerAttack.IsAttacking) { result = false; }
+            //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
             //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
-            if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
-            if (playerAnimator.IsResettingAnimation) { result = false; }
+            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
+            //if (playerAnimator.IsResettingAnimation) { result = false; }
+            //if (result == false) { return false; }
 
-            //Check for Button Canceling
-            Debug.Log(playerAttack.IsAttacking + " " + playerAttack.HitBoxCollided + " " + Enum.IsDefined(typeof(Attacks), action));
-            Debug.Log(playerAttack.IsAttacking == true && playerAttack.HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable);
-            if (playerAttack.IsAttacking == true && playerAttack.HitBoxCollided && Enum.IsDefined(typeof(Attacks), action) && playerAttack.IsCancelable)
-            {
-                Debug.Log(currentCancelLevel);
-                int movePriorityLevel = CheckPriorityLevel(action);
-                if (movePriorityLevel == 5) { movePriorityLevel = 4; }
-                if (CheckPriorityLevel(action) < currentCancelLevel) { result = false; }
-
-                else if (usedMoves.Contains(action)) { result = false; }
-                else
-                {
-                    result = true;
-                }
-            }
-
-            if (result == false) { return false; }
-
+            Debug.Log(action);
             playerAnimator.ChangeAnimation(action);
-            if (currentAction != null && Enum.IsDefined(typeof(Attacks), currentAction)) { currentCancelLevel = CheckPriorityLevel(currentAction); }
-            else
-            {
-                currentCancelLevel = 0;
-                usedMoves.Clear();
-            }
             currentAction = action;
 
-            return result;
+            return true;
         }
 
         private int CheckPriorityLevel(string moveName)

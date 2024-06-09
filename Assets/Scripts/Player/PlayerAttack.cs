@@ -40,12 +40,12 @@ public class PlayerAttack : MonoBehaviour
             {
                 foreach (Move move in movesetPriorityLevel.Moves)
                 {
-                    Debug.Log(i + " level was pressed");
+                    //Debug.Log(i + " level was pressed");
                     if (move.DirectionalInput.action.IsPressed()) 
                     {
                         Debug.Log(move + " should be ran pressed");
                         IsAttacking = true;
-                        actionScript.Action(move.MoveName);
+                        Debug.Log(actionScript.Action(move.MoveName));
                         return;
                     }
                 }
