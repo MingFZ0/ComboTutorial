@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 25593aa13c3ff744d9c2608d2d90f4d6
+guid: 1e89119024b22f4428870f1dc468029e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 25
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_2H_0
+      name: Walk_backwards_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 686d9211a7e299446a527c9c34ccc12e
-      internalID: 1450009817
+      spriteID: faf9df1edd75658469e6e26fd0679b30
+      internalID: 1919261053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_1
+      name: Walk_backwards_1
       rect:
         serializedVersion: 2
-        x: 111
+        x: 106
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f81ccbcf33b3484418a4e3a95c275294
-      internalID: 1335034808
+      spriteID: d14e6013352d11d4eaf02e677fda8301
+      internalID: 689001835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_2
+      name: Walk_backwards_2
       rect:
         serializedVersion: 2
-        x: 222
+        x: 212
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 252d6d97958f2054a99527fb40e2aea6
-      internalID: -691800595
+      spriteID: 794aa57e58a0d1f468c44cd068b79997
+      internalID: 436514454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_3
+      name: Walk_backwards_3
       rect:
         serializedVersion: 2
-        x: 333
+        x: 318
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09137b8678bed904c83c9865c96dfb99
-      internalID: -1995156569
+      spriteID: 0a79910da001b5749987cfca8608a011
+      internalID: -947502697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_4
+      name: Walk_backwards_4
       rect:
         serializedVersion: 2
-        x: 444
+        x: 424
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 535ffcfabfe86884283ab3346f762891
-      internalID: 245256502
+      spriteID: 297d5851832eeae4e93fcce5055d5b1e
+      internalID: -637623948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_5
+      name: Walk_backwards_5
       rect:
         serializedVersion: 2
-        x: 555
+        x: 530
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d267ff1fdb98744c9cac7d47ae50ac4
-      internalID: 2096733951
+      spriteID: 3356834e26d45d542a60dff2107feaa9
+      internalID: 666146870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_6
+      name: Walk_backwards_6
       rect:
         serializedVersion: 2
-        x: 666
+        x: 636
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f9b9cdd464d61a47a04e60c4d8452b5
-      internalID: 57674350
+      spriteID: 55e5710b9be86574c89257d022bf6fb9
+      internalID: -1354220586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2H_7
+      name: Walk_backwards_7
       rect:
         serializedVersion: 2
-        x: 777
+        x: 742
         y: 0
-        width: 111
-        height: 162
+        width: 106
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +258,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6368166639cbdc43860ab5c2a3df518
-      internalID: -115717787
+      spriteID: 9a0d87a1da495ec4a8cd2af480b33668
+      internalID: 532058018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_backwards_8
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 0
+        width: 106
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b785edac201e1e41a03d855bd0b4900
+      internalID: 1673010802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_backwards_9
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 0
+        width: 106
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 626c06472911c894796edd51b9009de9
+      internalID: -1775330812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_backwards_10
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 0
+        width: 106
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5858820c3c0bd54998b579b5450a5b9
+      internalID: -1778330057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_backwards_11
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 0
+        width: 106
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8048b6d6a6a993e4cbd9f428fbb094b3
+      internalID: -299474223
       vertices: []
       indices: 
       edges: []
@@ -275,14 +359,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_2H_0: 1450009817
-      Attack_2H_1: 1335034808
-      Attack_2H_2: -691800595
-      Attack_2H_3: -1995156569
-      Attack_2H_4: 245256502
-      Attack_2H_5: 2096733951
-      Attack_2H_6: 57674350
-      Attack_2H_7: -115717787
+      Walk_backwards_0: 1919261053
+      Walk_backwards_1: 689001835
+      Walk_backwards_10: -1778330057
+      Walk_backwards_11: -299474223
+      Walk_backwards_2: 436514454
+      Walk_backwards_3: -947502697
+      Walk_backwards_4: -637623948
+      Walk_backwards_5: 666146870
+      Walk_backwards_6: -1354220586
+      Walk_backwards_7: 532058018
+      Walk_backwards_8: 1673010802
+      Walk_backwards_9: -1775330812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
