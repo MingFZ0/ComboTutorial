@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 2; i < movesetPriorityMap.Keys.Count; i++)
+        for (int i = 2; i < 6; i++)
         {
             MovesetPriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
             InputActionReference movesetLevelInput = movesetPriorityLevel.LevelInput;

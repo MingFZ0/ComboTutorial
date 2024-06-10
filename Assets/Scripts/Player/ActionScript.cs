@@ -10,7 +10,7 @@ namespace Player
     public class ActionScript : MonoBehaviour
     {
         [SerializeField] private MovesetMap movesetMap;
-        private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
+        public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap { get; private set; }
 
         private PlayerAttack playerAttack;
         private PlayerMovement playerMovement;
@@ -25,7 +25,7 @@ namespace Player
 
         private void Awake()
         {
-            movesetPriorityMap = movesetMap.MovesetPriorityMap;
+            MovesetPriorityMap = movesetMap.MovesetPriorityMap;
             playerAttack = GetComponent<PlayerAttack>();
             playerMovement = GetComponent<PlayerMovement>();
             playerAnimator = GetComponent<PlayerAnimator>(); 
@@ -50,9 +50,9 @@ namespace Player
 
         private int CheckPriorityLevel(string moveName)
         {
-            foreach (int priorityLevel in movesetPriorityMap.Keys)
+            foreach (int priorityLevel in MovesetPriorityMap.Keys)
             {
-                MovesetPriorityLevel level = movesetPriorityMap[priorityLevel];
+                MovesetPriorityLevel level = MovesetPriorityMap[priorityLevel];
                 if (level.Contains(moveName)) return priorityLevel;
             }
             throw new UndefinedMoveName(gameObject.name + ": Unable to find the move name of " + moveName + " within the provided movesetMap of " + movesetMap.name);

@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: GokuMovesetMap
   m_EditorClassIdentifier: 
   controller: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+  Other:
+    LevelInput: {fileID: 0}
+    Moves:
+    - DirectionalInput: {fileID: 0}
+      MoveName: Idle
   Movement:
     LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
+    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Crouch
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Walk_Backward
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Walk_Forward
-    - DirectionalInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Idle
   Dash:
     LevelInput: {fileID: 0}
     Moves:
@@ -32,8 +37,6 @@ MonoBehaviour:
   Light:
     LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_2L
     - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5L
   Medium:
@@ -55,5 +58,5 @@ MonoBehaviour:
   Unique:
     LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+    - DirectionalInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5S
