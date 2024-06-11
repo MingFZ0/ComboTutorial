@@ -201,7 +201,7 @@ public partial class @PlayerControlsInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""WASD Keys"",
                     ""id"": ""84f303c5-fb04-4c85-aa65-80884f2be884"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

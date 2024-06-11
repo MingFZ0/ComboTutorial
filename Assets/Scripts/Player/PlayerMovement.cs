@@ -52,11 +52,11 @@ namespace Player
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
                 //Jumping
-                if (movement.y > 0)
+                if (movement.y > 0 && isJumping == false)
                 {
                     isJumping = true;
                     actionScript.Action(jumpMove.ToString());
-                    MoveCharacter(movement, walkSpeed, jumpForce);
+                    MoveCharacter(movement, 1, jumpForce);
                     rb2d.velocity = movement * jumpForce;
                 }
                 else if (movement.y == 0)
