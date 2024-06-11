@@ -681,6 +681,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashBufferMemory: 0.4
   walkSpeed: 3
+  jumpForce: 5
+  isJumping: 0
 --- !u!114 &1880588100
 MonoBehaviour:
   m_ObjectHideFlags: 0

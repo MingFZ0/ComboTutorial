@@ -14,14 +14,33 @@ namespace Player
         //Fields
         [SerializeField] private float dashBufferMemory;
         [SerializeField] private float walkSpeed;
+        [SerializeField] private float jumpForce;
+
+        public bool isJumping;
 
         private Rigidbody2D rb2d;
         private ActionScript actionScript;
+
+        private List<Move> movementMoves = new();
+        private Move jumpMove;
+        private Move crouchMove;
         
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
+            Debug.Log(moves.Count);
+            foreach (Move move in moves)
+            {
+                if (move.DirectionalInput.action.name == "Up") { jumpMove = move; }
+                else if (move.DirectionalInput.action.name == "Down") { crouchMove = move; }
+                else { movementMoves.Add(move); }
+            }
         }
 
         private void Update()
@@ -31,22 +50,45 @@ namespace Player
                 Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
                 Debug.Log(movement);
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
-                foreach (Move move in moves)
+
+                //Jumping
+                if (movement.y > 0)
                 {
-                    if (move.DirectionalInput.action.IsPressed())
-                    {
-                        actionScript.Action(move.ToString());
-                        MoveCharacter(movement, walkSpeed);
-                        return;
-                    }
+                    isJumping = true;
+                    actionScript.Action(jumpMove.ToString());
+                    MoveCharacter(movement, walkSpeed, jumpForce);
+                    rb2d.velocity = movement * jumpForce;
                 }
-                //if (movement.y < 0) actionScript.Action(movementMoveset.Moves[2].ToString());
+                else if (movement.y == 0)
+                {
+                    //Moving
+                    foreach (Move move in movementMoves)
+                    {
+                        if (move.DirectionalInput.action.IsPressed())
+                        {
+                            actionScript.Action(move.ToString());
+                            Debug.Log(movement);
+                            MoveCharacter(movement, walkSpeed);
+                            //MoveCharacter(movement, walkSpeed);
+                            //rb2d.AddForce(movement * walkSpeed, ForceMode2D.Impulse);
+                            //MoveCharacter(movement, walkSpeed);
+                            return;
+                        }
+                    }
+                } 
+                else
+                {
+                    actionScript.Action(crouchMove.ToString());
+                }
+
             }
         }
 
-        public void MoveCharacter(Vector2 movement, float force)
+        public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
         {
-            rb2d.velocity = movement * force;
+            Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
+            Debug.Log(transform.position + " to " + newLocation);
+            transform.Translate(newLocation);
         }
 
         public void CutSpeed()

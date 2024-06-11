@@ -48,6 +48,11 @@ namespace Player
             return true;
         }
 
+        private void Update()
+        {
+            
+        }
+
         private int CheckPriorityLevel(string moveName)
         {
             foreach (int priorityLevel in MovesetPriorityMap.Keys)

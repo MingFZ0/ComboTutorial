@@ -27,6 +27,8 @@ MonoBehaviour:
       MoveName: Walk_Backward
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Walk_Forward
+    - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Jump
   Dash:
     LevelInput: {fileID: 0}
     Moves:
