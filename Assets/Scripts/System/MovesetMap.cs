@@ -27,7 +27,7 @@ public class MovesetMap:ScriptableObject
 
     private void OnValidate()
     {
-        Debug.Log("Validating..");
+        
 
 
         MovesetPriorityMap = ToDictionary();
@@ -42,7 +42,8 @@ public class MovesetMap:ScriptableObject
         foreach (MovesetPriorityLevel attack in attacks) { AllAttack.AddRange(attack.Moves); }
         foreach (Move move in Movement.Moves) { AllMovement.Add(move); }
         foreach (Move move in Dash.Moves) { AllDash.Add(move); }
-        
+
+        Debug.Log(this.name + " Scriptable Object Was Valided..");
         //foreach (string name in AllMappedMoves) {Debug.Log(name); }
     }
 

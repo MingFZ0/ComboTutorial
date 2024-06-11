@@ -12,23 +12,26 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         //Fields
+        [SerializeField] private LayerMask jumpLayerMask;
         [SerializeField] private float dashBufferMemory;
         [SerializeField] private float walkSpeed;
         [SerializeField] private float jumpForce;
 
         public bool isJumping;
 
+        private BoxCollider2D boxCollider;
         private Rigidbody2D rb2d;
         private ActionScript actionScript;
 
         private List<Move> movementMoves = new();
         private Move jumpMove;
         private Move crouchMove;
-        
+
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
+            boxCollider = gameObject.GetComponent<BoxCollider2D>();
         }
 
         private void Start()
@@ -52,9 +55,8 @@ namespace Player
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
                 //Jumping
-                if (movement.y > 0 && isJumping == false)
+                if (movement.y > 0 && IsGrounded() == true)
                 {
-                    isJumping = true;
                     actionScript.Action(jumpMove.ToString());
                     MoveCharacter(movement, 1, jumpForce);
                     rb2d.velocity = movement * jumpForce;
@@ -75,8 +77,8 @@ namespace Player
                             return;
                         }
                     }
-                } 
-                else
+                }
+                else if (movement.y < 0)
                 {
                     actionScript.Action(crouchMove.ToString());
                 }
@@ -87,8 +89,20 @@ namespace Player
         public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
-            Debug.Log(transform.position + " to " + newLocation);
             transform.Translate(newLocation);
+        }
+
+        public bool IsGrounded()
+        {
+            float extraHeightText = 0.10f;
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, extraHeightText, jumpLayerMask);
+            Color rayColor = Color.red;
+            if (raycastHit.collider != null) { rayColor = Color.green; }
+            Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
+            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
+            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + extraHeightText), Vector2.right * (boxCollider.bounds.extents.x * 2f), rayColor);
+            Debug.Log(raycastHit.collider);
+            return raycastHit.collider != null;
         }
 
         public void CutSpeed()

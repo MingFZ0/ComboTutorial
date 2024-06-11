@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 1360729851}
   - component: {fileID: 1360729850}
   - component: {fileID: 1360729849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,8 +607,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360729848}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -5.06, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.03000021, y: -5.06, z: 0}
   m_LocalScale: {x: 38.877304, y: 1.3493426, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -679,6 +679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101b51ed7edb2f64dbf3a61900ad56fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   dashBufferMemory: 0.4
   walkSpeed: 3
   jumpForce: 5
