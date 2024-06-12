@@ -18,47 +18,70 @@ MonoBehaviour:
     Moves:
     - DirectionalInput: {fileID: 0}
       MoveName: Idle
+      Grounded: 0
   Movement:
     LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Crouch
+      Grounded: 1
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Walk_Backward
+      Grounded: 1
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Walk_Forward
+      Grounded: 1
     - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Jump
+      Grounded: 1
   Dash:
     LevelInput: {fileID: 0}
     Moves:
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Dash_Backward
+      Grounded: 1
     - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Dash_Forward
+      Grounded: 1
   Light:
     LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5L
+      Grounded: 1
+    - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_JL
+      Grounded: 0
   Medium:
     LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_2M
+      Grounded: 1
     - DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5M
+      Grounded: 1
+    - DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_JM
+      Grounded: 0
   Heavy:
     LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_2H
+      Grounded: 1
     - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_4H
+      Grounded: 1
     - DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5H
+      Grounded: 1
+    - DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      MoveName: Attack_JH
+      Grounded: 0
   Unique:
     LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - DirectionalInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
       MoveName: Attack_5S
+      Grounded: 1

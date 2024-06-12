@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 namespace Player
 {
 
-    public class PlayerMovement : MonoBehaviour
+    public class MovementScript : MonoBehaviour
     {
         //Fields
         [SerializeField] private LayerMask jumpLayerMask;
@@ -41,7 +41,7 @@ namespace Player
             foreach (Move move in moves)
             {
                 if (move.DirectionalInput.action.name == "Up") { jumpMove = move; }
-                else if (move.DirectionalInput.action.name == "Down") { crouchMove = move; }
+                else if (move.DirectionalInput.action.name == "Down") {  crouchMove = move; }
                 else { movementMoves.Add(move); }
             }
         }
@@ -55,10 +55,9 @@ namespace Player
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
                 //Jumping
-                if (movement.y > 0 && IsGrounded() == true)
+                if (movement.y > 0 && IsGrounded() == jumpMove.Grounded)
                 {
                     actionScript.Action(jumpMove.ToString());
-                    MoveCharacter(movement, 1, jumpForce);
                     rb2d.velocity = movement * jumpForce;
                 }
                 else if (movement.y == 0)
@@ -66,19 +65,15 @@ namespace Player
                     //Moving
                     foreach (Move move in movementMoves)
                     {
-                        if (move.DirectionalInput.action.IsPressed())
+                        if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded)
                         {
                             actionScript.Action(move.ToString());
-                            Debug.Log(movement);
                             MoveCharacter(movement, walkSpeed);
-                            //MoveCharacter(movement, walkSpeed);
-                            //rb2d.AddForce(movement * walkSpeed, ForceMode2D.Impulse);
-                            //MoveCharacter(movement, walkSpeed);
                             return;
                         }
                     }
                 }
-                else if (movement.y < 0)
+                else if (movement.y < 0 && IsGrounded() == crouchMove.Grounded)
                 {
                     actionScript.Action(crouchMove.ToString());
                 }
@@ -101,7 +96,7 @@ namespace Player
             Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
             Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
             Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + extraHeightText), Vector2.right * (boxCollider.bounds.extents.x * 2f), rayColor);
-            Debug.Log(raycastHit.collider);
+            //Debug.Log(raycastHit.collider);
             return raycastHit.collider != null;
         }
 

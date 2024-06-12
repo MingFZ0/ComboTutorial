@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerAnimator : MonoBehaviour
+    public class AnimatorScript : MonoBehaviour
     {
         private Animator animator;
         public bool IsResettingAnimation;

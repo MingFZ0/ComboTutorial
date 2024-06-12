@@ -143,6 +143,7 @@ public class Move
 {
     [SerializeField] public InputActionReference DirectionalInput;
     [SerializeField] public string MoveName;
+    [SerializeField] public Boolean Grounded;
 
     public override bool Equals(object obj)
     {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bafa632542b220a4bb42660a703632c8
+guid: 5efb1d9b7fdee694595eb7a5ba3789b3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_JL_0
+      name: Attack_JM_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 149
-        height: 137
+        width: 121
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 898e1fcaa34ae6645afaea305d0edf99
-      internalID: -1611603866
+      spriteID: fd549bb71547a7340a5af0a976bbb998
+      internalID: 656634005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_JL_1
+      name: Attack_JM_1
       rect:
         serializedVersion: 2
-        x: 149
+        x: 121
         y: 0
-        width: 149
-        height: 137
+        width: 121
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 068e4805d2f03044bbfd91dd66a18463
-      internalID: -1683737524
+      spriteID: 89186ea9d3c334e4c85068793e0c44df
+      internalID: 1999902730
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_JL_2
+      name: Attack_JM_2
       rect:
         serializedVersion: 2
-        x: 298
+        x: 242
         y: 0
-        width: 149
-        height: 137
+        width: 121
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70caadc1f85ce7a4ebf63abf189f16a0
-      internalID: -327423949
+      spriteID: 7020871f974177e48b6cf045db7a9d87
+      internalID: -672352985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_JL_3
+      name: Attack_JM_3
       rect:
         serializedVersion: 2
-        x: 447
+        x: 363
         y: 0
-        width: 149
-        height: 137
+        width: 121
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa603f8605e211844a9183d1ab3ccf42
-      internalID: 80186157
+      spriteID: 9d1e95cd0c039d54e90b7a2c0281f41c
+      internalID: 2049626803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_JM_4
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 0
+        width: 121
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c17be32fa234eb4b835357c6c1da115
+      internalID: -948102578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_JM_5
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 0
+        width: 121
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3091c2b62390eda43ba922653db17940
+      internalID: 2088013801
       vertices: []
       indices: 
       edges: []
@@ -191,10 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_JL_0: -1611603866
-      Attack_JL_1: -1683737524
-      Attack_JL_2: -327423949
-      Attack_JL_3: 80186157
+      Attack_JM_0: 656634005
+      Attack_JM_1: 1999902730
+      Attack_JM_2: -672352985
+      Attack_JM_3: 2049626803
+      Attack_JM_4: -948102578
+      Attack_JM_5: 2088013801
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

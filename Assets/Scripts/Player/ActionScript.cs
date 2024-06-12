@@ -12,9 +12,10 @@ namespace Player
         [SerializeField] private MovesetMap movesetMap;
         public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap { get; private set; }
 
-        private PlayerAttack playerAttack;
-        private PlayerMovement playerMovement;
-        private PlayerAnimator playerAnimator;
+        private PlayerControlsInput playerControlsInput;
+        private AttackScript playerAttack;
+        private MovementScript playerMovement;
+        private AnimatorScript playerAnimator;
 
         private string currentAction;
         private int currentCancelLevel;
@@ -26,9 +27,13 @@ namespace Player
         private void Awake()
         {
             MovesetPriorityMap = movesetMap.MovesetPriorityMap;
-            playerAttack = GetComponent<PlayerAttack>();
-            playerMovement = GetComponent<PlayerMovement>();
-            playerAnimator = GetComponent<PlayerAnimator>(); 
+            playerAttack = GetComponent<AttackScript>();
+            playerMovement = GetComponent<MovementScript>();
+            playerAnimator = GetComponent<AnimatorScript>();
+
+
+            playerControlsInput = new PlayerControlsInput();
+            playerControlsInput.Player.Enable();
         }
 
         public bool Action(string action)

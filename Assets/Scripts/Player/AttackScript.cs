@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : MonoBehaviour
+public class AttackScript : MonoBehaviour
 {
     //Script References
-    private ActionScript actionScript;
     [SerializeField] private MovesetMap movesetMap;
+    
+    private ActionScript actionScript;
     private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
-    private PlayerControlsInput playerControlsInput;
+    private StateScript stateScript;
 
     //Fields
     public bool IsAttacking;
@@ -21,12 +22,8 @@ public class PlayerAttack : MonoBehaviour
     void Awake()
     {
         actionScript = GetComponent<ActionScript>();
-
-        playerControlsInput = new PlayerControlsInput();
-        playerControlsInput.Player.Enable();
-
+        stateScript = GetComponent<StateScript>();
         movesetPriorityMap = movesetMap.MovesetPriorityMap;
-
     }
 
     private void Update()
@@ -41,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
                 foreach (Move move in movesetPriorityLevel.Moves)
                 {
                     //Debug.Log(i + " level was pressed");
-                    if (move.DirectionalInput.action.IsPressed()) 
+                    if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 
                     {
                         Debug.Log(move + " should be ran pressed");
                         IsAttacking = true;

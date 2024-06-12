@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBoxCollision : MonoBehaviour
+public class HitBoxCollisionScript : MonoBehaviour
 {
-    private PlayerAttack playerAttack;
+    private AttackScript playerAttack;
     //private BoxCollider2D collider;
 
     private void Awake()
     {
-        playerAttack = GetComponentInParent<PlayerAttack>();
+        playerAttack = GetComponentInParent<AttackScript>();
         //collider = GetComponent<BoxCollider2D>();
         //collider = gameObject.GetComponent<BoxCollider2D>();
     }
