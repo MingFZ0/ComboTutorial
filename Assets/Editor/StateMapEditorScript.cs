@@ -7,11 +7,15 @@ using UnityEngine;
 [CustomEditor(typeof(StateMap))]
 public class StateMapEditorScript : Editor
 {
+    string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
+
     public override void OnInspectorGUI()
     {
         StateMap stateMap = target as StateMap;
-        stateMap.StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
-        string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
+        Dictionary<string, AnimationClip> stateDictionaryMap = new Dictionary<string, AnimationClip>();
+        int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
+        if (stateMap.inputs != null) { inputs = stateMap.inputs; }
+        //inputs = stateMap.inputs;
 
         stateMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField(stateMap.AnimatorController, typeof(RuntimeAnimatorController), false);
 
@@ -28,10 +32,14 @@ public class StateMapEditorScript : Editor
             for (int i = 0; i < stateAnimationEnumStrings.Length; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(stateAnimationEnumStrings[i]);
-                stateMap.StateAnimations[i] = clips[EditorGUILayout.Popup(0, clipNames)];
+                //EditorGUILayout.LabelField(stateAnimationEnumStrings[i]);
+                inputs[i] = EditorGUILayout.Popup(stateAnimationEnumStrings[i], inputs[i], clipNames);
+                stateMap.StateAnimations[i] = clips[i];
                 EditorGUILayout.EndHorizontal();
+                stateDictionaryMap.Add(stateAnimationEnumStrings[i], stateMap.StateAnimations[i]);
             }
+            stateMap.inputs = inputs;
+
         }
             
     }

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584146415b4b2014dad9d236e33fb062, type: 3}
   m_Name: GokuStateAnimationMap
   m_EditorClassIdentifier: 
-  idle: {fileID: 0}
-  falling: 
-  landing: 
+  AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+  StateAnimations:
+  - {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}
+  - {fileID: 7400000, guid: f8f3b13e4b9c04245922f5994f216545, type: 2}
+  - {fileID: 7400000, guid: bc3831db6e4c1564ea2525fadbbd5ed2, type: 2}
+  inputs: 0d0000000500000003000000
