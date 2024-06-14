@@ -37,7 +37,6 @@ namespace Player
         private void Start()
         {
             List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
-            Debug.Log(moves.Count);
             foreach (Move move in moves)
             {
                 if (move.DirectionalInput.action.name == "Up") { jumpMove = move; }

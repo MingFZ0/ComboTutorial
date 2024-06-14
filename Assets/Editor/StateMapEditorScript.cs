@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +13,6 @@ public class StateMapEditorScript : Editor
     public override void OnInspectorGUI()
     {
         StateMap stateMap = target as StateMap;
-        Dictionary<string, AnimationClip> stateDictionaryMap = new Dictionary<string, AnimationClip>();
         int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
         if (stateMap.inputs != null) { inputs = stateMap.inputs; }
         //inputs = stateMap.inputs;
@@ -22,25 +22,33 @@ public class StateMapEditorScript : Editor
         if (stateMap.AnimatorController != null)
         {
             AnimationClip[] clips = stateMap.AnimatorController.animationClips;
-            string[] clipNames = new string[clips.Length];
-
-            for (int i = 0; i < clips.Length; i++)
-            {
-                clipNames[i] = clips[i].name;
-            }
+            string[] clipNames = ConvertClipsToName(clips);
 
             for (int i = 0; i < stateAnimationEnumStrings.Length; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                //EditorGUILayout.LabelField(stateAnimationEnumStrings[i]);
                 inputs[i] = EditorGUILayout.Popup(stateAnimationEnumStrings[i], inputs[i], clipNames);
                 stateMap.StateAnimations[i] = clips[i];
                 EditorGUILayout.EndHorizontal();
-                stateDictionaryMap.Add(stateAnimationEnumStrings[i], stateMap.StateAnimations[i]);
-            }
-            stateMap.inputs = inputs;
 
+                stateMap.StateAnimationMap[stateAnimationEnumStrings[i]] = clips[inputs[i]];
+            }
+
+            //Debug.Log(dictToString);
+            stateMap.inputs = inputs;
+            string dictToString = "";
+            foreach (string key in stateMap.StateAnimationMap.Keys)
+            {
+                dictToString += key + ": " + stateMap.StateAnimationMap[key].name + "; ";
+            }
+            Debug.Log(dictToString);
         }
-            
+    }
+
+    private string[] ConvertClipsToName(AnimationClip[] clips)
+    {
+        string[] clipNames = new string[clips.Length];
+        for (int i = 0; i < clips.Length; i++) { clipNames[i] = clips[i].name; }
+        return clipNames;
     }
 }

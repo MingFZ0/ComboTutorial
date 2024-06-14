@@ -628,8 +628,8 @@ GameObject:
   - component: {fileID: 1880588102}
   - component: {fileID: 1880588101}
   - component: {fileID: 1880588107}
-  - component: {fileID: 1880588108}
   - component: {fileID: 1880588100}
+  - component: {fileID: 1880588108}
   - component: {fileID: 1880588098}
   - component: {fileID: 1880588099}
   - component: {fileID: 1880588097}
@@ -926,7 +926,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 5.96}
+    oldSize: {x: 4.44, y: 4.4}
     newSize: {x: 0.96, y: 1.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -947,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce7721689d57a04aaff673073bad6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateMap: {fileID: 11400000, guid: dd8fa0f3c92d0e642b5bef088a84b79e, type: 2}
 --- !u!1 &1991184418
 GameObject:
   m_ObjectHideFlags: 0

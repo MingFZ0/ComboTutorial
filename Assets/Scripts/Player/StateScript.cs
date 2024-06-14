@@ -6,62 +6,68 @@ using UnityEngine;
 
 public class StateScript : MonoBehaviour
 {
+    [SerializeField] private StateMap stateMap;
+    
     private MovementScript movementScript;
     private AttackScript attackScript;
     private ActionScript actionScript;
 
-    public CharacterState State { get; private set; }
-
-    private Move idle;
-    private Move falling;
-    private Move landing;
-
-    public enum CharacterState
-    {
-        Falling,
-        Landing
-    }
+    private Dictionary<string, AnimationClip> stateAnimationMap = new();
+    //private Move idle;
+    //private Move falling;
+    //private Move landing;
 
     private void Awake()
     {
         movementScript = GetComponent<MovementScript>();
         actionScript = GetComponent<ActionScript>();
         attackScript = GetComponent<AttackScript>();
+        //stateAnimationMap = stateMap.StateAnimationMap;
+
+        //Debug.Log(stateAnimationMap == null);
     }
 
     private void Start()
     {
-        foreach (Move move in actionScript.MovesetPriorityMap[-1].Moves)
+        stateAnimationMap = stateMap.StateAnimationMap;
+        Debug.Log(stateMap.StateAnimationMap.Keys.Count);
+
+        foreach (string key in stateMap.StateAnimationMap.Keys)
         {
-            if (move.MoveName == "Idle") { idle = move; }
-            if (move.MoveName == "Falling") { falling = move; }
-            if (move.MoveName == "Landing") { landing = move; }
+            Debug.Log(key);
         }
-
-        
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed() == false && attackScript.IsAttacking == false)
-        {
-            if (IsGrounded()) 
-            { 
-                actionScript.Action(idle.ToString()); 
-            }
-            else 
-            {  
-                State = CharacterState.Falling;
-                actionScript.Action(falling.ToString()); 
-            }
-        }
+        //if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed() == false && attackScript.IsAttacking == false)
+        //{
+        //    if (IsGrounded())
+        //    {
+        //        actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()].ToString());
+        //    }
+        //    else
+        //    {
+        //        //State = CharacterState.Falling;
+        //        actionScript.Action(stateAnimationMap[StateAnimation.Falling.ToString()].ToString());
+        //    }
+        //}
 
-        if (attackScript.IsAttacking && State == CharacterState.Falling && IsGrounded())
+        //if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()].ToString() && IsGrounded())
+        //{
+        //    actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()].ToString());
+        //}
+
+        //if (attackScript.IsAttacking && actionScript.CurrentAction == StateAnimation.Falling.ToString() && IsGrounded())
+        //{
+        //    //State = CharacterState.Landing;
+        //    actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()].ToString());
+        //}
+
+        foreach (string key in stateMap.StateAnimationMap.Keys)
         {
-            State = CharacterState.Landing;
-            actionScript.Action(landing.ToString());
+            Debug.Log(key);
         }
     }
 
