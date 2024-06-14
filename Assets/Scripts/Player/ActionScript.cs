@@ -17,7 +17,7 @@ namespace Player
         private MovementScript playerMovement;
         private AnimatorScript playerAnimator;
 
-        private string currentAction;
+        public string CurrentAction { get; private set; }
         private int currentCancelLevel;
 
         private List<string> usedMoves;
@@ -41,14 +41,14 @@ namespace Player
             //bool result = true;
             //if (playerAttack.IsAttacking) { result = false; }
             //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), currentAction)) { result = false; }
+            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
             //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
             //if (playerAnimator.IsResettingAnimation) { result = false; }
             //if (result == false) { return false; }
 
             Debug.Log(action);
             playerAnimator.ChangeAnimation(action);
-            currentAction = action;
+            CurrentAction = action;
 
             return true;
         }

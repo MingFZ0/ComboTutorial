@@ -18,7 +18,13 @@ MonoBehaviour:
     Moves:
     - DirectionalInput: {fileID: 0}
       MoveName: Idle
+      Grounded: 1
+    - DirectionalInput: {fileID: 0}
+      MoveName: Falling
       Grounded: 0
+    - DirectionalInput: {fileID: 0}
+      MoveName: Landing
+      Grounded: 1
   Movement:
     LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
