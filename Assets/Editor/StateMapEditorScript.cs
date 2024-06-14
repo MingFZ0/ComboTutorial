@@ -15,7 +15,6 @@ public class StateMapEditorScript : Editor
         StateMap stateMap = target as StateMap;
         int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
         if (stateMap.inputs != null) { inputs = stateMap.inputs; }
-        //inputs = stateMap.inputs;
 
         stateMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField(stateMap.AnimatorController, typeof(RuntimeAnimatorController), false);
 
@@ -28,20 +27,9 @@ public class StateMapEditorScript : Editor
             {
                 EditorGUILayout.BeginHorizontal();
                 inputs[i] = EditorGUILayout.Popup(stateAnimationEnumStrings[i], inputs[i], clipNames);
-                stateMap.StateAnimations[i] = clips[i];
                 EditorGUILayout.EndHorizontal();
-
-                stateMap.StateAnimationMap[stateAnimationEnumStrings[i]] = clips[inputs[i]];
             }
-
-            //Debug.Log(dictToString);
             stateMap.inputs = inputs;
-            string dictToString = "";
-            foreach (string key in stateMap.StateAnimationMap.Keys)
-            {
-                dictToString += key + ": " + stateMap.StateAnimationMap[key].name + "; ";
-            }
-            Debug.Log(dictToString);
         }
     }
 

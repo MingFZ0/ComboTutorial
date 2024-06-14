@@ -7,13 +7,48 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Characters/StateMap")]
 public class StateMap : ScriptableObject
 {
-
-    [SerializeReference] public Dictionary<string, AnimationClip> StateAnimationMap = new();
+    public Dictionary<string, AnimationClip> StateAnimationMap;
     public RuntimeAnimatorController AnimatorController;
     public AnimationClip[] StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
     
     public readonly string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
     public int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
+
+
+    private void OnValidate()
+    {
+        if (AnimatorController != null)
+        {
+            StateAnimationMap = new();
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                StateAnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
+            }
+        }
+        
+
+        //Debug.Log("Updated Dictionary");
+
+        //foreach (string key in StateAnimationMap.Keys)
+        //{
+        //    Debug.Log(key + ": " + StateAnimationMap[key].name);
+        //}
+
+        //Debug.Log(inputs[0] + ", " + inputs[1] + ", " + inputs[2]);
+    }
+}
+
+[Serializable]
+public class StateAnimationKeyPair
+{
+    [SerializeField] public string Key;
+    [SerializeField] public AnimationClip Value;
+
+    public StateAnimationKeyPair(string key, AnimationClip value)
+    {
+        this.Key = key;
+        this.Value = value;
+    }
 }
 
 

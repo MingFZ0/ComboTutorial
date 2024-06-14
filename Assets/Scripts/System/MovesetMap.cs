@@ -10,7 +10,6 @@ public class MovesetMap:ScriptableObject
 {
     public RuntimeAnimatorController controller;
 
-    [SerializeField] private MovesetPriorityLevel Other = new(-1);
     [SerializeField] private MovesetPriorityLevel Movement = new(0);
     [SerializeField] private MovesetPriorityLevel Dash = new(1);
     [SerializeField] private MovesetPriorityLevel Light = new(2);
@@ -38,7 +37,7 @@ public class MovesetMap:ScriptableObject
 
         AllMappedMoves = VerifyMappedMoveSet();
 
-        MovesetPriorityLevel[] attacks = {Other, Light, Medium, Heavy, Unique };
+        MovesetPriorityLevel[] attacks = {Light, Medium, Heavy, Unique };
         foreach (MovesetPriorityLevel attack in attacks) { AllAttack.AddRange(attack.Moves); }
         foreach (Move move in Movement.Moves) { AllMovement.Add(move); }
         foreach (Move move in Dash.Moves) { AllDash.Add(move); }
@@ -50,7 +49,7 @@ public class MovesetMap:ScriptableObject
     public Dictionary<int, MovesetPriorityLevel> ToDictionary()
     {
         Dictionary<int, MovesetPriorityLevel> dict = new();
-        MovesetPriorityLevel[] moveSet = {Other, Movement, Dash, Light, Medium, Heavy, Unique };
+        MovesetPriorityLevel[] moveSet = {Movement, Dash, Light, Medium, Heavy, Unique };
 
         //if (moveSet == null) { return null; }
         foreach (MovesetPriorityLevel moveSetLevel in moveSet)
