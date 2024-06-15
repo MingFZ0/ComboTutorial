@@ -128,7 +128,7 @@ public class MovesetPriorityLevel
     {
         foreach (Move move in Moves)
         {
-            if (move.MoveName == moveName) return true;
+            if (move.MoveName.Equals(moveName)) return true;
         }
         return false;
     }

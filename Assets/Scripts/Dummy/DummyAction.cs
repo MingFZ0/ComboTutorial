@@ -18,4 +18,12 @@ public class DummyAction : ActionScript
         //else { Action("Idle"); }
         Action(SelectedMove.name);
     }
+
+    public override bool Action(string action)
+    {
+        bool result = base.playerAnimator.ChangeAnimation(action);
+        base.CurrentAction = action;
+
+        return result;
+    }
 }

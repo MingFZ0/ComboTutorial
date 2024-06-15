@@ -57,8 +57,10 @@ namespace Player
                 //Jumping
                 if (movement.y > 0 && IsGrounded() == jumpMove.Grounded)
                 {
-                    actionScript.Action(jumpMove.ToString());
-                    rb2d.velocity = movement * jumpForce;
+                    if (actionScript.Action(jumpMove.ToString()))
+                    {
+                        rb2d.velocity = movement * jumpForce;
+                    }
                 }
                 else if (movement.y == 0)
                 {
@@ -67,8 +69,10 @@ namespace Player
                     {
                         if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded)
                         {
-                            actionScript.Action(move.ToString());
-                            MoveCharacter(movement, walkSpeed);
+                            if (actionScript.Action(move.ToString()))
+                            {
+                                MoveCharacter(movement, walkSpeed);
+                            }
                             return;
                         }
                     }

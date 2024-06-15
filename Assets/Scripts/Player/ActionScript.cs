@@ -12,12 +12,12 @@ namespace Player
         [SerializeField] private MovesetMap movesetMap;
         public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap { get; private set; }
 
-        private PlayerControlsInput playerControlsInput;
-        private AttackScript attackScript;
-        private MovementScript playerMovement;
-        private AnimatorScript playerAnimator;
+        protected PlayerControlsInput playerControlsInput;
+        protected AttackScript attackScript;
+        protected MovementScript playerMovement;
+        protected AnimatorScript playerAnimator;
 
-        public string CurrentAction { get; private set; }
+        public string CurrentAction { get; protected set; }
         private int currentCancelLevel;
 
         private List<string> usedMoves;
@@ -38,20 +38,37 @@ namespace Player
 
         public virtual bool Action(string action)
         {
-            //bool result = true;
-            //if (attackScript.IsAttacking) { result = false; }
+            bool result = true;
+            if (attackScript.IsAttacking) { result = false; }
             //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
             //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
             //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
             //if (playerAnimator.IsResettingAnimation) { result = false; }
-            //if (result == false) { return false; }
+            if (result == false) { return false; }
 
             //Debug.Log(action);
-            bool result = playerAnimator.ChangeAnimation(action);
+            if (playerAnimator.ChangeAnimation(action)) { currentCancelLevel = CheckPriorityLevel(action); }
             CurrentAction = action;
 
-            return result;
+            return true;
         }
+
+        //public virtual bool Action(Move action)
+        //{
+        //    bool result = true;
+        //    if (attackScript.IsAttacking) { result = false; }
+        //    //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
+        //    //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
+        //    //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
+        //    //if (playerAnimator.IsResettingAnimation) { result = false; }
+        //    if (result == false) { return false; }
+
+        //    //Debug.Log(action);
+        //    if (playerAnimator.ChangeAnimation(action)) { currentCancelLevel = CheckPriorityLevel(action); }
+        //    CurrentAction = action;
+
+        //    return true;
+        //}
 
         private void Update()
         {

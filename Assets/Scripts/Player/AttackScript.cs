@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class AttackScript : MonoBehaviour
 {
     //Script References
-    [SerializeField] private MovesetMap movesetMap;
-    
     private ActionScript actionScript;
     private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
     private StateScript stateScript;
@@ -23,7 +21,11 @@ public class AttackScript : MonoBehaviour
     {
         actionScript = GetComponent<ActionScript>();
         stateScript = GetComponent<StateScript>();
-        movesetPriorityMap = movesetMap.MovesetPriorityMap;
+    }
+
+    private void Start()
+    {
+        movesetPriorityMap = actionScript.MovesetPriorityMap;
     }
 
     private void Update()
@@ -41,8 +43,10 @@ public class AttackScript : MonoBehaviour
                     if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 
                     {
                         Debug.Log(move + " should be ran pressed");
-                        IsAttacking = true;
-                        Debug.Log(actionScript.Action(move.MoveName));
+                        if (actionScript.Action(move.MoveName)) 
+                        {
+                            //IsAttacking = true;
+                        }
                         return;
                     }
                 }
