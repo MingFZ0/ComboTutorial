@@ -13,7 +13,7 @@ namespace Player
         public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap { get; private set; }
 
         private PlayerControlsInput playerControlsInput;
-        private AttackScript playerAttack;
+        private AttackScript attackScript;
         private MovementScript playerMovement;
         private AnimatorScript playerAnimator;
 
@@ -27,7 +27,7 @@ namespace Player
         private void Awake()
         {
             MovesetPriorityMap = movesetMap.MovesetPriorityMap;
-            playerAttack = GetComponent<AttackScript>();
+            attackScript = GetComponent<AttackScript>();
             playerMovement = GetComponent<MovementScript>();
             playerAnimator = GetComponent<AnimatorScript>();
 
@@ -36,21 +36,21 @@ namespace Player
             playerControlsInput.Player.Enable();
         }
 
-        public bool Action(string action)
+        public virtual bool Action(string action)
         {
             //bool result = true;
-            //if (playerAttack.IsAttacking) { result = false; }
+            //if (attackScript.IsAttacking) { result = false; }
             //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
-            //if (playerAttack.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
+            //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
+            //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
             //if (playerAnimator.IsResettingAnimation) { result = false; }
             //if (result == false) { return false; }
 
-            Debug.Log(action);
-            playerAnimator.ChangeAnimation(action);
+            //Debug.Log(action);
+            bool result = playerAnimator.ChangeAnimation(action);
             CurrentAction = action;
 
-            return true;
+            return result;
         }
 
         private void Update()

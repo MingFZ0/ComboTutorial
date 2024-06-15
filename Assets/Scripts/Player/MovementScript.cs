@@ -16,6 +16,7 @@ namespace Player
         [SerializeField] private float dashBufferMemory;
         [SerializeField] private float walkSpeed;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float groundDetectionBoxHeight;
 
         public bool isJumping;
 
@@ -88,13 +89,13 @@ namespace Player
 
         public bool IsGrounded()
         {
-            float extraHeightText = 0.10f;
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, extraHeightText, jumpLayerMask);
+            float groundDetectionBoxHeight = 0.10f;
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundDetectionBoxHeight, jumpLayerMask);
             Color rayColor = Color.red;
             if (raycastHit.collider != null) { rayColor = Color.green; }
-            Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
-            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + extraHeightText), rayColor);
-            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + extraHeightText), Vector2.right * (boxCollider.bounds.extents.x * 2f), rayColor);
+            Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundDetectionBoxHeight), rayColor);
+            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, 0), Vector2.down * (boxCollider.bounds.extents.y + groundDetectionBoxHeight), rayColor);
+            Debug.DrawRay(boxCollider.bounds.center - new Vector3(boxCollider.bounds.extents.x, boxCollider.bounds.extents.y + groundDetectionBoxHeight), Vector2.right * (boxCollider.bounds.extents.x * 2f), rayColor);
             //Debug.Log(raycastHit.collider);
             return raycastHit.collider != null;
         }

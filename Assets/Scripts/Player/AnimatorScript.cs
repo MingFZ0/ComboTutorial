@@ -18,6 +18,14 @@ namespace Player
             animator = GetComponent<Animator>();
         }
 
+        private void Update()
+        {
+            if (CurrentAnimation != animator.GetCurrentAnimatorClipInfo(0)[0].clip.name)
+            {
+                CurrentAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+            }
+        }
+
         public void Jumping()
         {
             Debug.Log("Jumping!");
