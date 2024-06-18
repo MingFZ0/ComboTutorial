@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using UnityEngine.InputSystem;
+using System.Linq;
+
+[CreateAssetMenu(menuName = "Characters/ActionMap")]
+public class ActionMap : ScriptableObject
+{
+    public RuntimeAnimatorController AnimatorController;
+    public List<ActionMapInput> ActionMapInput;
+    public PriorityLevel[] PriorityLevels;
+    public Dictionary<int, PriorityLevel> ActionPriorityMap = new();
+
+    private void OnValidate()
+    {
+        ActionPriorityMap.Clear();
+
+        for (int i = 0; i < PriorityLevels.Length; i++)
+        {
+            ActionPriorityMap[i] = PriorityLevels[i];
+        }
+    }
+
+    private void OnEnable()
+    {
+        //Debug.Log(ActionPriorityMap[0].Moves.Count);
+    }
+}
+
+public struct ActionMapInput 
+{
+    [SerializeField] public PriorityLevel PriorityLevel;
+    [SerializeField] public int PriorityIndex;
+}
+
+[Serializable]
+public class PriorityLevel
+{
+    [SerializeField] public InputActionReference LevelInput;
+    [SerializeField] public List<Move> Moves = new();
+    public bool Fold;
+
+    public PriorityLevel() { }
+}
+
+[Serializable]
+public class Move
+{
+    public RuntimeAnimatorController AnimatorController;
+    [SerializeField] public InputActionReference DirectionalInput;
+    [SerializeField] public AnimationClip AnimationClip;
+    [SerializeField] public bool Grounded;
+    public int AnimationClipIndexInput;
+
+    public Move(RuntimeAnimatorController _animatorController) { 
+        this.AnimatorController = _animatorController;
+    }
+
+    //public RuntimeAnimatorController GetAnimatorController() { return _animatorController; }
+
+    public Move(InputActionReference directionalInput, AnimationClip animationClip, bool grounded)
+    {
+        DirectionalInput = directionalInput;
+        AnimationClip = animationClip;
+        Grounded = grounded;
+    }
+}
+
+public enum ActionEnum
+{
+    Movement,
+    Dash,
+    Light,
+    Medium,
+    Heavy,
+    Unique
+}

@@ -9,7 +9,7 @@ public class AttackScript : MonoBehaviour
 {
     //Script References
     private ActionScript actionScript;
-    private Dictionary<int, MovesetPriorityLevel> movesetPriorityMap;
+    private Dictionary<int, PriorityLevel> movesetPriorityMap;
     private StateScript stateScript;
 
     //Fields
@@ -32,7 +32,7 @@ public class AttackScript : MonoBehaviour
     {
         for (int i = 2; i < 6; i++)
         {
-            MovesetPriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
+            PriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
             InputActionReference movesetLevelInput = movesetPriorityLevel.LevelInput;
 
             if (movesetLevelInput.action.WasPressedThisFrame())
@@ -43,10 +43,10 @@ public class AttackScript : MonoBehaviour
                     if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 
                     {
                         Debug.Log(move + " should be ran pressed");
-                        if (actionScript.Action(move.MoveName)) 
-                        {
-                            //IsAttacking = true;
-                        }
+                        //if (actionScript.Action(move.MoveName)) 
+                        //{
+                        //    //IsAttacking = true;
+                        //}
                         return;
                     }
                 }

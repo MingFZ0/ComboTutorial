@@ -9,8 +9,8 @@ namespace Player
 
     public class ActionScript : MonoBehaviour
     {
-        [SerializeField] private MovesetMap movesetMap;
-        public Dictionary<int, MovesetPriorityLevel> MovesetPriorityMap { get; private set; }
+        [SerializeField] private ActionMap movesetMap;
+        public Dictionary<int, PriorityLevel> MovesetPriorityMap { get; private set; }
 
         protected PlayerControlsInput playerControlsInput;
         protected AttackScript attackScript;
@@ -26,7 +26,7 @@ namespace Player
 
         private void Awake()
         {
-            MovesetPriorityMap = movesetMap.MovesetPriorityMap;
+            MovesetPriorityMap = movesetMap.ActionPriorityMap;
             attackScript = GetComponent<AttackScript>();
             playerMovement = GetComponent<MovementScript>();
             playerAnimator = GetComponent<AnimatorScript>();
@@ -47,42 +47,15 @@ namespace Player
             if (result == false) { return false; }
 
             //Debug.Log(action);
-            if (playerAnimator.ChangeAnimation(action)) { currentCancelLevel = CheckPriorityLevel(action); }
+            if (playerAnimator.ChangeAnimation(action)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
             CurrentAction = action;
 
             return true;
         }
 
-        //public virtual bool Action(Move action)
-        //{
-        //    bool result = true;
-        //    if (attackScript.IsAttacking) { result = false; }
-        //    //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-        //    //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
-        //    //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
-        //    //if (playerAnimator.IsResettingAnimation) { result = false; }
-        //    if (result == false) { return false; }
-
-        //    //Debug.Log(action);
-        //    if (playerAnimator.ChangeAnimation(action)) { currentCancelLevel = CheckPriorityLevel(action); }
-        //    CurrentAction = action;
-
-        //    return true;
-        //}
-
         private void Update()
         {
             
-        }
-
-        private int CheckPriorityLevel(string moveName)
-        {
-            foreach (int priorityLevel in MovesetPriorityMap.Keys)
-            {
-                MovesetPriorityLevel level = MovesetPriorityMap[priorityLevel];
-                if (level.Contains(moveName)) return priorityLevel;
-            }
-            throw new UndefinedMoveName(gameObject.name + ": Unable to find the move name of " + moveName + " within the provided movesetMap of " + movesetMap.name);
         }
     }
 }
