@@ -31,6 +31,11 @@ MonoBehaviour:
       AnimationClip: {fileID: 7400000, guid: 3728157d1352ab24f85dca2820becd0b, type: 2}
       Grounded: 1
       AnimationClipIndexInput: 13
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 0c4a9cdb366739e4994c2ab67bcbea8e, type: 2}
+      Grounded: 1
+      AnimationClipIndexInput: 12
     Fold: 1
   - LevelInput: {fileID: 0}
     Moves:
@@ -52,7 +57,12 @@ MonoBehaviour:
       AnimationClip: {fileID: 7400000, guid: 220d341d34be902448c52318dd6d99f3, type: 2}
       Grounded: 1
       AnimationClipIndexInput: 5
-    Fold: 0
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: da23255321918124aa424a45944b7dff, type: 2}
+      Grounded: 0
+      AnimationClipIndexInput: 14
+    Fold: 1
   - LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -65,7 +75,12 @@ MonoBehaviour:
       AnimationClip: {fileID: 7400000, guid: 744741408c6d9494cbb36e6a010c0c14, type: 2}
       Grounded: 1
       AnimationClipIndexInput: 6
-    Fold: 0
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: aefdfb97a18de7b4ba8eeb35b526b62e, type: 2}
+      Grounded: 0
+      AnimationClipIndexInput: 15
+    Fold: 1
   - LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -83,6 +98,11 @@ MonoBehaviour:
       AnimationClip: {fileID: 7400000, guid: 1dfdf7f18c9e5494dbfabcec7d2c5a69, type: 2}
       Grounded: 1
       AnimationClipIndexInput: 8
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: bc705979088abb64c8fa93db145db792, type: 2}
+      Grounded: 0
+      AnimationClipIndexInput: 16
     Fold: 1
   - LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
