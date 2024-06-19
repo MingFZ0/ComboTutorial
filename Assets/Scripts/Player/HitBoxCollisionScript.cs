@@ -26,7 +26,8 @@ public class HitBoxCollisionScript : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    { 
+    {
+        Debug.Log("hit end" + collision.gameObject.name);
         attackScript.OnHitBoxExit();
     }
 }
