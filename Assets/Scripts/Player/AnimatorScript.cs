@@ -31,34 +31,14 @@ namespace Player
             Debug.Log("Jumping!");
         }
 
-        public void ResetAnimation()
+        public bool ChangeAnimation(AnimationClip targetAnimation)
         {
-            if (ChangeAnimation(Movement.Player_Idle.ToString()))
-            {
-                IsResettingAnimation = true;
-                //Debug.Log("Reset Animation to Idle");
-                //actionScript.Action(Movement.Player_Idle.ToString());
-                
-            };
-            
-        }
+            if (CurrentAnimation == targetAnimation.name) return false;
 
-        public bool ChangeAnimation(string targetAnimation)
-        {
-            if (CurrentAnimation == targetAnimation) return false;
-
-            animator.Play(targetAnimation);
-            CurrentAnimation = targetAnimation;
+            animator.Play(targetAnimation.name);
+            CurrentAnimation = targetAnimation.name;
             AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-            foreach (AnimationClip clip in clips)
-            {
-                //O(n) Operation
-                if (clip.name == CurrentAnimation)
-                {
-                    CurrentAnimationClip = clip;
-                    return true;
-                }
-            }
+            CurrentAnimationClip = targetAnimation;
             return true;
         }
     }

@@ -5,14 +5,14 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(StateMap))]
+[CustomEditor(typeof(StateAnimationMap))]
 public class StateMapEditorScript : Editor
 {
     string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
 
     public override void OnInspectorGUI()
     {
-        StateMap stateMap = target as StateMap;
+        StateAnimationMap stateMap = target as StateAnimationMap;
         int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
         if (stateMap.inputs != null) { inputs = stateMap.inputs; }
 

@@ -945,7 +945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348e6177e198a1246a63da52d1b9eeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesetMap: {fileID: 11400000, guid: fe346fac4fe041c409545edb10204be0, type: 2}
+  animationMapping: {fileID: 11400000, guid: 3c529d43b96bc614888cb6f3bf3f27ec, type: 2}
 --- !u!114 &1880588101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1506,10 +1506,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39182dbc82e3ccb40b7bc5badde0230c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesetMap: {fileID: 11400000, guid: fe346fac4fe041c409545edb10204be0, type: 2}
+  animationMapping: {fileID: 0}
   MoveInputInt: 8
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
   SelectedMove: {fileID: 7400000, guid: 1dfdf7f18c9e5494dbfabcec7d2c5a69, type: 2}
+  dummyAnimationMapping: {fileID: 11400000, guid: 3c529d43b96bc614888cb6f3bf3f27ec, type: 2}
 --- !u!4 &2111489420
 Transform:
   m_ObjectHideFlags: 0

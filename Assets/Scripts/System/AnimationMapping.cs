@@ -6,5 +6,6 @@ using UnityEngine;
 public class AnimationMapping : ScriptableObject
 {
     public RuntimeAnimatorController AnimatorController;
-    public ActionMap ActionAnimationMap;
+    public ActionAnimationMap ActionAnimationMap;
+    public StateAnimationMap StateAnimationMap;
 }

@@ -9,7 +9,8 @@ namespace Player
 
     public class ActionScript : MonoBehaviour
     {
-        [SerializeField] private ActionMap movesetMap;
+        [SerializeField] private AnimationMapping animationMapping;
+
         public Dictionary<int, PriorityLevel> MovesetPriorityMap { get; private set; }
 
         protected PlayerControlsInput playerControlsInput;
@@ -17,7 +18,7 @@ namespace Player
         protected MovementScript playerMovement;
         protected AnimatorScript playerAnimator;
 
-        public string CurrentAction { get; protected set; }
+        public AnimationClip CurrentAction { get; protected set; }
         private int currentCancelLevel;
 
         private List<string> usedMoves;
@@ -26,7 +27,7 @@ namespace Player
 
         private void Awake()
         {
-            MovesetPriorityMap = movesetMap.ActionPriorityMap;
+            
             attackScript = GetComponent<AttackScript>();
             playerMovement = GetComponent<MovementScript>();
             playerAnimator = GetComponent<AnimatorScript>();
@@ -34,9 +35,11 @@ namespace Player
 
             playerControlsInput = new PlayerControlsInput();
             playerControlsInput.Player.Enable();
+
+            if (animationMapping != null) { MovesetPriorityMap = animationMapping.ActionAnimationMap.ActionPriorityMap; }
         }
 
-        public virtual bool Action(string action)
+        public virtual bool Action(AnimationClip action)
         {
             bool result = true;
             if (attackScript.IsAttacking) { result = false; }
@@ -53,9 +56,13 @@ namespace Player
             return true;
         }
 
-        private void Update()
+        public virtual void ResetAction()
         {
-            
+            AnimationClip idle = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Idle.ToString()];
+            AnimationClip falling = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Falling.ToString()];
+
+            if (playerMovement.IsGrounded() == false) { Action(falling); }
+            else { Action(idle); }
         }
     }
 }

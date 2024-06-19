@@ -43,10 +43,10 @@ public class AttackScript : MonoBehaviour
                     if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 
                     {
                         Debug.Log(move + " should be ran pressed");
-                        //if (actionScript.Action(move.MoveName)) 
-                        //{
-                        //    //IsAttacking = true;
-                        //}
+                        if (actionScript.Action(move.AnimationClip))
+                        {
+                            //IsAttacking = true;
+                        }
                         return;
                     }
                 }

@@ -12,82 +12,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0181a8f8912b5e488ba6737f9b12319, type: 3}
   m_Name: GokuMovesetMap
   m_EditorClassIdentifier: 
-  controller: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
-  Other:
-    LevelInput: {fileID: 0}
+  AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+  PriorityLevels:
+  - LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: 0}
-      MoveName: Idle
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: f8f3b13e4b9c04245922f5994f216545, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: 0}
-      MoveName: Falling
-      Grounded: 0
-    - DirectionalInput: {fileID: 0}
-      MoveName: Landing
+      AnimationClipIndexInput: 1
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: bc3831db6e4c1564ea2525fadbbd5ed2, type: 2}
       Grounded: 1
-  Movement:
-    LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClipIndexInput: 2
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 3728157d1352ab24f85dca2820becd0b, type: 2}
+      Grounded: 1
+      AnimationClipIndexInput: 13
+    Fold: 1
+  - LevelInput: {fileID: 0}
     Moves:
-    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Crouch
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: fe2972113984251459a4dfb1c5d25891, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Walk_Backward
+      AnimationClipIndexInput: 4
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 4259f069e682b3e45b88080aa63cd40e, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Walk_Forward
-      Grounded: 1
-    - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Jump
-      Grounded: 1
-  Dash:
-    LevelInput: {fileID: 0}
+      AnimationClipIndexInput: 3
+    Fold: 0
+  - LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Dash_Backward
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 220d341d34be902448c52318dd6d99f3, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Dash_Forward
-      Grounded: 1
-  Light:
-    LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClipIndexInput: 5
+    Fold: 0
+  - LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_5L
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 3a70cd8d2dcd7294b95ed22666ae1cc7, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_JL
-      Grounded: 0
-  Medium:
-    LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClipIndexInput: 7
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 744741408c6d9494cbb36e6a010c0c14, type: 2}
+      Grounded: 1
+      AnimationClipIndexInput: 6
+    Fold: 0
+  - LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_2M
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: c0f54c3089af70e44b4e77c79fa0902e, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_5M
+      AnimationClipIndexInput: 9
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 2e25656f777e4774fbbecdda13c2fdd0, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_JM
-      Grounded: 0
-  Heavy:
-    LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClipIndexInput: 10
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 1dfdf7f18c9e5494dbfabcec7d2c5a69, type: 2}
+      Grounded: 1
+      AnimationClipIndexInput: 8
+    Fold: 1
+  - LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
-    - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_2H
+    - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
+      DirectionalInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      AnimationClip: {fileID: 7400000, guid: 725b1591f373a124fbf87a0130142519, type: 2}
       Grounded: 1
-    - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_4H
-      Grounded: 1
-    - DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_5H
-      Grounded: 1
-    - DirectionalInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_JH
-      Grounded: 0
-  Unique:
-    LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-    Moves:
-    - DirectionalInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
-      MoveName: Attack_5S
-      Grounded: 1
+      AnimationClipIndexInput: 11
+    Fold: 1

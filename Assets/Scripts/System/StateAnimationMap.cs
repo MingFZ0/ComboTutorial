@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Characters/StateMap")]
-public class StateMap : ScriptableObject
+public class StateAnimationMap : ScriptableObject
 {
-    public Dictionary<string, AnimationClip> StateAnimationMap;
+    public Dictionary<string, AnimationClip> AnimationMap;
     public RuntimeAnimatorController AnimatorController;
     public AnimationClip[] StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
     
@@ -19,10 +19,10 @@ public class StateMap : ScriptableObject
     {
         if (AnimatorController != null)
         {
-            StateAnimationMap = new();
+            AnimationMap = new();
             for (int i = 0; i < inputs.Length; i++)
             {
-                StateAnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
+                AnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
             }
         }
         

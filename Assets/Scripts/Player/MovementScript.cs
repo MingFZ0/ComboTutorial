@@ -57,7 +57,7 @@ namespace Player
                 //Jumping
                 if (movement.y > 0 && IsGrounded() == jumpMove.Grounded)
                 {
-                    if (actionScript.Action(jumpMove.ToString()))
+                    if (actionScript.Action(jumpMove.AnimationClip))
                     {
                         rb2d.velocity = movement * jumpForce;
                     }
@@ -69,7 +69,7 @@ namespace Player
                     {
                         if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded)
                         {
-                            if (actionScript.Action(move.ToString()))
+                            if (actionScript.Action(move.AnimationClip))
                             {
                                 MoveCharacter(movement, walkSpeed);
                             }
@@ -79,7 +79,7 @@ namespace Player
                 }
                 else if (movement.y < 0 && IsGrounded() == crouchMove.Grounded)
                 {
-                    actionScript.Action(crouchMove.ToString());
+                    actionScript.Action(crouchMove.AnimationClip);
                 }
 
             }

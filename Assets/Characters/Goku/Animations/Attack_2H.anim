@@ -175,7 +175,7 @@ AnimationClip:
   - time: 1.0666667
     functionName: Action
     data: Idle
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

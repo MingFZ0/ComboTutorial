@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class StateScript : MonoBehaviour
 {
-    [SerializeField] private StateMap stateMap;
+    [SerializeField] private StateAnimationMap stateMap;
     
     private MovementScript movementScript;
     private AttackScript attackScript;
@@ -22,7 +22,7 @@ public class StateScript : MonoBehaviour
         movementScript = GetComponent<MovementScript>();
         actionScript = GetComponent<ActionScript>();
         attackScript = GetComponent<AttackScript>();
-        stateAnimationMap = stateMap.StateAnimationMap;
+        stateAnimationMap = stateMap.AnimationMap;
     }
 
     private void Start()
@@ -41,24 +41,24 @@ public class StateScript : MonoBehaviour
             if (IsGrounded())
             {
               
-                actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()].name);
+                actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()]);
             }
             else
             {
                 //State = CharacterState.Falling;
-                actionScript.Action(stateAnimationMap[StateAnimation.Falling.ToString()].name);
+                actionScript.Action(stateAnimationMap[StateAnimation.Falling.ToString()]);
             }
         }
 
-        if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()].ToString() && IsGrounded())
+        if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()] && IsGrounded())
         {
-            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()].name);
+            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
         }
 
-        if (attackScript.IsAttacking && actionScript.CurrentAction == StateAnimation.Falling.ToString() && IsGrounded())
+        if (attackScript.IsAttacking && actionScript.CurrentAction.name == StateAnimation.Falling.ToString() && IsGrounded())
         {
             //State = CharacterState.Landing;
-            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()].name);
+            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
         }
     }
 

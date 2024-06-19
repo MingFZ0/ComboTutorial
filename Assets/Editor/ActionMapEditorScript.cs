@@ -7,12 +7,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CustomEditor(typeof(ActionMap))]
+[CustomEditor(typeof(ActionAnimationMap))]
 public class ActionMapEditorScript : Editor
 {
     public override void OnInspectorGUI()
     {
-        ActionMap actionMap = (ActionMap)target;
+        ActionAnimationMap actionMap = (ActionAnimationMap)target;
         actionMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField(actionMap.AnimatorController, typeof(RuntimeAnimatorController), false);
 
         string[] levelNames = Enum.GetNames(typeof(ActionEnum));

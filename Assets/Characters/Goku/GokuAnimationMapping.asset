@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GokuAnimationMapping
   m_EditorClassIdentifier: 
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
-  ActionAnimationMap: {fileID: 0}
+  ActionAnimationMap: {fileID: 11400000, guid: fe346fac4fe041c409545edb10204be0, type: 2}
+  StateAnimationMap: {fileID: 11400000, guid: dd8fa0f3c92d0e642b5bef088a84b79e, type: 2}

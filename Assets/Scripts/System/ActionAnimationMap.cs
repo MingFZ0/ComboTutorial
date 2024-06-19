@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 
 [CreateAssetMenu(menuName = "Characters/ActionMap")]
-public class ActionMap : ScriptableObject
+public class ActionAnimationMap : ScriptableObject
 {
     public RuntimeAnimatorController AnimatorController;
     public List<ActionMapInput> ActionMapInput;
@@ -65,6 +65,11 @@ public class Move
         DirectionalInput = directionalInput;
         AnimationClip = animationClip;
         Grounded = grounded;
+    }
+
+    public override string ToString()
+    {
+        return AnimationClip.name;
     }
 }
 
