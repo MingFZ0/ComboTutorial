@@ -154,7 +154,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6333333
+  - time: 0.65
     functionName: ResetAction
     data: 
     objectReferenceParameter: {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}

@@ -61,7 +61,11 @@ namespace Player
             AnimationClip idle = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Idle.ToString()];
             AnimationClip falling = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Falling.ToString()];
 
-            if (playerMovement.IsGrounded() == false) { Action(falling); }
+            if (playerMovement.IsGrounded() == false) { 
+
+                bool result = Action(falling);
+                Debug.Log("Falling " + result);
+            }
             else { Action(idle); }
         }
     }
