@@ -43,10 +43,7 @@ namespace Player
         {
             bool result = true;
             if (attackScript.IsAttacking) { result = false; }
-            //if (playerMovement.IsDashing && Enum.IsDefined(typeof(Attacks), action)) { result = false; }
-            //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Attacks), action) && Enum.IsDefined(typeof(Attacks), CurrentAction)) { result = false; }
-            //if (attackScript.IsAttacking == true && Enum.IsDefined(typeof(Movement), action) == true) { result = false; }
-            //if (playerAnimator.IsResettingAnimation) { result = false; }
+
             if (result == false) { return false; }
 
             //Debug.Log(action);
@@ -67,6 +64,19 @@ namespace Player
                 Debug.Log("Falling " + result);
             }
             else { Action(idle); }
+        }
+
+        public int FindPriorityLevel(AnimationClip clip)
+        {
+            foreach (int levelIndex in MovesetPriorityMap.Keys)
+            {
+                PriorityLevel level = MovesetPriorityMap[levelIndex];
+                foreach (Move move in level.Moves)
+                {
+                    if (move.AnimationClip == clip) { return levelIndex; }
+                }
+            }
+            throw new ArgumentOutOfRangeException("Unable to find Priority Level of clip " + clip.name);
         }
     }
 }
