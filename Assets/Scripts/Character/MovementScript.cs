@@ -51,7 +51,7 @@ namespace Player
             if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
             {
                 Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
-                Debug.Log(movement);
+                //Debug.Log(movement);
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
                 //Jumping

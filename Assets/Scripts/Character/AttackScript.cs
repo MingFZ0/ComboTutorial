@@ -14,8 +14,7 @@ public class AttackScript : MonoBehaviour
 
     //Fields
     public bool IsAttacking;
-    public Boolean IsCancelable;
-    public Boolean HitBoxCollided { get; private set; }
+    public bool HitBoxCollided { get; private set; }
 
     void Awake()
     {
