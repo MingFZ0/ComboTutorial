@@ -60,6 +60,8 @@ namespace Player
                 {
                     if (actionScript.Action(jumpMove.AnimationClip))
                     {
+
+
                         if (movement.x > 0)
                         {
                             rb2d.velocity = new Vector2(jumpSpeed, movement.y * jumpForce);

@@ -21,7 +21,7 @@ namespace Player
         public AnimationClip CurrentAction { get; protected set; }
         private int currentCancelLevel;
 
-        private List<string> usedMoves;
+        private List<AnimationClip> usedMoves = new();
         private int currentMovePriorityLevel;
 
 
@@ -42,13 +42,25 @@ namespace Player
         public virtual bool Action(AnimationClip action)
         {
             bool result = true;
-            if (attackScript.IsAttacking) { result = false; }
+            int levelIndex = FindPriorityLevel(action);
 
+            if (levelIndex < currentCancelLevel) { result = false; }
+            if (usedMoves.Contains(action)) { result = false; }
+            if (levelIndex >= 2 && currentCancelLevel >= 2 && attackScript.HitBoxCollided == false) { result = false; }
             if (result == false) { return false; }
 
             //Debug.Log(action);
             if (playerAnimator.ChangeAnimation(action)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
-            CurrentAction = action;
+            {
+                CurrentAction = action;
+                currentCancelLevel = levelIndex;
+                usedMoves.Add(action);
+                if (levelIndex == 0) { 
+                    usedMoves.Clear();
+                    currentCancelLevel = 0;
+                }
+            }
+            
 
             return true;
         }
@@ -57,13 +69,18 @@ namespace Player
         {
             AnimationClip idle = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Idle.ToString()];
             AnimationClip falling = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Falling.ToString()];
+            AnimationClip action;
 
-            if (playerMovement.IsGrounded() == false) { 
-
-                bool result = Action(falling);
-                Debug.Log("Falling " + result);
+            if (playerMovement.IsGrounded() == false) 
+            {
+                action = falling;
             }
-            else { Action(idle); }
+            else { action = idle; }
+
+            CurrentAction = action;
+            currentCancelLevel = 0;
+            bool result = Action(falling);
+            Debug.Log("Falling " + result);
         }
 
         public int FindPriorityLevel(AnimationClip clip)
@@ -76,6 +93,12 @@ namespace Player
                     if (move.AnimationClip == clip) { return levelIndex; }
                 }
             }
+
+            foreach (AnimationClip animation in animationMapping.StateAnimationMap.AnimationMap.Values)
+            {
+                if (animation == clip) { return 0; }
+            }
+            Debug.Log(clip.name);
             throw new ArgumentOutOfRangeException("Unable to find Priority Level of clip " + clip.name);
         }
     }

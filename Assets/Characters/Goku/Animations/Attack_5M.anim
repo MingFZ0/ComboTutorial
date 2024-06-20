@@ -152,8 +152,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.48333332
-    functionName: Action
-    data: Idle
+    functionName: ResetAction
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

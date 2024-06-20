@@ -14,7 +14,7 @@ public class AttackScript : MonoBehaviour
 
     //Fields
     public bool IsAttacking;
-    public bool HitBoxCollided { get; private set; }
+    public bool HitBoxCollided;
 
     void Awake()
     {
@@ -54,5 +54,5 @@ public class AttackScript : MonoBehaviour
     }
 
     public void OnHitBoxCollide() { HitBoxCollided = true; }
-    public void OnHitBoxExit() {HitBoxCollided=false; }
+    public void OnHitBoxExit() { HitBoxCollided=false; }
 }
