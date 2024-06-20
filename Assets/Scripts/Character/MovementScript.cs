@@ -17,7 +17,7 @@ namespace Player
         [SerializeField] private float walkSpeed;
         [SerializeField] private float jumpForce;
         [SerializeField] private float groundDetectionBoxHeight;
-        [SerializeField] private float jumpSpeed;
+        [SerializeField] private Vector2 jumpAngle;
 
         public bool isJumping;
 
@@ -34,6 +34,7 @@ namespace Player
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
             boxCollider = gameObject.GetComponent<BoxCollider2D>();
+            jumpAngle = jumpAngle.normalized;
         }
 
         private void Start()
@@ -64,11 +65,17 @@ namespace Player
 
                         if (movement.x > 0)
                         {
-                            rb2d.velocity = new Vector2(jumpSpeed, movement.y * jumpForce);
+                            jumpAngle.x = Math.Abs(jumpAngle.x);
+                            rb2d.velocity = jumpAngle * jumpForce;
+                        }
+                        else if (movement.x < 0)
+                        {
+                            jumpAngle.x = Math.Abs(jumpAngle.x) * -1;
+                            rb2d.velocity = jumpAngle * jumpForce;
                         }
                         else
                         {
-                            rb2d.velocity = new Vector2(jumpSpeed * -1, movement.y * jumpForce);
+                            rb2d.velocity = new Vector2(0, jumpAngle.y * jumpForce);
                         }
                         
                     }
