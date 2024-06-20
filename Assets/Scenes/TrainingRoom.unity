@@ -1442,6 +1442,7 @@ MonoBehaviour:
   walkSpeed: 3
   jumpForce: 5
   groundDetectionBoxHeight: 0.15
+  jumpSpeed: 10
   isJumping: 0
 --- !u!114 &1880588100
 MonoBehaviour:
