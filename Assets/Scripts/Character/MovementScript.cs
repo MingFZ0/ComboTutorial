@@ -17,6 +17,7 @@ namespace Player
         [SerializeField] private float walkSpeed;
         [SerializeField] private float jumpForce;
         [SerializeField] private float groundDetectionBoxHeight;
+        [SerializeField] private float jumpSpeed;
 
         public bool isJumping;
 
@@ -59,7 +60,15 @@ namespace Player
                 {
                     if (actionScript.Action(jumpMove.AnimationClip))
                     {
-                        rb2d.velocity = movement * jumpForce;
+                        if (movement.x > 0)
+                        {
+                            rb2d.velocity = new Vector2(jumpSpeed, movement.y * jumpForce);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(jumpSpeed * -1, movement.y * jumpForce);
+                        }
+                        
                     }
                 }
                 else if (movement.y == 0)
