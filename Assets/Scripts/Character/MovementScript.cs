@@ -66,10 +66,14 @@ namespace Player
                             jumpAngle.x = Math.Abs(jumpAngle.x);
                             rb2d.velocity = jumpAngle * jumpForce;
                         }
-                        else
+                        else if (movement.x < 0)
                         {
                             jumpAngle.x = Math.Abs(jumpAngle.x) * -1;
                             rb2d.velocity = jumpAngle * jumpForce;
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(0, jumpAngle.y * jumpForce);
                         }
                         
                     }
