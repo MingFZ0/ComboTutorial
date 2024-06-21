@@ -19,8 +19,6 @@ namespace Player
         [SerializeField] private float groundDetectionBoxHeight;
         [SerializeField] private Vector2 jumpAngle;
 
-        public bool isJumping;
-
         private BoxCollider2D boxCollider;
         private Rigidbody2D rb2d;
         private ActionScript actionScript;
@@ -50,6 +48,8 @@ namespace Player
 
         private void Update()
         {
+            //if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.AddForce(Vector2.down * gravity, ForceMode2D.Impulse); }
+
             if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
             {
                 Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
@@ -61,23 +61,26 @@ namespace Player
                 {
                     if (actionScript.Action(jumpMove.AnimationClip))
                     {
+                        rb2d.velocity = Vector2.zero;
+                        rb2d.velocity = movement * jumpForce;
 
+                        //rb2d.AddForce(movement * jumpForce, ForceMode2D.Impulse);
 
-                        if (movement.x > 0)
-                        {
-                            jumpAngle.x = Math.Abs(jumpAngle.x);
-                            rb2d.velocity = jumpAngle * jumpForce;
-                        }
-                        else if (movement.x < 0)
-                        {
-                            jumpAngle.x = Math.Abs(jumpAngle.x) * -1;
-                            rb2d.velocity = jumpAngle * jumpForce;
-                        }
-                        else
-                        {
-                            rb2d.velocity = new Vector2(0, jumpAngle.y * jumpForce);
-                        }
-                        
+                        //if (movement.x > 0)
+                        //{
+                        //    jumpAngle.x = Math.Abs(jumpAngle.x);
+                        //    rb2d.velocity = jumpAngle * jumpForce;
+                        //}
+                        //else if (movement.x < 0)
+                        //{
+                        //    jumpAngle.x = Math.Abs(jumpAngle.x) * -1;
+                        //    rb2d.velocity = jumpAngle * jumpForce;
+                        //}
+                        //else
+                        //{
+                        //    rb2d.velocity = new Vector2(0, jumpAngle.y * jumpForce);
+                        //}
+
                     }
                 }
                 else if (movement.y == 0)

@@ -55,6 +55,7 @@ namespace Player
                 CurrentAction = action;
                 currentCancelLevel = levelIndex;
                 usedMoves.Add(action);
+                Debug.Log(CurrentAction);
                 if (levelIndex == 0) { 
                     usedMoves.Clear();
                     currentCancelLevel = 0;
@@ -67,8 +68,8 @@ namespace Player
 
         public virtual void ResetAction()
         {
-            AnimationClip idle = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Idle.ToString()];
-            AnimationClip falling = animationMapping.StateAnimationMap.AnimationMap[StateAnimation.Falling.ToString()];
+            AnimationClip idle = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
+            AnimationClip falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
             AnimationClip action;
 
             if (playerMovement.IsGrounded() == false) 
@@ -79,8 +80,7 @@ namespace Player
 
             CurrentAction = action;
             currentCancelLevel = 0;
-            bool result = Action(falling);
-            Debug.Log("Falling " + result);
+            Action(falling);
         }
 
         public int FindPriorityLevel(AnimationClip clip)
@@ -94,9 +94,9 @@ namespace Player
                 }
             }
 
-            foreach (AnimationClip animation in animationMapping.StateAnimationMap.AnimationMap.Values)
+            foreach (AnimationClip animation in animationMapping.StateAnimationMap.AnimationToPriorityIndexMap.Keys)
             {
-                if (animation == clip) { return 0; }
+                if (animation == clip) { return animationMapping.StateAnimationMap.AnimationToPriorityIndexMap[animation]; }
             }
             Debug.Log(clip.name);
             throw new ArgumentOutOfRangeException("Unable to find Priority Level of clip " + clip.name);

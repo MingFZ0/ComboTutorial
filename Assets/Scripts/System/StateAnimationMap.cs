@@ -7,34 +7,28 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Characters/StateMap")]
 public class StateAnimationMap : ScriptableObject
 {
-    public Dictionary<string, AnimationClip> AnimationMap;
+    public Dictionary<string, AnimationClip> StateStringToAnimationMap;
+    public Dictionary<AnimationClip, int> AnimationToPriorityIndexMap;
     public RuntimeAnimatorController AnimatorController;
     public AnimationClip[] StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
     
     public readonly string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
     public int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
+    public int[] priorityIndexInputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
 
 
     private void OnValidate()
     {
         if (AnimatorController != null)
         {
-            AnimationMap = new();
+            StateStringToAnimationMap = new();
+            AnimationToPriorityIndexMap = new();
             for (int i = 0; i < inputs.Length; i++)
             {
-                AnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
+                StateStringToAnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
+                AnimationToPriorityIndexMap.Add(AnimatorController.animationClips[inputs[i]], priorityIndexInputs[i]);
             }
         }
-        
-
-        //Debug.Log("Updated Dictionary");
-
-        //foreach (string key in StateAnimationMap.Keys)
-        //{
-        //    Debug.Log(key + ": " + StateAnimationMap[key].name);
-        //}
-
-        //Debug.Log(inputs[0] + ", " + inputs[1] + ", " + inputs[2]);
     }
 }
 

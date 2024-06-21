@@ -14,7 +14,9 @@ public class StateMapEditorScript : Editor
     {
         StateAnimationMap stateMap = target as StateAnimationMap;
         int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
+        int[] priorityLevelInputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
         if (stateMap.inputs != null) { inputs = stateMap.inputs; }
+        if (stateMap.inputs != null) { priorityLevelInputs = stateMap.priorityIndexInputs; }
 
         stateMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField(stateMap.AnimatorController, typeof(RuntimeAnimatorController), false);
 
@@ -26,10 +28,15 @@ public class StateMapEditorScript : Editor
             for (int i = 0; i < stateAnimationEnumStrings.Length; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                inputs[i] = EditorGUILayout.Popup(stateAnimationEnumStrings[i], inputs[i], clipNames);
+                EditorGUIUtility.labelWidth = 150;
+                priorityLevelInputs[i] = EditorGUILayout.IntField(new GUIContent("Priority Level Index"), priorityLevelInputs[i], GUILayout.Width(180));
+                GUILayout.Space(30);
+                EditorGUIUtility.labelWidth = 50;
+                inputs[i] = EditorGUILayout.Popup(stateAnimationEnumStrings[i], inputs[i], clipNames, GUILayout.Width(200));
                 EditorGUILayout.EndHorizontal();
             }
             stateMap.inputs = inputs;
+            stateMap.priorityIndexInputs = priorityLevelInputs;
         }
     }
 

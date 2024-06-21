@@ -37,8 +37,8 @@ public class DummyAction : ActionScript
 
     public override void ResetAction()
     {
-        AnimationClip idle = dummyAnimationMapping.StateAnimationMap.AnimationMap[StateAnimation.Idle.ToString()];
-        AnimationClip falling = dummyAnimationMapping.StateAnimationMap.AnimationMap[StateAnimation.Falling.ToString()];
+        AnimationClip idle = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
+        AnimationClip falling = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
 
         Action(idle);
     }
