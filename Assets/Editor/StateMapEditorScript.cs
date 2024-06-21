@@ -37,6 +37,7 @@ public class StateMapEditorScript : Editor
             }
             stateMap.inputs = inputs;
             stateMap.priorityIndexInputs = priorityLevelInputs;
+            serializedObject.ApplyModifiedProperties();
         }
     }
 
