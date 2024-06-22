@@ -1441,9 +1441,9 @@ MonoBehaviour:
     m_Bits: 64
   dashBufferMemory: 0.4
   walkSpeed: 3
-  jumpForce: 10
+  jumpForce: 5
+  fallForce: 0
   groundDetectionBoxHeight: 0.15
-  jumpAngle: {x: 1, y: 2.5}
 --- !u!114 &1880588100
 MonoBehaviour:
   m_ObjectHideFlags: 0

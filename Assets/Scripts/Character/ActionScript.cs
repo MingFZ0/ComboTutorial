@@ -47,7 +47,9 @@ namespace Player
             if (levelIndex < currentCancelLevel) { result = false; }
             if (usedMoves.Contains(action)) { result = false; }
             if (levelIndex >= 2 && currentCancelLevel >= 2 && attackScript.HitBoxCollided == false) { result = false; }
-            if (result == false) { return false; }
+            if (result == false) {
+                return false; 
+            }
 
             //Debug.Log(action);
             if (playerAnimator.ChangeAnimation(action)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
@@ -80,7 +82,6 @@ namespace Player
 
             CurrentAction = action;
             currentCancelLevel = 0;
-            Action(falling);
         }
 
         public int FindPriorityLevel(AnimationClip clip)

@@ -13,10 +13,10 @@ public class StateMapEditorScript : Editor
     public override void OnInspectorGUI()
     {
         StateAnimationMap stateMap = target as StateAnimationMap;
-        int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
-        int[] priorityLevelInputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
-        if (stateMap.inputs != null) { inputs = stateMap.inputs; }
-        if (stateMap.inputs != null) { priorityLevelInputs = stateMap.priorityIndexInputs; }
+        int[] inputs = CreateEmptyIntArray(Enum.GetNames(typeof(StateAnimation)).Length);
+        int[] priorityLevelInputs = CreateEmptyIntArray(Enum.GetNames(typeof(StateAnimation)).Length);
+        if (stateMap.inputs.Length > 0) { inputs = stateMap.inputs; }
+        if (stateMap.priorityIndexInputs.Length > 0) { priorityLevelInputs = stateMap.priorityIndexInputs; }
 
         stateMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField(stateMap.AnimatorController, typeof(RuntimeAnimatorController), false);
 
@@ -46,5 +46,15 @@ public class StateMapEditorScript : Editor
         string[] clipNames = new string[clips.Length];
         for (int i = 0; i < clips.Length; i++) { clipNames[i] = clips[i].name; }
         return clipNames;
+    }
+
+    private int[] CreateEmptyIntArray(int size)
+    {
+        int[] intArray = new int[size];
+        for (int i = 0; i < size; i++) 
+        {
+            intArray[i] = 0;
+        }
+        return intArray;
     }
 }

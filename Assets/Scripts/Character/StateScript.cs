@@ -10,6 +10,7 @@ public class StateScript : MonoBehaviour
 {
     public int LandingFrames;
     private int currentFrame;
+    private bool landed;
     [SerializeField] private StateAnimationMap stateMap;
     
     private MovementScript movementScript;
@@ -48,46 +49,51 @@ public class StateScript : MonoBehaviour
             {
                 actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()]);
             }
+            else if (IsGrounded() && LandingFrames > 0)
+            {
+                StartLandingRecovery();
+            }
         }
 
-        else if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()] && IsGrounded() && LandingFrames == 0)
+        else if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()] && IsGrounded())
         {
-            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
+            StartLandingRecovery();
         }
 
-        else if (attackScript.IsAttacking && actionScript.CurrentAction.name == StateAnimation.Falling.ToString() && IsGrounded() && LandingFrames == 0)
+        else if (attackScript.IsAttacking && actionScript.CurrentAction.name == StateAnimation.Falling.ToString() && IsGrounded())
         {
-            //State = CharacterState.Landing;
-            actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
+            StartLandingRecovery();
         }
     }
 
     public void SetLandingFrame(int frame) { this.LandingFrames = frame; }
 
+    private void StartLandingRecovery()
+    {
+        landed = true;
+        actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
+    }
+
     public Boolean IsGrounded() { return movementScript.IsGrounded(); }
 
     private void FixedUpdate()
     {
-        if ((currentGroundedState == false
-            && IsGrounded()
-            || actionScript.CurrentAction == stateAnimationMap[StateAnimation.Landing.ToString()]
-            && IsGrounded())
-            && LandingFrames > 0)
+        if (landed)
         {
             if (currentFrame >= LandingFrames)
             {
                 actionScript.ResetAction();
+                landed = false;
                 LandingFrames = 0;
                 currentFrame = 0;
+                //Debug.Log("Action was reset");
             }
             else
             {
-                bool result = actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
+                actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
                 currentFrame++;
             }
             
         }
-
-        currentGroundedState = IsGrounded();
     }
 }

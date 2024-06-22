@@ -16,8 +16,8 @@ namespace Player
         [SerializeField] private float dashBufferMemory;
         [SerializeField] private float walkSpeed;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float fallForce;
         [SerializeField] private float groundDetectionBoxHeight;
-        [SerializeField] private Vector2 jumpAngle;
 
         private BoxCollider2D boxCollider;
         private Rigidbody2D rb2d;
@@ -27,12 +27,13 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
+        private bool isJumping;
+
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
             boxCollider = gameObject.GetComponent<BoxCollider2D>();
-            jumpAngle = jumpAngle.normalized;
         }
 
         private void Start()
@@ -61,26 +62,9 @@ namespace Player
                 {
                     if (actionScript.Action(jumpMove.AnimationClip))
                     {
-                        rb2d.velocity = Vector2.zero;
+                        Debug.Log("Jumped");
                         rb2d.velocity = movement * jumpForce;
-
-                        //rb2d.AddForce(movement * jumpForce, ForceMode2D.Impulse);
-
-                        //if (movement.x > 0)
-                        //{
-                        //    jumpAngle.x = Math.Abs(jumpAngle.x);
-                        //    rb2d.velocity = jumpAngle * jumpForce;
-                        //}
-                        //else if (movement.x < 0)
-                        //{
-                        //    jumpAngle.x = Math.Abs(jumpAngle.x) * -1;
-                        //    rb2d.velocity = jumpAngle * jumpForce;
-                        //}
-                        //else
-                        //{
-                        //    rb2d.velocity = new Vector2(0, jumpAngle.y * jumpForce);
-                        //}
-
+                        
                     }
                 }
                 else if (movement.y == 0)
@@ -88,10 +72,11 @@ namespace Player
                     //Moving
                     foreach (Move move in movementMoves)
                     {
-                        if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded)
+                        if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded && rb2d.velocity.y == 0)
                         {
                             if (actionScript.Action(move.AnimationClip))
                             {
+                                Debug.Log("Moving " + move.AnimationClip.name);
                                 MoveCharacter(movement, walkSpeed);
                             }
                             return;
@@ -104,6 +89,8 @@ namespace Player
                 }
 
             }
+
+            if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.velocity -= Vector2.down * (Physics2D.gravity.y * fallForce) * Time.deltaTime; }
         }
 
         public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
