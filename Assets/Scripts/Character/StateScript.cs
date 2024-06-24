@@ -45,25 +45,25 @@ public class StateScript : MonoBehaviour
     {
         if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed() == false && attackScript.IsAttacking == false)
         {
-            if (IsGrounded() && LandingFrames == 0)
+            if (IsGrounded() && LandingFrames == 0 && !movementScript.isJumping)
             {
                 actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()]);
             }
-            else if (IsGrounded() && LandingFrames > 0)
-            {
-                StartLandingRecovery();
-            }
+            //else if (IsGrounded() && LandingFrames > 0)
+            //{
+            //    StartLandingRecovery();
+            //}
         }
 
-        else if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()] && IsGrounded())
-        {
-            StartLandingRecovery();
-        }
+        //else if (actionScript.CurrentAction == stateAnimationMap[StateAnimation.Falling.ToString()] && IsGrounded())
+        //{
+        //    StartLandingRecovery();
+        //}
 
-        else if (attackScript.IsAttacking && actionScript.CurrentAction.name == StateAnimation.Falling.ToString() && IsGrounded())
-        {
-            StartLandingRecovery();
-        }
+        //else if (attackScript.IsAttacking && actionScript.CurrentAction.name == StateAnimation.Falling.ToString() && IsGrounded())
+        //{
+        //    StartLandingRecovery();
+        //}
     }
 
     public void SetLandingFrame(int frame) { this.LandingFrames = frame; }
@@ -78,22 +78,22 @@ public class StateScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (landed)
-        {
-            if (currentFrame >= LandingFrames)
-            {
-                actionScript.ResetAction();
-                landed = false;
-                LandingFrames = 0;
-                currentFrame = 0;
-                //Debug.Log("Action was reset");
-            }
-            else
-            {
-                actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
-                currentFrame++;
-            }
+        //if (landed && LandingFrames > 0)
+        //{
+        //    if (currentFrame >= LandingFrames)
+        //    {
+        //        actionScript.ResetAction();
+        //        landed = false;
+        //        LandingFrames = 0;
+        //        currentFrame = 0;
+        //        //Debug.Log("Action was reset");
+        //    }
+        //    else
+        //    {
+        //        actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
+        //        currentFrame++;
+        //    }
             
-        }
+        //}
     }
 }

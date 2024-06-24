@@ -27,13 +27,16 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
-        private bool isJumping;
+        private float _jumpForce;
+        public bool isJumping;
+        private Vector2 jumpingMotion;
 
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
             boxCollider = gameObject.GetComponent<BoxCollider2D>();
+            _jumpForce = jumpForce;
         }
 
         private void Start()
@@ -47,50 +50,64 @@ namespace Player
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (isJumping)
+            {
+                JumpPhysicExecute();
+            }
+        }
+
         private void Update()
         {
-            //if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.AddForce(Vector2.down * gravity, ForceMode2D.Impulse); }
 
-            if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
+            if (!isJumping && actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
             {
                 Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
-                //Debug.Log(movement);
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
-                //Jumping
-                if (movement.y > 0 && IsGrounded() == jumpMove.Grounded)
-                {
-                    if (actionScript.Action(jumpMove.AnimationClip))
-                    {
-                        Debug.Log("Jumped");
-                        rb2d.velocity = movement * jumpForce;
-                        
-                    }
-                }
-                else if (movement.y == 0)
-                {
-                    //Moving
-                    foreach (Move move in movementMoves)
-                    {
-                        if (move.DirectionalInput.action.IsPressed() && IsGrounded() == move.Grounded && rb2d.velocity.y == 0)
-                        {
-                            if (actionScript.Action(move.AnimationClip))
-                            {
-                                Debug.Log("Moving " + move.AnimationClip.name);
-                                MoveCharacter(movement, walkSpeed);
-                            }
-                            return;
-                        }
-                    }
-                }
-                else if (movement.y < 0 && IsGrounded() == crouchMove.Grounded)
-                {
-                    actionScript.Action(crouchMove.AnimationClip);
-                }
+                //if (movement.y > 0 && IsGrounded() == jumpMove.Grounded && !isJumping) { ButtonJumpingMovement(movement); }
+                //else 
+                if (movement.y == 0) { ButtonHorizontalMovement(movement); }
+                else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove.AnimationClip);}
 
             }
 
-            if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.velocity -= Vector2.down * (Physics2D.gravity.y * fallForce) * Time.deltaTime; }
+            //if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.velocity -= Vector2.down * (Physics2D.gravity.y * fallForce) * Time.deltaTime; }
+        }
+
+        private void ButtonJumpingMovement(Vector2 movement) 
+        { 
+            if (actionScript.Action(jumpMove.AnimationClip)) 
+            {
+                isJumping = true;
+                jumpingMotion = movement;
+                Debug.Log("Jumped " + actionScript.CurrentAction + " " + actionScript.playerAnimator.CurrentAnimation);
+                rb2d.velocity = jumpingMotion * _jumpForce;
+            } 
+        }
+
+        private void ButtonHorizontalMovement(Vector2 movement)
+        {
+            foreach (Move move in movementMoves)
+            {
+                if (move.DirectionalInput.action.IsPressed() && !isJumping && IsGrounded() == move.Grounded)
+                {
+                    if (actionScript.Action(move.AnimationClip))
+                    {
+                        Debug.Log("Moving " + move.AnimationClip.name);
+                        MoveCharacter(movement, walkSpeed);
+                    }
+                    return;
+                }
+            }
+        }
+
+        public void JumpPhysicExecute()
+        {
+            jumpingMotion += new Vector2(jumpingMotion.x, jumpingMotion.y + Physics2D.gravity.y * fallForce * Time.deltaTime);
+            transform.Translate(jumpingMotion *  Time.deltaTime);
+            //rb2d.velocity += new Vector2 (jumpingMotion.x*(Physics2D.gravity.y * fallForce * Time.deltaTime), jumpingMotion.y*(Physics2D.gravity.y * fallForce * Time.deltaTime));
         }
 
         public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
@@ -112,10 +129,14 @@ namespace Player
             return raycastHit.collider != null;
         }
 
-        public void CutSpeed()
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);
-        }
+        public void CutSpeed() {rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);}
 
+        public void SetJumpingTrue() { this.isJumping = true; }
+        public void SetJumpingFalse() 
+        {  
+            this.isJumping = false;
+            this.jumpingMotion = Vector2.zero;
+            this._jumpForce = this.jumpForce;
+        }
     }
 }

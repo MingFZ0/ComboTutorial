@@ -16,7 +16,7 @@ namespace Player
         protected PlayerControlsInput playerControlsInput;
         protected AttackScript attackScript;
         protected MovementScript playerMovement;
-        protected AnimatorScript playerAnimator;
+        public AnimatorScript playerAnimator;
 
         public AnimationClip CurrentAction { get; protected set; }
         private int currentCancelLevel;
@@ -57,7 +57,6 @@ namespace Player
                 CurrentAction = action;
                 currentCancelLevel = levelIndex;
                 usedMoves.Add(action);
-                Debug.Log(CurrentAction);
                 if (levelIndex == 0) { 
                     usedMoves.Clear();
                     currentCancelLevel = 0;
@@ -74,14 +73,19 @@ namespace Player
             AnimationClip falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
             AnimationClip action;
 
-            if (playerMovement.IsGrounded() == false) 
+            if (playerMovement.IsGrounded() == false ) 
             {
                 action = falling;
             }
-            else { action = idle; }
+            else { 
+                action = idle;
+                playerMovement.SetJumpingFalse();
+            }
 
+            Debug.Log("Switching from " + CurrentAction + " to " + action);
             CurrentAction = action;
             currentCancelLevel = 0;
+            Action(action);
         }
 
         public int FindPriorityLevel(AnimationClip clip)

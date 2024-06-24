@@ -1441,9 +1441,10 @@ MonoBehaviour:
     m_Bits: 64
   dashBufferMemory: 0.4
   walkSpeed: 3
-  jumpForce: 5
-  fallForce: 0
+  jumpForce: 8
+  fallForce: 2
   groundDetectionBoxHeight: 0.15
+  isJumping: 0
 --- !u!114 &1880588100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1457,6 +1458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationMapping: {fileID: 11400000, guid: 3c529d43b96bc614888cb6f3bf3f27ec, type: 2}
+  playerAnimator: {fileID: 0}
 --- !u!114 &1880588101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2164,6 +2166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationMapping: {fileID: 0}
+  playerAnimator: {fileID: 0}
   MoveInputInt: 0
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
   SelectedMove: {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}

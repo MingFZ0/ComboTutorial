@@ -22,11 +22,6 @@ public class ActionAnimationMap : ScriptableObject
             ActionPriorityMap[i] = PriorityLevels[i];
         }
     }
-
-    private void OnEnable()
-    {
-        //Debug.Log(ActionPriorityMap[0].Moves.Count);
-    }
 }
 
 public struct ActionMapInput 
