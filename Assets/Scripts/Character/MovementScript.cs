@@ -15,7 +15,7 @@ namespace Player
         [SerializeField] private LayerMask jumpLayerMask;
         [SerializeField] private float dashBufferMemory;
         [SerializeField] private float walkSpeed;
-        [SerializeField] private float jumpForce;
+        [SerializeField] private Vector2 jumpForce;
         [SerializeField] private float fallForce;
         [SerializeField] private float groundDetectionBoxHeight;
 
@@ -27,7 +27,8 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
-        private float _jumpForce;
+        private float _jumpForceVertical;
+        private float _jumpForceHorizontal;
         public bool isJumping;
         private Vector2 jumpingMotion;
 
@@ -36,7 +37,6 @@ namespace Player
             actionScript = GetComponent<ActionScript>();
             rb2d = gameObject.GetComponent<Rigidbody2D>();
             boxCollider = gameObject.GetComponent<BoxCollider2D>();
-            _jumpForce = jumpForce;
         }
 
         private void Start()
@@ -67,7 +67,16 @@ namespace Player
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
 
                 //if (movement.y > 0 && IsGrounded() == jumpMove.Grounded && !isJumping) { ButtonJumpingMovement(movement); }
-                //else 
+                if (movement.y > 0 && !isJumping)
+                {
+                    isJumping = true;
+                    Vector3 newPos = new Vector3(movement.x, movement.y, transform.position.z);
+                    _jumpForceHorizontal = jumpForce.x * 0.5f;
+                    _jumpForceVertical = jumpForce.y;
+                    jumpingMotion = newPos;
+
+                    transform.Translate(new Vector2(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime);
+                }
                 if (movement.y == 0) { ButtonHorizontalMovement(movement); }
                 else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove.AnimationClip);}
 
@@ -83,7 +92,7 @@ namespace Player
                 isJumping = true;
                 jumpingMotion = movement;
                 Debug.Log("Jumped " + actionScript.CurrentAction + " " + actionScript.playerAnimator.CurrentAnimation);
-                rb2d.velocity = jumpingMotion * _jumpForce;
+                //rb2d.velocity = jumpingMotion * _jumpForce;
             } 
         }
 
@@ -105,8 +114,25 @@ namespace Player
 
         public void JumpPhysicExecute()
         {
-            jumpingMotion += new Vector2(jumpingMotion.x, jumpingMotion.y + Physics2D.gravity.y * fallForce * Time.deltaTime);
-            transform.Translate(jumpingMotion *  Time.deltaTime);
+            if (_jumpForceVertical < 1)
+            {
+                _jumpForceVertical = Math.Abs(_jumpForceVertical) * -1;
+                _jumpForceVertical *= 1.5f;
+                _jumpForceHorizontal -= (jumpForce.x - _jumpForceHorizontal) * 0.5f;
+                if (_jumpForceVertical < jumpForce.y) { _jumpForceVertical = jumpForce.y * -1; }
+            }
+            else { 
+                _jumpForceVertical *= 0.90f;
+
+                if (_jumpForceVertical < 1) { _jumpForceVertical = -2; }
+                _jumpForceHorizontal += (jumpForce.x - _jumpForceHorizontal) * 0.5f;
+            }
+
+
+            transform.Translate(new Vector3(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime );
+            if (IsGrounded()) { isJumping = false; }
+            //jumpingMotion += new Vector2(jumpingMotion.x, jumpingMotion.y + Physics2D.gravity.y * fallForce * Time.deltaTime);
+            //transform.Translate(jumpingMotion *  Time.deltaTime);
             //rb2d.velocity += new Vector2 (jumpingMotion.x*(Physics2D.gravity.y * fallForce * Time.deltaTime), jumpingMotion.y*(Physics2D.gravity.y * fallForce * Time.deltaTime));
         }
 
@@ -136,7 +162,7 @@ namespace Player
         {  
             this.isJumping = false;
             this.jumpingMotion = Vector2.zero;
-            this._jumpForce = this.jumpForce;
+            //this._jumpForce = this.jumpForce;
         }
     }
 }

@@ -1441,8 +1441,8 @@ MonoBehaviour:
     m_Bits: 64
   dashBufferMemory: 0.4
   walkSpeed: 3
-  jumpForce: 8
-  fallForce: 2
+  jumpForce: {x: 5, y: 20}
+  fallForce: 1.94
   groundDetectionBoxHeight: 0.15
   isJumping: 0
 --- !u!114 &1880588100
