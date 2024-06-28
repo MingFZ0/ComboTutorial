@@ -34,7 +34,7 @@ namespace Player
         public bool ChangeAnimation(AnimationClip targetAnimation)
         {
             if (CurrentAnimation == targetAnimation.name) return false;
-            Debug.Log("changed Animation to " + targetAnimation.name);
+            //Debug.Log("changed Animation to " + targetAnimation.name);
             animator.Play(targetAnimation.name);
             CurrentAnimation = targetAnimation.name;
             AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;

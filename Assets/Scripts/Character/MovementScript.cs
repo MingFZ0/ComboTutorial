@@ -38,6 +38,8 @@ namespace Player
         [Range(0, 1)] [SerializeField] private float risingVerticalMovementMultiplier;
         [SerializeField] private float fallingVerticalMovementMultiplier;
 
+        private WaitForSeconds waitForAFrame = new WaitForSeconds(0.0133f);
+        private Coroutine _dashInputCoroutine;
         private float _jumpForceVertical;
         private float _jumpForceHorizontal;
         public bool isJumping;
@@ -48,7 +50,15 @@ namespace Player
         //Dash
         [Header("Dash Attributes")]
 
+        [SerializeField] private float dashForce;
+        [Range(0, 1)] [SerializeField] private float dashMovementMultiplier;
         [SerializeField] private float dashBufferMemory;
+        [SerializeField] private float dashForceStoppingLimit;
+        private Move _dashBufferedMove;
+        private float _dashBufferMemory;
+        private float _dashForce;
+        private float _dashDirecton;
+        private bool isDashing;
         
         private void Awake()
         {
@@ -74,10 +84,26 @@ namespace Player
             {
                 JumpPhysicExecute();
             }
+            if (isDashing) { DashPhysicsExecute(); }
         }
 
         private void Update()
         {
+
+            if (_dashBufferMemory > 0)
+            {
+                if (_dashBufferedMove.DirectionalInput.action.WasPressedThisFrame())
+                {
+                    foreach (Move dashMove in actionScript.MovesetPriorityMap[1].Moves)
+                    {
+                        if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove.AnimationClip))
+                        {
+                            _dashForce = dashForce;
+                            isDashing = true;
+                        }
+                    }
+                }
+            }
 
             if (!isJumping && actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
             {
@@ -93,7 +119,6 @@ namespace Player
                 else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove.AnimationClip);}
 
             }
-
             //if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.velocity -= Vector2.down * (Physics2D.gravity.y * fallForce) * Time.deltaTime; }
         }
 
@@ -120,7 +145,15 @@ namespace Player
                 {
                     if (actionScript.Action(move.AnimationClip))
                     {
-                        Debug.Log("Moving " + move.AnimationClip.name);
+                        if (_dashInputCoroutine == null && move.DirectionalInput.action.WasPressedThisFrame()) { 
+                            _dashInputCoroutine = StartCoroutine(PrepareDash(move));
+                            _dashDirecton = movement.x;
+                        }
+                        else if (move.DirectionalInput.action.WasPressedThisFrame()) { 
+                            StopCoroutine(_dashInputCoroutine);
+                            _dashInputCoroutine = StartCoroutine(PrepareDash(move));
+                            _dashDirecton = movement.x;
+                        }
                         MoveCharacter(movement, walkSpeed);
                     }
                     return;
@@ -159,6 +192,17 @@ namespace Player
             //rb2d.velocity += new Vector2 (jumpingMotion.x*(Physics2D.gravity.y * fallForce * Time.deltaTime), jumpingMotion.y*(Physics2D.gravity.y * fallForce * Time.deltaTime));
         }
 
+        public void DashPhysicsExecute()
+        {
+            if (_dashForce < dashForceStoppingLimit)
+            {
+                return;
+            }
+
+            _dashForce *= dashMovementMultiplier;
+            transform.Translate(new Vector2(_dashForce * _dashDirecton * Time.deltaTime, 0));
+        }
+
         public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
@@ -192,6 +236,25 @@ namespace Player
             this.isJumping = false;
             this.jumpingMotion = Vector2.zero;
             //this._jumpForce = this.jumpForce;
+        }
+
+        private IEnumerator PrepareDash(Move move)
+        {
+            //Debug.Log("Moving " + move.AnimationClip.name);
+            _dashBufferMemory = dashBufferMemory;
+            _dashBufferedMove = move;
+
+            yield return waitForAFrame;
+
+            while (_dashBufferMemory > 0)
+            {
+                _dashBufferMemory--;
+                yield return waitForAFrame;
+            }
+
+            isDashing = false;
+            _dashForce = 0;
+            yield break;
         }
     }
 }
