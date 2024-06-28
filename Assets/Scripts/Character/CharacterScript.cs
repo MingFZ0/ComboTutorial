@@ -7,7 +7,7 @@ public class CharacterScript : MonoBehaviour, ICharacterScript
 {
     private MovementScript movementScript;
 
-    public bool GetIsGrounded() {return movementScript.IsGrounded();}
+    public bool GetIsGrounded() {return movementScript.IsGroundedWithJumping();}
 
 
 }

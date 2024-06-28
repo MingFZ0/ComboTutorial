@@ -1436,15 +1436,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101b51ed7edb2f64dbf3a61900ad56fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 3
   jumpLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  dashBufferMemory: 0.4
-  walkSpeed: 3
-  jumpForce: {x: 5, y: 20}
-  fallForce: 1.94
   groundDetectionBoxHeight: 0.15
+  jumpForce: {x: 10, y: 20}
+  fallForce: 1.94
+  risingHorizontalMovementMultiplier: 1
+  fallingHorizontalMovementMultiplier: 0.968
+  risingVerticalMovementMultiplier: 0.802
+  fallingVerticalMovementMultiplier: 1.2
   isJumping: 0
+  dashBufferMemory: 0.4
 --- !u!114 &1880588100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,13 +1619,13 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880588096}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

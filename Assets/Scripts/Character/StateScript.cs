@@ -74,7 +74,7 @@ public class StateScript : MonoBehaviour
         actionScript.Action(stateAnimationMap[StateAnimation.Landing.ToString()]);
     }
 
-    public Boolean IsGrounded() { return movementScript.IsGrounded(); }
+    public Boolean IsGrounded() { return movementScript.IsGroundedWithJumping(); }
 
     private void FixedUpdate()
     {

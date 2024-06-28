@@ -12,13 +12,6 @@ namespace Player
     public class MovementScript : MonoBehaviour
     {
         //Fields
-        [SerializeField] private LayerMask jumpLayerMask;
-        [SerializeField] private float dashBufferMemory;
-        [SerializeField] private float walkSpeed;
-        [SerializeField] private Vector2 jumpForce;
-        [SerializeField] private float fallForce;
-        [SerializeField] private float groundDetectionBoxHeight;
-
         private BoxCollider2D boxCollider;
         private Rigidbody2D rb2d;
         private ActionScript actionScript;
@@ -27,11 +20,36 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
+
+        //Walk
+        [Header("Walk Attributes")]
+        [SerializeField] private float walkSpeed;
+
+        [Space]
+
+        //Jump
+        [Header("Jump Attributes")]
+        [SerializeField] private LayerMask jumpLayerMask;
+        [SerializeField] private float groundDetectionBoxHeight;
+        [SerializeField] private Vector2 jumpForce;
+        [SerializeField] private float fallForce;
+        [Range(0, 1)] [SerializeField] private float risingHorizontalMovementMultiplier;
+        [Range(0, 1)] [SerializeField] private float fallingHorizontalMovementMultiplier;
+        [Range(0, 1)] [SerializeField] private float risingVerticalMovementMultiplier;
+        [SerializeField] private float fallingVerticalMovementMultiplier;
+
         private float _jumpForceVertical;
         private float _jumpForceHorizontal;
         public bool isJumping;
         private Vector2 jumpingMotion;
 
+        [Space]
+
+        //Dash
+        [Header("Dash Attributes")]
+
+        [SerializeField] private float dashBufferMemory;
+        
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
@@ -100,7 +118,7 @@ namespace Player
         {
             foreach (Move move in movementMoves)
             {
-                if (move.DirectionalInput.action.IsPressed() && !isJumping && IsGrounded() == move.Grounded)
+                if (move.DirectionalInput.action.IsPressed() && !isJumping && IsGroundedWithJumping() == move.Grounded)
                 {
                     if (actionScript.Action(move.AnimationClip))
                     {
@@ -117,20 +135,27 @@ namespace Player
             if (_jumpForceVertical < 1)
             {
                 _jumpForceVertical = Math.Abs(_jumpForceVertical) * -1;
-                _jumpForceVertical *= 1.5f;
-                _jumpForceHorizontal -= (jumpForce.x - _jumpForceHorizontal) * 0.5f;
-                if (_jumpForceVertical < jumpForce.y) { _jumpForceVertical = jumpForce.y * -1; }
+                _jumpForceVertical *= fallingVerticalMovementMultiplier;
+                _jumpForceHorizontal *= fallingHorizontalMovementMultiplier;
             }
             else { 
-                _jumpForceVertical *= 0.90f;
+                _jumpForceVertical *= risingVerticalMovementMultiplier;
 
-                if (_jumpForceVertical < 1) { _jumpForceVertical = -2; }
-                _jumpForceHorizontal += (jumpForce.x - _jumpForceHorizontal) * 0.5f;
+                if (_jumpForceVertical < 1) { _jumpForceVertical = -1f; }
+                _jumpForceHorizontal *= risingHorizontalMovementMultiplier;
             }
 
 
             transform.Translate(new Vector3(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime );
-            if (IsGrounded()) { isJumping = false; }
+            if (IsGrounded() && isJumping && _jumpForceVertical < 0) 
+            {
+                _jumpForceVertical = 0;
+                _jumpForceHorizontal = 0;
+                RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundDetectionBoxHeight, jumpLayerMask);
+                Vector2 surface = Physics2D.ClosestPoint(transform.position, raycastHit.collider) + Vector2.up * 2;
+                transform.position = new Vector2(transform.position.x, surface.y + groundDetectionBoxHeight);
+                isJumping = false; 
+            }
             //jumpingMotion += new Vector2(jumpingMotion.x, jumpingMotion.y + Physics2D.gravity.y * fallForce * Time.deltaTime);
             //transform.Translate(jumpingMotion *  Time.deltaTime);
             //rb2d.velocity += new Vector2 (jumpingMotion.x*(Physics2D.gravity.y * fallForce * Time.deltaTime), jumpingMotion.y*(Physics2D.gravity.y * fallForce * Time.deltaTime));
@@ -140,6 +165,11 @@ namespace Player
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
             transform.Translate(newLocation);
+        }
+
+        public bool IsGroundedWithJumping()
+        {
+            return isJumping || IsGrounded();
         }
 
         public bool IsGrounded()

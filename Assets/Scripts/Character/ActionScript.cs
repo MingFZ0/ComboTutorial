@@ -73,7 +73,7 @@ namespace Player
             AnimationClip falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
             AnimationClip action;
 
-            if (playerMovement.IsGrounded() == false ) 
+            if (playerMovement.IsGroundedWithJumping() == false ) 
             {
                 action = falling;
             }
