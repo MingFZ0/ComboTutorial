@@ -69,6 +69,7 @@ namespace Player
 
         public virtual void ResetAction()
         {
+            Debug.Log("Reset Action");
             AnimationClip idle = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
             AnimationClip falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
             AnimationClip action;

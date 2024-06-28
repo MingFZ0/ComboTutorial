@@ -87,13 +87,7 @@ namespace Player
                 //if (movement.y > 0 && IsGrounded() == jumpMove.Grounded && !isJumping) { ButtonJumpingMovement(movement); }
                 if (movement.y > 0 && !isJumping)
                 {
-                    isJumping = true;
-                    Vector3 newPos = new Vector3(movement.x, movement.y, transform.position.z);
-                    _jumpForceHorizontal = jumpForce.x * 0.5f;
-                    _jumpForceVertical = jumpForce.y;
-                    jumpingMotion = newPos;
-
-                    transform.Translate(new Vector2(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime);
+                    ButtonJumpingMovement(movement);
                 }
                 if (movement.y == 0) { ButtonHorizontalMovement(movement); }
                 else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove.AnimationClip);}
@@ -107,10 +101,14 @@ namespace Player
         { 
             if (actionScript.Action(jumpMove.AnimationClip)) 
             {
+                Debug.Log("Jumping");
                 isJumping = true;
-                jumpingMotion = movement;
-                Debug.Log("Jumped " + actionScript.CurrentAction + " " + actionScript.playerAnimator.CurrentAnimation);
-                //rb2d.velocity = jumpingMotion * _jumpForce;
+                Vector3 newPos = new Vector3(movement.x, movement.y, transform.position.z);
+                _jumpForceHorizontal = jumpForce.x * 0.5f;
+                _jumpForceVertical = jumpForce.y;
+                jumpingMotion = newPos;
+
+                transform.Translate(new Vector2(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime);
             } 
         }
 
@@ -169,7 +167,8 @@ namespace Player
 
         public bool IsGroundedWithJumping()
         {
-            return isJumping || IsGrounded();
+            if (isJumping) { return false; }
+            else { return IsGrounded(); }
         }
 
         public bool IsGrounded()

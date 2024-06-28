@@ -47,6 +47,7 @@ public class StateScript : MonoBehaviour
         {
             if (IsGrounded() && LandingFrames == 0 && !movementScript.isJumping)
             {
+                
                 actionScript.Action(stateAnimationMap[StateAnimation.Idle.ToString()]);
             }
             //else if (IsGrounded() && LandingFrames > 0)

@@ -296,7 +296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400789623
 Transform:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &492708664
 Transform:
   m_ObjectHideFlags: 0
@@ -567,7 +567,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.55999994, y: -0.6600001}
+  m_ConnectedAnchor: {x: 0.27000046, y: -0.44000006}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!50 &525010884
@@ -1022,7 +1022,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.53999996, y: 0}
+  m_ConnectedAnchor: {x: 0.27000046, y: -0.44000006}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!50 &923789694
@@ -1354,7 +1354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1614467820
 Transform:
   m_ObjectHideFlags: 0
@@ -1690,8 +1690,8 @@ BoxCollider2D:
   m_Offset: {x: -0.08159447, y: -1.074972}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.44, y: 4.4}
+    pivot: {x: 0.5, y: 0.39634147}
+    oldSize: {x: 4.12, y: 6.56}
     newSize: {x: 0.96, y: 1.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1764,7 +1764,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.3000002, y: -0.75}
+  m_ConnectedAnchor: {x: 0.26999998, y: -0.44000006}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!50 &1883007041
