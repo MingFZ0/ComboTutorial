@@ -90,7 +90,7 @@ namespace Player
         private void Update()
         {
 
-            if (_dashBufferMemory > 0)
+            if (_dashBufferMemory > 0 && !isJumping)
             {
                 if (_dashBufferedMove.DirectionalInput.action.WasPressedThisFrame())
                 {
@@ -105,7 +105,7 @@ namespace Player
                 }
             }
 
-            if (!isJumping && actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
+            if (!isJumping && !isDashing && actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
             {
                 Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
                 List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
