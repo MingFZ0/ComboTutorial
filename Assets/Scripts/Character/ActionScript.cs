@@ -62,8 +62,6 @@ namespace Player
                     currentCancelLevel = 0;
                 }
             }
-            
-
             return true;
         }
 

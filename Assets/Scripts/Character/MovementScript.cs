@@ -20,14 +20,18 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
+        private Coroutine characterActionMovementCorountine;
+        private float _characterActionMovementCoruntineTimer;
 
         //Walk
+        #region Walk
         [Header("Walk Attributes")]
         [SerializeField] private float walkSpeed;
-
         [Space]
+        #endregion
 
         //Jump
+        #region Jump
         [Header("Jump Attributes")]
         [SerializeField] private LayerMask jumpLayerMask;
         [SerializeField] private float groundDetectionBoxHeight;
@@ -37,11 +41,11 @@ namespace Player
 
         private WaitForSeconds waitForAFrame = new WaitForSeconds(0.0133f);
         private Coroutine _dashInputCoroutine;
-
-
         [Space]
+        #endregion
 
         //Dash
+        #region Dash
         [Header("Dash Attributes")]
         [SerializeField] private float dashBufferMemory;
         private Move _dashBufferedMove;
@@ -53,7 +57,8 @@ namespace Player
         private float _dashTotalHorizontalTime;
         private Move _dashMove;
         private bool isDashing;
-        
+        #endregion
+
         private void Awake()
         {
             actionScript = GetComponent<ActionScript>();
@@ -177,32 +182,24 @@ namespace Player
                 transform.position = new Vector2(transform.position.x, surface.y + groundDetectionBoxHeight);
                 isJumping = false; 
             }
-            //jumpingMotion += new Vector2(jumpingMotion.x, jumpingMotion.y + Physics2D.gravity.y * fallForce * Time.deltaTime);
-            //transform.Translate(jumpingMotion *  Time.deltaTime);
-            //rb2d.velocity += new Vector2 (jumpingMotion.x*(Physics2D.gravity.y * fallForce * Time.deltaTime), jumpingMotion.y*(Physics2D.gravity.y * fallForce * Time.deltaTime));
         }
 
         public void DashPhysicsExecute()
         {
-            //if (_dashForce < dashForceStoppingLimit)
-            //{
-            //    return;
-            //}
-
-            //_dashForce *= dashMovementMultiplier;
-
-            
             if (_dashTime > _dashTotalHorizontalTime) { return; }
             _dashTime += Time.deltaTime;
 
-            float dashForce;
-                dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime);
+            float dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime);
               
-
             transform.Translate(new Vector2(dashForce * _dashDirecton * Time.deltaTime, 0));
         }
 
-        public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
+        //public IEnumerator MoveCharacterCoroutine(AnimationCurve horizontalForce, AnimationCurve verticalForce)
+        //{
+
+        //}
+
+        private void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
             transform.Translate(newLocation);
@@ -226,8 +223,6 @@ namespace Player
             //Debug.Log(raycastHit.collider);
             return raycastHit.collider != null;
         }
-
-        public void CutSpeed() {rb2d.velocity = new Vector2(rb2d.velocity.x / 2, rb2d.velocity.y);}
 
         public void SetJumpingTrue() { this.isJumping = true; }
         public void SetJumpingFalse() 
@@ -256,5 +251,7 @@ namespace Player
             _dashTime = 0;
             yield break;
         }
+    
+        
     }
 }
