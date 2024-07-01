@@ -31,19 +31,13 @@ namespace Player
         [Header("Jump Attributes")]
         [SerializeField] private LayerMask jumpLayerMask;
         [SerializeField] private float groundDetectionBoxHeight;
-        [SerializeField] private Vector2 jumpForce;
-        [SerializeField] private float fallForce;
-        [Range(0, 1)] [SerializeField] private float risingHorizontalMovementMultiplier;
-        [Range(0, 1)] [SerializeField] private float fallingHorizontalMovementMultiplier;
-        [Range(0, 1)] [SerializeField] private float risingVerticalMovementMultiplier;
-        [SerializeField] private float fallingVerticalMovementMultiplier;
+        private float _jumpTime;
+        public bool isJumping;
+        private Vector2 jumpingMotion;
 
         private WaitForSeconds waitForAFrame = new WaitForSeconds(0.0133f);
         private Coroutine _dashInputCoroutine;
-        private float _jumpForceVertical;
-        private float _jumpForceHorizontal;
-        public bool isJumping;
-        private Vector2 jumpingMotion;
+        
 
         [Space]
 
@@ -129,11 +123,10 @@ namespace Player
                 Debug.Log("Jumping");
                 isJumping = true;
                 Vector3 newPos = new Vector3(movement.x, movement.y, transform.position.z);
-                _jumpForceHorizontal = jumpForce.x * 0.5f;
-                _jumpForceVertical = jumpForce.y;
+                _jumpTime = 0f;
                 jumpingMotion = newPos;
 
-                transform.Translate(new Vector2(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime);
+                transform.Translate(new Vector2(jumpingMotion.x * jumpMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(0), jumpingMotion.y * jumpMove.MovementAcceration.VerticalAccerationCurve.Evaluate(0)) * Time.deltaTime);
             } 
         }
 
@@ -163,25 +156,21 @@ namespace Player
 
         public void JumpPhysicExecute()
         {
-            if (_jumpForceVertical < 1)
+
+            _jumpTime += Time.deltaTime;
+            float currentVerticalJumpForce;
+            float currentHorizontalJumpForce;
+            AnimationCurve verticalJumpForce = jumpMove.MovementAcceration.VerticalAccerationCurve;
+            AnimationCurve horizontalJumpForce = jumpMove.MovementAcceration.HorizontalAccerationCurve; ;
+            if (_jumpTime >= verticalJumpForce[verticalJumpForce.length - 1].time) { currentVerticalJumpForce = verticalJumpForce[verticalJumpForce.length - 1].value; }
+            else { currentVerticalJumpForce = verticalJumpForce.Evaluate(_jumpTime); }
+
+            if (_jumpTime >= horizontalJumpForce[horizontalJumpForce.length - 1].time) { currentHorizontalJumpForce = horizontalJumpForce[horizontalJumpForce.length - 1].value; }
+            else { currentHorizontalJumpForce = horizontalJumpForce.Evaluate(_jumpTime); }
+            transform.Translate(new Vector3(jumpingMotion.x * currentHorizontalJumpForce, jumpingMotion.y * currentVerticalJumpForce) * Time.deltaTime );
+            if (IsGrounded() && isJumping && currentVerticalJumpForce < 0) 
             {
-                _jumpForceVertical = Math.Abs(_jumpForceVertical) * -1;
-                _jumpForceVertical *= fallingVerticalMovementMultiplier;
-                _jumpForceHorizontal *= fallingHorizontalMovementMultiplier;
-            }
-            else { 
-                _jumpForceVertical *= risingVerticalMovementMultiplier;
-
-                if (_jumpForceVertical < 1) { _jumpForceVertical = -1f; }
-                _jumpForceHorizontal *= risingHorizontalMovementMultiplier;
-            }
-
-
-            transform.Translate(new Vector3(jumpingMotion.x * _jumpForceHorizontal, jumpingMotion.y * _jumpForceVertical) * Time.deltaTime );
-            if (IsGrounded() && isJumping && _jumpForceVertical < 0) 
-            {
-                _jumpForceVertical = 0;
-                _jumpForceHorizontal = 0;
+                _jumpTime = 0f;
                 RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundDetectionBoxHeight, jumpLayerMask);
                 Vector2 surface = Physics2D.ClosestPoint(transform.position, raycastHit.collider) + Vector2.up * 2;
                 transform.position = new Vector2(transform.position.x, surface.y + groundDetectionBoxHeight);

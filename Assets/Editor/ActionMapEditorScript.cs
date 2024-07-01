@@ -49,11 +49,24 @@ public class ActionMapEditorScript : Editor
                         move.AnimationClipIndexInput = EditorGUILayout.Popup("AnimationClip", move.AnimationClipIndexInput, allClipNames);
                         move.Grounded = EditorGUILayout.Toggle("Grounded", move.Grounded);
                         move.AnimationClip = allClips[move.AnimationClipIndexInput];
+                        
+                        EditorGUI.indentLevel++;
+                            Motion movementAcceration;
+                            if (move.MovementAcceration != null) { movementAcceration = move.MovementAcceration; }
+                            else { movementAcceration = new(); }
 
-                        AnimationCurve curve;
-                        if (move.AccerationCurve != null) { curve = move.AccerationCurve; }
-                        else { curve = new(); }
-                        move.AccerationCurve = EditorGUILayout.CurveField("Acceration Curve", curve);
+                            AnimationCurve verticalMovementCurve;
+                            AnimationCurve horizontalMovementCurve;
+                            if (movementAcceration.VerticalAccerationCurve != null) { verticalMovementCurve = movementAcceration.VerticalAccerationCurve; }
+                            else { verticalMovementCurve = new(); }
+                            if (movementAcceration.HorizontalAccerationCurve != null) { horizontalMovementCurve = movementAcceration.HorizontalAccerationCurve; }
+                            else { horizontalMovementCurve = new(); }
+
+                            movementAcceration.VerticalAccerationCurve = EditorGUILayout.CurveField("Vertical Acceration", verticalMovementCurve);
+                            movementAcceration.HorizontalAccerationCurve = EditorGUILayout.CurveField("Horizontal Acceration", horizontalMovementCurve);
+                            move.MovementAcceration = movementAcceration;
+                        EditorGUI.indentLevel--;
+
                     }
                     EditorGUILayout.Space();
 
