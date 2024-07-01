@@ -47,6 +47,7 @@ public class Move
     [SerializeField] public InputActionReference DirectionalInput;
     [SerializeField] public AnimationClip AnimationClip;
     [SerializeField] public bool Grounded;
+    [SerializeField] public AnimationCurve AccerationCurve;
     public int AnimationClipIndexInput;
 
     public Move(RuntimeAnimatorController _animatorController) { 

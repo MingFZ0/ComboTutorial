@@ -49,6 +49,11 @@ public class ActionMapEditorScript : Editor
                         move.AnimationClipIndexInput = EditorGUILayout.Popup("AnimationClip", move.AnimationClipIndexInput, allClipNames);
                         move.Grounded = EditorGUILayout.Toggle("Grounded", move.Grounded);
                         move.AnimationClip = allClips[move.AnimationClipIndexInput];
+
+                        AnimationCurve curve;
+                        if (move.AccerationCurve != null) { curve = move.AccerationCurve; }
+                        else { curve = new(); }
+                        move.AccerationCurve = EditorGUILayout.CurveField("Acceration Curve", curve);
                     }
                     EditorGUILayout.Space();
 
