@@ -37,17 +37,13 @@ namespace Player
 
         private WaitForSeconds waitForAFrame = new WaitForSeconds(0.0133f);
         private Coroutine _dashInputCoroutine;
-        
+
 
         [Space]
 
         //Dash
         [Header("Dash Attributes")]
-
-        [SerializeField] private float dashForce;
-        [Range(0, 1)] [SerializeField] private float dashMovementMultiplier;
         [SerializeField] private float dashBufferMemory;
-        [SerializeField] private float dashForceStoppingLimit;
         private Move _dashBufferedMove;
         private float _dashBufferMemory;
         private float _dashForce;
@@ -96,8 +92,8 @@ namespace Player
                     {
                         if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove.AnimationClip))
                         {
-                            _dashForce = dashForce;
                             _dashMove = dashMove;
+                            _dashTotalHorizontalTime = _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time;
                             isDashing = true;
                         }
                     }
@@ -200,11 +196,7 @@ namespace Player
             _dashTime += Time.deltaTime;
 
             float dashForce;
-            if (_dashTime > _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time)
-            {
-                dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time;
-            } 
-            else { dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime); }
+                dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime);
               
 
             transform.Translate(new Vector2(dashForce * _dashDirecton * Time.deltaTime, 0));
@@ -261,6 +253,7 @@ namespace Player
 
             isDashing = false;
             _dashForce = 0;
+            _dashTime = 0;
             yield break;
         }
     }

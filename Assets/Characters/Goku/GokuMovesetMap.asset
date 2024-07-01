@@ -61,8 +61,8 @@ MonoBehaviour:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: 0.27448454
-            value: 0.33892387
+            time: 0.0013885498
+            value: 20.180746
             inSlope: 0
             outSlope: 0
             tangentMode: 136
@@ -70,14 +70,50 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.6469072
-            value: 0.7232704
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 136
+            time: 0.10265437
+            value: 14.428168
+            inSlope: -186.3053
+            outSlope: -186.3053
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.09657306
+            outWeight: 0.33177358
+          - serializedVersion: 3
+            time: 0.16442163
+            value: 2.3358226
+            inSlope: -94.617035
+            outSlope: -94.617035
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
-            outWeight: 0.33333334
+            outWeight: 0.28696603
+          - serializedVersion: 3
+            time: 0.24362676
+            value: 0.3120458
+            inSlope: -6.525561
+            outSlope: -6.525561
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.41283935
+          - serializedVersion: 3
+            time: 0.34364182
+            value: -10.343151
+            inSlope: -265.5116
+            outSlope: -265.5116
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.20495303
+            outWeight: 0.09222059
+          - serializedVersion: 3
+            time: 0.36653066
+            value: -15.010178
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
@@ -85,8 +121,8 @@ MonoBehaviour:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: 0.19072166
-            value: 0.39343116
+            time: 0.0042266846
+            value: 6.6490765
             inSlope: 0
             outSlope: 0
             tangentMode: 136
@@ -94,13 +130,22 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.67525774
-            value: 0.1236897
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 136
+            time: 0.34892923
+            value: 5.034594
+            inSlope: -14.591812
+            outSlope: -14.591812
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.19359651
+          - serializedVersion: 3
+            time: 0.5332147
+            value: 1.985932
+            inSlope: -28.486425
+            outSlope: -28.486425
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.09268216
             outWeight: 0.33333334
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -140,7 +185,52 @@ MonoBehaviour:
           m_RotationOrder: 4
         HorizontalAccerationCurve:
           serializedVersion: 2
-          m_Curve: []
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.016535167
+            value: 21.663712
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6585326
+            value: 19.058418
+            inSlope: -1.3182037
+            outSlope: -1.3182037
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.3396346
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1.216053
+            value: 22.07693
+            inSlope: -11.596023
+            outSlope: -11.596023
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.12985674
+            outWeight: 1
+          - serializedVersion: 3
+            time: 1.6680529
+            value: 0.4019826
+            inSlope: -1.1371932
+            outSlope: -1.1371932
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.24833584
+            outWeight: 0.15401459
+          - serializedVersion: 3
+            time: 2.1815455
+            value: 0
+            inSlope: 1.1856954
+            outSlope: 1.1856954
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2636652
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
@@ -163,7 +253,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 3
-    Fold: 0
+    Fold: 1
   - LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -202,7 +292,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 14
-    Fold: 1
+    Fold: 0
   - LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -259,7 +349,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 15
-    Fold: 1
+    Fold: 0
   - LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -334,7 +424,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 16
-    Fold: 1
+    Fold: 0
   - LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -355,4 +445,4 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 11
-    Fold: 1
+    Fold: 0
