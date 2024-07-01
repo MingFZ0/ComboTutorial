@@ -52,6 +52,10 @@ namespace Player
         private float _dashBufferMemory;
         private float _dashForce;
         private float _dashDirecton;
+
+        private float _dashTime;
+        private float _dashTotalHorizontalTime;
+        private Move _dashMove;
         private bool isDashing;
         
         private void Awake()
@@ -93,6 +97,7 @@ namespace Player
                         if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove.AnimationClip))
                         {
                             _dashForce = dashForce;
+                            _dashMove = dashMove;
                             isDashing = true;
                         }
                     }
@@ -183,13 +188,26 @@ namespace Player
 
         public void DashPhysicsExecute()
         {
-            if (_dashForce < dashForceStoppingLimit)
-            {
-                return;
-            }
+            //if (_dashForce < dashForceStoppingLimit)
+            //{
+            //    return;
+            //}
 
-            _dashForce *= dashMovementMultiplier;
-            transform.Translate(new Vector2(_dashForce * _dashDirecton * Time.deltaTime, 0));
+            //_dashForce *= dashMovementMultiplier;
+
+            
+            if (_dashTime > _dashTotalHorizontalTime) { return; }
+            _dashTime += Time.deltaTime;
+
+            float dashForce;
+            if (_dashTime > _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time)
+            {
+                dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time;
+            } 
+            else { dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime); }
+              
+
+            transform.Translate(new Vector2(dashForce * _dashDirecton * Time.deltaTime, 0));
         }
 
         public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)

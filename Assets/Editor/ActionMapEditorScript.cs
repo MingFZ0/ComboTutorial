@@ -53,7 +53,11 @@ public class ActionMapEditorScript : Editor
                         EditorGUI.indentLevel++;
                             Motion movementAcceration;
                             if (move.MovementAcceration != null) { movementAcceration = move.MovementAcceration; }
-                            else { movementAcceration = new(); }
+                            else 
+                            { 
+                                move.MovementAcceration = new Motion();
+                                movementAcceration = new(); 
+                            }
 
                             AnimationCurve verticalMovementCurve;
                             AnimationCurve horizontalMovementCurve;
@@ -88,6 +92,7 @@ public class ActionMapEditorScript : Editor
                 EditorGUILayout.Space();
             }
 
+            EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
         }
