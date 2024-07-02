@@ -20,9 +20,6 @@ namespace Player
         private Move jumpMove;
         private Move crouchMove;
 
-        private Coroutine characterActionMovementCorountine;
-        private float _characterActionMovementCoruntineTimer;
-
         //Walk
         #region Walk
         [Header("Walk Attributes")]
@@ -194,15 +191,15 @@ namespace Player
             transform.Translate(new Vector2(dashForce * _dashDirecton * Time.deltaTime, 0));
         }
 
-        //public IEnumerator MoveCharacterCoroutine(AnimationCurve horizontalForce, AnimationCurve verticalForce)
-        //{
-
-        //}
-
-        private void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
+        public void MoveCharacter(Vector2 movement, float xForce, float yForce = 1)
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
             transform.Translate(newLocation);
+        }
+
+        public void MoveCharacter(float xForce, float yForce)
+        {
+            transform.Translate(new Vector2(xForce * Time.deltaTime, yForce * Time.deltaTime));
         }
 
         public bool IsGroundedWithJumping()
