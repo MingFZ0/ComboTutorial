@@ -195,10 +195,13 @@ namespace Player
         {
             Vector3 newLocation = new Vector3(movement.x * xForce * Time.deltaTime, movement.y * yForce * Time.deltaTime, transform.position.z);
             transform.Translate(newLocation);
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.zero, 0, gameObject.layer);
+            if (raycastHit.collider) { Debug.Log(raycastHit.collider.gameObject.name); }
         }
 
         public void MoveCharacter(float xForce, float yForce)
         {
+            
             transform.Translate(new Vector2(xForce * Time.deltaTime, yForce * Time.deltaTime));
         }
 

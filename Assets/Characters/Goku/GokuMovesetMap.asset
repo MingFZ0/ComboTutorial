@@ -314,12 +314,39 @@ MonoBehaviour:
           m_RotationOrder: 4
         HorizontalAccerationCurve:
           serializedVersion: 2
-          m_Curve: []
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.002577698
+            value: -0.00070036575
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.15987621
+            value: -5.4063005
+            inSlope: 23.864208
+            outSlope: 23.864208
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.39238605
+            outWeight: 0.24768814
+          - serializedVersion: 3
+            time: 0.27660763
+            value: -6.4969044
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 14
-    Fold: 0
+    Fold: 1
   - LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -391,22 +418,31 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.04160559
-            value: 10.0824375
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 136
+            time: 0.037045382
+            value: 7.761865
+            inSlope: 629.02277
+            outSlope: 629.02277
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.11194226
-            value: 0.12291855
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 136
+            time: 0.054453492
+            value: 18.889025
+            inSlope: -691.26917
+            outSlope: -691.26917
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.067776464
+          - serializedVersion: 3
+            time: 0.11194226
+            value: 0.12291855
+            inSlope: 30.540161
+            outSlope: 30.540161
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.22806524
             outWeight: 0.33333334
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -430,7 +466,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 15
-    Fold: 1
+    Fold: 0
   - LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
@@ -505,7 +541,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
       AnimationClipIndexInput: 16
-    Fold: 0
+    Fold: 1
   - LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
     Moves:
     - AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
