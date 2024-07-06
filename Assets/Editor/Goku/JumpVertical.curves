@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12322, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: JumpVertical
+  m_EditorClassIdentifier: 
+  m_Presets:
+  - m_Name: 
+    m_Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0013885498
+        value: 20.180746
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.10265437
+        value: 14.428168
+        inSlope: -186.3053
+        outSlope: -186.3053
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.09657306
+        outWeight: 0.33177358
+      - serializedVersion: 3
+        time: 0.16442163
+        value: 2.3358226
+        inSlope: -94.617035
+        outSlope: -94.617035
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.28696603
+      - serializedVersion: 3
+        time: 0.24362676
+        value: 0.3120458
+        inSlope: -6.525561
+        outSlope: -6.525561
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.41283935
+      - serializedVersion: 3
+        time: 0.34364182
+        value: -10.343151
+        inSlope: -265.5116
+        outSlope: -265.5116
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20495303
+        outWeight: 0.09222059
+      - serializedVersion: 3
+        time: 0.36653066
+        value: -15.010178
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
