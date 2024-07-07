@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Characters/StateMap")]
-public class StateAnimationMap : ScriptableObject
+//[CreateAssetMenu(menuName = "Characters/StateMap")]
+[Serializable]
+public class StateAnimationMap
 {
     public Dictionary<string, AnimationClip> StateStringToAnimationMap;
     public Dictionary<AnimationClip, int> AnimationToPriorityIndexMap;
@@ -17,7 +18,7 @@ public class StateAnimationMap : ScriptableObject
     public int[] priorityIndexInputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
 
 
-    private void OnValidate()
+    public void UpdateDictMap()
     {
         if (AnimatorController != null)
         {

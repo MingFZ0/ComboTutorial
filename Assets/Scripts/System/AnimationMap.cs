@@ -6,8 +6,13 @@ using UnityEngine;
 public class AnimationMap : ScriptableObject
 {
     public RuntimeAnimatorController AnimatorController;
-    public ActionAnimationMap ActionAnimationMap;
-    public StateAnimationMap StateAnimationMap;
+    public ActionAnimationMap ActionAnimationMap = new();
+    public StateAnimationMap StateAnimationMap = new();
+
+    private void OnValidate()
+    {
+        ActionAnimationMap.UpdatePriorityMap();
+    }
 }
 
 

@@ -5,15 +5,15 @@ using System;
 using UnityEngine.InputSystem;
 using System.Linq;
 
-[CreateAssetMenu(menuName = "Characters/ActionMap")]
-public class ActionAnimationMap : ScriptableObject
+[Serializable]
+public class ActionAnimationMap
 {
     public RuntimeAnimatorController AnimatorController;
     public List<ActionMapInput> ActionMapInput;
     public PriorityLevel[] PriorityLevels;
     public Dictionary<int, PriorityLevel> ActionPriorityMap = new();
 
-    private void OnValidate()
+    public void UpdatePriorityMap()
     {
         ActionPriorityMap.Clear();
 
@@ -53,8 +53,6 @@ public class Move
     public Move(RuntimeAnimatorController _animatorController) { 
         this.AnimatorController = _animatorController;
     }
-
-    //public RuntimeAnimatorController GetAnimatorController() { return _animatorController; }
 
     public Move(InputActionReference directionalInput, AnimationClip animationClip, bool grounded)
     {
