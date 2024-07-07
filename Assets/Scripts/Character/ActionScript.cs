@@ -9,7 +9,7 @@ namespace Player
 
     public class ActionScript : MonoBehaviour
     {
-        [SerializeField] private AnimationMapping animationMapping;
+        [SerializeField] private AnimationMap animationMapping;
 
         public Dictionary<int, PriorityLevel> MovesetPriorityMap { get; private set; }
 

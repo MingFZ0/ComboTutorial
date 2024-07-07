@@ -19,7 +19,7 @@ public class DummyActionEditorScript : Editor
             dummyAction.MoveInputInt = EditorGUILayout.Popup("Selected Move", dummyAction.MoveInputInt, clipNames);
             dummyAction.SelectedMove = clips[dummyAction.MoveInputInt];
 
-            dummyAction.dummyAnimationMapping = (AnimationMapping)EditorGUILayout.ObjectField("Dummy Animation Mapping", dummyAction.dummyAnimationMapping, typeof(AnimationMapping), false);
+            dummyAction.dummyAnimationMapping = (AnimationMap)EditorGUILayout.ObjectField("Dummy Animation Mapping", dummyAction.dummyAnimationMapping, typeof(AnimationMap), false);
             serializedObject.Update();
         }
     }

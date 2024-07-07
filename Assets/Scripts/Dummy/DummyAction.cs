@@ -10,7 +10,7 @@ public class DummyAction : ActionScript
     public int MoveInputInt;
     public RuntimeAnimatorController AnimatorController;
     public AnimationClip SelectedMove;
-    public AnimationMapping dummyAnimationMapping;
+    public AnimationMap dummyAnimationMapping;
 
     //private void Awake()
     //{
