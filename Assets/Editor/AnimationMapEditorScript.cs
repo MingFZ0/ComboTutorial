@@ -72,20 +72,23 @@ public class AnimationMapEditorScript : Editor
         if (animationMap.ActionAnimationMap.PriorityLevels == null || animationMap.ActionAnimationMap.PriorityLevels.Length == 0)
         {
             animationMap.ActionAnimationMap.PriorityLevels = new PriorityLevel[levelNames.Length];
-            for (int i = 0; i < levelNames.Length; i++) { animationMap.ActionAnimationMap.PriorityLevels[i] = new PriorityLevel(); }
+            for (int i = ActionAnimationMap.StartingPriorityLevelIndex; i < levelNames.Length; i++) { animationMap.ActionAnimationMap.PriorityLevels[i] = new PriorityLevel(); }
             Debug.Log(animationMap.ActionAnimationMap.PriorityLevels.Length);
         }
 
-        for (int i = 0; i < levelNames.Length; i++)
+        for (int i = ActionAnimationMap.StartingPriorityLevelIndex; i < levelNames.Length; i++)
         {
             PriorityLevel priorityLevel = animationMap.ActionAnimationMap.PriorityLevels[i];
 
-            priorityLevel.Fold = EditorGUILayout.Foldout(priorityLevel.Fold, levelNames[i]);
+            //priorityLevel.Fold = EditorGUILayout.Foldout(priorityLevel.Fold, levelNames[i]);
+            priorityLevel.Fold = EditorGUILayout.BeginFoldoutHeaderGroup(priorityLevel.Fold, levelNames[i]);
 
             if (priorityLevel.Fold)
             {
+                GUILayout.Box("", GUILayout.MaxWidth(float.MaxValue), GUILayout.Height(5));
                 EditorGUILayout.LabelField("Priority Index [" + i + "]");
                 priorityLevel.LevelInput = (InputActionReference)EditorGUILayout.ObjectField("Level Input", priorityLevel.LevelInput, typeof(InputActionReference), false);
+                GUILayout.Box("", GUILayout.MaxWidth(float.MaxValue), GUILayout.Height(5));
 
                 EditorGUI.indentLevel++;
 
@@ -121,6 +124,7 @@ public class AnimationMapEditorScript : Editor
                     movementAcceration.HorizontalAccerationCurve = EditorGUILayout.CurveField("Horizontal Acceration", horizontalMovementCurve);
                     move.MovementAcceration = movementAcceration;
                     EditorGUI.indentLevel--;
+                    EditorGUILayout.HelpBox("", MessageType.None);
 
                 }
                 EditorGUILayout.Space();
@@ -128,7 +132,7 @@ public class AnimationMapEditorScript : Editor
                 EditorGUILayout.BeginHorizontal();
                 if (EditorGUILayout.DropdownButton(new GUIContent("Add Move"), FocusType.Passive))
                 {
-                    priorityLevel.Moves.Add(new Move(animationMap.ActionAnimationMap.AnimatorController));
+                    priorityLevel.Moves.Add(new Move());
                 }
                 if (EditorGUILayout.DropdownButton(new GUIContent("Remove Move"), FocusType.Passive))
                 {
@@ -137,11 +141,10 @@ public class AnimationMapEditorScript : Editor
                 EditorGUILayout.EndHorizontal();
 
                 //Move move = new Move(actionMap.AnimatorController);
-
                 EditorGUI.indentLevel--;
             }
-            
 
+            EditorGUILayout.EndFoldoutHeaderGroup();
             EditorGUILayout.Space();
         }
 
