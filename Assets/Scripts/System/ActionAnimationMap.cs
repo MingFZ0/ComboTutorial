@@ -10,8 +10,8 @@ public class ActionAnimationMap
 {
     public static readonly int StartingPriorityLevelIndex = 2;
     public List<ActionMapInput> ActionMapInput;
-    public PriorityLevel[] PriorityLevels;
-    public Dictionary<int, PriorityLevel> ActionPriorityMap = new();
+    public PriorityLevel<AttackMove>[] PriorityLevels;
+    public Dictionary<int, PriorityLevel<AttackMove>> ActionPriorityMap = new();
 
     public void UpdatePriorityMap()
     {
@@ -26,18 +26,25 @@ public class ActionAnimationMap
 
 public struct ActionMapInput 
 {
-    [SerializeField] public PriorityLevel PriorityLevel;
+    [SerializeField] public PriorityLevel<AttackMove> PriorityLevel;
     [SerializeField] public int PriorityIndex;
 }
 
 [Serializable]
-public class PriorityLevel
+public class PriorityLevel<MoveType>
 {
     [SerializeField] public InputActionReference LevelInput;
-    [SerializeField] public List<Move> Moves = new();
+    [SerializeField] public List<MoveType> Moves = new();
     public bool Fold;
 
     public PriorityLevel() { }
+}
+
+[Serializable]
+public class AttackMove : Move
+{
+    [SerializeField] public Motion MovementCurve;
+    [SerializeField] public Motion HitstunCurve;
 }
 
 [Serializable]
@@ -46,7 +53,6 @@ public class Move
     [SerializeField] public InputActionReference DirectionalInput;
     [SerializeField] public AnimationClip AnimationClip;
     [SerializeField] public bool Grounded;
-    [SerializeField] public Motion MovementAcceration;
     public int AnimationClipIndexInput;
 
     public Move()
