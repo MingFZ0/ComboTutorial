@@ -16,7 +16,7 @@ public class ActionAnimationMap
         new PriorityLevel<AttackMove>(2),
         new PriorityLevel<AttackMove>(3),
         new PriorityLevel<AttackMove>(4),
-        new PriorityLevel<AttackMove>(5)
+        new PriorityLevel<AttackMove>(5),
     };
 }
 

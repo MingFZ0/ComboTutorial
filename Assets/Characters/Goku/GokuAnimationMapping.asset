@@ -27,12 +27,6 @@ MonoBehaviour:
     - LevelInput: {fileID: 0}
       Moves: []
       Fold: 0
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
   StateAnimationMap:
     AnimatorController: {fileID: 0}
     StateAnimations:

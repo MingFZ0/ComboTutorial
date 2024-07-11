@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.TerrainTools;
 using UnityEngine;
@@ -162,6 +163,11 @@ public class AnimationMapEditorScript : Editor
             animationMap.MovementAnimationMap.DashMoveLevel = DashPriorityLevel;
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
+
+        animationMap.PriorityMap[0] = MovementPriorityLevel;
+        animationMap.PriorityMap[1] = DashPriorityLevel;
+
+
         EditorGUI.indentLevel--;
 
         EditorGUI.indentLevel--;
@@ -174,16 +180,17 @@ public class AnimationMapEditorScript : Editor
         //EditorGUILayout.TextField(tabs[tabIndex].ToString());
         string[] levelNames = Enum.GetNames(typeof(ActionEnum));
 
-        for (int i = ActionAnimationMap.StartingPriorityLevelIndex; i < animationMap.PriorityMap.Length; i++)
+        for (int i = 0; i < animationMap.ActionAnimationMap.PriorityLevels.Length; i++)
         {
-            PriorityLevel<AttackMove> priorityLevel = (PriorityLevel<AttackMove>) animationMap.PriorityMap[i];
+            PriorityLevel<AttackMove> priorityLevel = animationMap.ActionAnimationMap.PriorityLevels[i];
+            int levelIndex = ActionAnimationMap.StartingPriorityLevelIndex + i;
 
-            priorityLevel.Fold = EditorGUILayout.BeginFoldoutHeaderGroup(priorityLevel.Fold, levelNames[i]);
+            priorityLevel.Fold = EditorGUILayout.BeginFoldoutHeaderGroup(priorityLevel.Fold, levelNames[levelIndex]);
 
             if (priorityLevel.Fold)
             {
                 GUILayout.Box("", GUILayout.MaxWidth(float.MaxValue), GUILayout.Height(5));
-                EditorGUILayout.LabelField("Priority Index [" + i + "]");
+                EditorGUILayout.LabelField("Priority Index [" + levelIndex + "]");
                 priorityLevel.LevelInput = (InputActionReference)EditorGUILayout.ObjectField("Level Input", priorityLevel.LevelInput, typeof(InputActionReference), false);
                 GUILayout.Box("", GUILayout.MaxWidth(float.MaxValue), GUILayout.Height(5));
 
@@ -240,7 +247,10 @@ public class AnimationMapEditorScript : Editor
                 EditorGUI.indentLevel--;
             }
 
-            animationMap.ActionAnimationMap.PriorityLevels[i - ActionAnimationMap.StartingPriorityLevelIndex] = priorityLevel;
+            animationMap.ActionAnimationMap.PriorityLevels[i] = priorityLevel;
+            animationMap.PriorityMap[levelIndex] = priorityLevel;
+
+
 
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorGUILayout.Space();

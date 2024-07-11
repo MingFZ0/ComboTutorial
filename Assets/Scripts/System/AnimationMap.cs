@@ -11,7 +11,7 @@ public class AnimationMap : ScriptableObject
     public StateAnimationMap StateAnimationMap = new();
     public MovementAnimationMap MovementAnimationMap = new();
 
-    public object[] PriorityMap = {
+    [SerializeField] public object[] PriorityMap = {
         new PriorityLevel<Move>(0),         //Movement
         new PriorityLevel<DashMove>(1),     //Dash
         new PriorityLevel<AttackMove>(2),   //Light
