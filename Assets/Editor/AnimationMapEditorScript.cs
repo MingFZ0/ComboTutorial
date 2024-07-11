@@ -20,7 +20,7 @@ public class AnimationMapEditorScript : Editor
         
         EditorGUILayout.Space();
         animationMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Animator Controller", animationMap.AnimatorController, typeof(RuntimeAnimatorController), false);
-        
+
         if (animationMap.AnimatorController == null)
         {
             EditorGUILayout.HelpBox("Animator Controller is needed to assign animations to moves", MessageType.Warning);
@@ -52,7 +52,7 @@ public class AnimationMapEditorScript : Editor
                 break;
         }
 
-        EditorUtility.SetDirty(target);
+        EditorUtility.SetDirty(animationMap);
         serializedObject.ApplyModifiedProperties();
         serializedObject.Update();
     }
@@ -242,11 +242,10 @@ public class AnimationMapEditorScript : Editor
 
             animationMap.ActionAnimationMap.PriorityLevels[i - ActionAnimationMap.StartingPriorityLevelIndex] = priorityLevel;
 
-            serializedObject.ApplyModifiedProperties();
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorGUILayout.Space();
         }
-
+        
         EditorGUI.indentLevel--;
     }
 
@@ -275,7 +274,7 @@ public class AnimationMapEditorScript : Editor
         }
         stateAnimationMap.inputs = inputs;
         stateAnimationMap.priorityIndexInputs = priorityLevelInputs;
-        serializedObject.ApplyModifiedProperties();
+        //serializedObject.ApplyModifiedProperties();
     }
 }
 

@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 public class ActionAnimationMap
 {
     public static readonly int StartingPriorityLevelIndex = 2;
-    public PriorityLevel<AttackMove>[] PriorityLevels =
+    [SerializeField] public PriorityLevel<AttackMove>[] PriorityLevels =
     {
         new PriorityLevel<AttackMove>(2),
         new PriorityLevel<AttackMove>(3),

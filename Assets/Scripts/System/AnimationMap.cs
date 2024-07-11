@@ -7,7 +7,7 @@ using UnityEngine;
 public class AnimationMap : ScriptableObject
 {
     public RuntimeAnimatorController AnimatorController;
-    public ActionAnimationMap ActionAnimationMap = new();
+    [SerializeField] public ActionAnimationMap ActionAnimationMap = new();
     public StateAnimationMap StateAnimationMap = new();
     public MovementAnimationMap MovementAnimationMap = new();
 
