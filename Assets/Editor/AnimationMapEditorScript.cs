@@ -20,6 +20,7 @@ public class AnimationMapEditorScript : Editor
         
         EditorGUILayout.Space();
         animationMap.AnimatorController = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Animator Controller", animationMap.AnimatorController, typeof(RuntimeAnimatorController), false);
+        EditorUtility.SetDirty(animationMap);
 
         if (animationMap.AnimatorController == null)
         {
@@ -52,14 +53,13 @@ public class AnimationMapEditorScript : Editor
                 break;
         }
 
-        EditorUtility.SetDirty(animationMap);
         serializedObject.ApplyModifiedProperties();
         serializedObject.Update();
     }
 
     private void MovementMap()
     {
-        EditorGUILayout.TextField(tabs[tabIndex].ToString());
+        //EditorGUILayout.TextField(tabs[tabIndex].ToString());
         string[] levelNames = Enum.GetNames(typeof(ActionEnum));
 
         PriorityLevel<Move> MovementPriorityLevel = animationMap.MovementAnimationMap.MovementMoveLevel;

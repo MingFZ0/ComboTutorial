@@ -45,8 +45,8 @@ MonoBehaviour:
     MovementMoveLevel:
       LevelInput: {fileID: 0}
       Moves: []
-      Fold: 1
+      Fold: 0
     DashMoveLevel:
       LevelInput: {fileID: 0}
       Moves: []
-      Fold: 1
+      Fold: 0
