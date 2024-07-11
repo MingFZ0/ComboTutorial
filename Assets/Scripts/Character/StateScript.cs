@@ -43,7 +43,7 @@ public class StateScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed() == false && attackScript.IsAttacking == false)
+        if (actionScript.MovementAnimationMap.MovementMoveLevel.LevelInput.action.IsPressed() == false && attackScript.IsAttacking == false)
         {
             if (IsGrounded() && LandingFrames == 0 && !movementScript.isJumping)
             {

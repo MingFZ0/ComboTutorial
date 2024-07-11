@@ -30,6 +30,7 @@ namespace Player
         //Jump
         #region Jump
         [Header("Jump Attributes")]
+        [SerializeField] private Motion jumpMovementCurve;
         [SerializeField] private LayerMask jumpLayerMask;
         [SerializeField] private float groundDetectionBoxHeight;
         private float _jumpTime;
@@ -45,6 +46,7 @@ namespace Player
         #region Dash
         [Header("Dash Attributes")]
         [SerializeField] private float dashBufferMemory;
+        private List<DashMove> dashMoveList;
         private Move _dashBufferedMove;
         private float _dashBufferMemory;
         private float _dashForce;
@@ -52,7 +54,7 @@ namespace Player
 
         private float _dashTime;
         private float _dashTotalHorizontalTime;
-        private Move _dashMove;
+        private DashMove _dashMove;
         private bool isDashing;
         #endregion
 
@@ -65,13 +67,15 @@ namespace Player
 
         private void Start()
         {
-            List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
+            List<Move> moves = actionScript.MovementAnimationMap.MovementMoveLevel.Moves;
             foreach (Move move in moves)
             {
                 if (move.DirectionalInput.action.name == "Up") { jumpMove = move; }
                 else if (move.DirectionalInput.action.name == "Down") {  crouchMove = move; }
                 else { movementMoves.Add(move); }
             }
+
+            dashMoveList = actionScript.MovementAnimationMap.DashMoveLevel.Moves;
         }
 
         private void FixedUpdate()
@@ -90,22 +94,22 @@ namespace Player
             {
                 if (_dashBufferedMove.DirectionalInput.action.WasPressedThisFrame())
                 {
-                    foreach (Move dashMove in actionScript.MovesetPriorityMap[1].Moves)
+                    foreach (DashMove dashMove in dashMoveList)
                     {
                         if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove.AnimationClip))
                         {
                             _dashMove = dashMove;
-                            _dashTotalHorizontalTime = _dashMove.MovementAcceration.HorizontalAccerationCurve[_dashMove.MovementAcceration.HorizontalAccerationCurve.length - 1].time;
+                            _dashTotalHorizontalTime = _dashMove.MovementCurve.HorizontalAccerationCurve[_dashMove.MovementCurve.HorizontalAccerationCurve.length - 1].time;
                             isDashing = true;
                         }
                     }
                 }
             }
 
-            if (!isJumping && !isDashing && actionScript.MovesetPriorityMap[0].LevelInput.action.IsPressed())
+            if (!isJumping && !isDashing && actionScript.MovementAnimationMap.MovementMoveLevel.LevelInput.action.IsPressed())
             {
-                Vector2 movement = actionScript.MovesetPriorityMap[0].LevelInput.action.ReadValue<Vector2>();
-                List<Move> moves = actionScript.MovesetPriorityMap[0].Moves;
+                Vector2 movement = actionScript.MovementAnimationMap.MovementMoveLevel.LevelInput.action.ReadValue<Vector2>();
+                List<Move> moves = actionScript.MovementAnimationMap.MovementMoveLevel.Moves;
 
                 //if (movement.y > 0 && IsGrounded() == jumpMove.Grounded && !isJumping) { ButtonJumpingMovement(movement); }
                 if (movement.y > 0 && !isJumping)
@@ -129,7 +133,7 @@ namespace Player
                 _jumpTime = 0f;
                 jumpingMotion = newPos;
 
-                transform.Translate(new Vector2(jumpingMotion.x * jumpMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(0), jumpingMotion.y * jumpMove.MovementAcceration.VerticalAccerationCurve.Evaluate(0)) * Time.deltaTime);
+                transform.Translate(new Vector2(jumpingMotion.x * jumpMovementCurve.HorizontalAccerationCurve.Evaluate(0), jumpingMotion.y * jumpMovementCurve.VerticalAccerationCurve.Evaluate(0)) * Time.deltaTime);
             } 
         }
 
@@ -163,8 +167,8 @@ namespace Player
             _jumpTime += Time.deltaTime;
             float currentVerticalJumpForce;
             float currentHorizontalJumpForce;
-            AnimationCurve verticalJumpForce = jumpMove.MovementAcceration.VerticalAccerationCurve;
-            AnimationCurve horizontalJumpForce = jumpMove.MovementAcceration.HorizontalAccerationCurve; ;
+            AnimationCurve verticalJumpForce = jumpMovementCurve.VerticalAccerationCurve;
+            AnimationCurve horizontalJumpForce = jumpMovementCurve.HorizontalAccerationCurve; ;
             if (_jumpTime >= verticalJumpForce[verticalJumpForce.length - 1].time) { currentVerticalJumpForce = verticalJumpForce[verticalJumpForce.length - 1].value; }
             else { currentVerticalJumpForce = verticalJumpForce.Evaluate(_jumpTime); }
 
@@ -186,7 +190,7 @@ namespace Player
             if (_dashTime > _dashTotalHorizontalTime) { return; }
             _dashTime += Time.deltaTime;
 
-            float dashForce = _dashMove.MovementAcceration.HorizontalAccerationCurve.Evaluate(_dashTime);
+            float dashForce = _dashMove.MovementCurve.HorizontalAccerationCurve.Evaluate(_dashTime);
               
             transform.Translate(new Vector2(dashForce * _dashDirecton * Time.deltaTime, 0));
         }

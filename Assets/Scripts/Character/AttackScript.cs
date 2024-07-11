@@ -9,7 +9,7 @@ public class AttackScript : MonoBehaviour
 {
     //Script References
     private ActionScript actionScript;
-    private Dictionary<int, PriorityLevel> movesetPriorityMap;
+    private PriorityLevel<AttackMove>[] priorityLevels;
     private StateScript stateScript;
 
     //Fields
@@ -24,19 +24,19 @@ public class AttackScript : MonoBehaviour
 
     private void Start()
     {
-        movesetPriorityMap = actionScript.MovesetPriorityMap;
+        priorityLevels = actionScript.ActionAnimationMap.PriorityLevels;
     }
 
     private void Update()
     {
         for (int i = 2; i < 6; i++)
         {
-            PriorityLevel movesetPriorityLevel = movesetPriorityMap[i];
-            InputActionReference movesetLevelInput = movesetPriorityLevel.LevelInput;
+            PriorityLevel<AttackMove> attackPriorityLevel = priorityLevels[i];
+            InputActionReference movesetLevelInput = attackPriorityLevel.LevelInput;
 
             if (movesetLevelInput.action.WasPressedThisFrame())
             {
-                foreach (Move move in movesetPriorityLevel.Moves)
+                foreach (AttackMove move in attackPriorityLevel.Moves)
                 {
                     //Debug.Log(i + " level was pressed");
                     if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 

@@ -11,7 +11,8 @@ namespace Player
     {
         [SerializeField] private AnimationMap animationMapping;
 
-        public Dictionary<int, PriorityLevel> MovesetPriorityMap { get; private set; }
+        public ActionAnimationMap ActionAnimationMap { get; private set; }
+        public MovementAnimationMap MovementAnimationMap { get; private set; }
 
         protected PlayerControlsInput playerControlsInput;
         protected AttackScript attackScript;
@@ -41,7 +42,6 @@ namespace Player
             playerControlsInput = new PlayerControlsInput();
             playerControlsInput.Player.Enable();
 
-            if (animationMapping != null) { MovesetPriorityMap = animationMapping.ActionAnimationMap.ActionPriorityMap; }
         }
 
         private void Update()
@@ -57,11 +57,16 @@ namespace Player
             }
         }
 
-        public virtual bool Action(Move action)
+        public virtual bool Action(AnimationClip clip) 
         {
-            if (Action(action.AnimationClip))
+            throw new NotImplementedException("This method is only used for DummyAction");
+        }
+
+        public bool Action(AttackMove action)
+        {
+            if (CheckMoveForAction(action))
             {
-                currentActionMotion = action.MovementAcceration;
+                currentActionMotion = action.MovementCurve;
 
                 if (currentActionMotion.HorizontalAccerationCurve.length == 0) { _maxcurrentHorizontalMotion = 0; }
                 else { _maxcurrentHorizontalMotion = currentActionMotion.HorizontalAccerationCurve[currentActionMotion.HorizontalAccerationCurve.length - 1].time; }
@@ -75,25 +80,27 @@ namespace Player
             else return false;
         }
 
-        public virtual bool Action(AnimationClip action)
+        public bool CheckMoveForAction(Move action)
         {
             bool result = true;
-            int levelIndex = FindPriorityLevel(action);
+            int levelIndex = action.PriorityLevelIndex;
 
             if (levelIndex < currentCancelLevel) { result = false; }
-            if (usedMoves.Contains(action)) { result = false; }
+            if (usedMoves.Contains(action.AnimationClip)) { result = false; }
             if (levelIndex >= 2 && currentCancelLevel >= 2 && attackScript.HitBoxCollided == false) { result = false; }
-            if (result == false) {
-                return false; 
+            if (result == false)
+            {
+                return false;
             }
 
             //Debug.Log(action);
-            if (playerAnimator.ChangeAnimation(action)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
+            if (playerAnimator.ChangeAnimation(action.AnimationClip)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
             {
-                CurrentAction = action;
+                CurrentAction = action.AnimationClip;
                 currentCancelLevel = levelIndex;
-                usedMoves.Add(action);
-                if (levelIndex == 0) { 
+                usedMoves.Add(action.AnimationClip);
+                if (levelIndex == 0)
+                {
                     usedMoves.Clear();
                     currentCancelLevel = 0;
                 }
@@ -136,26 +143,12 @@ namespace Player
             Debug.Log("Switching from " + CurrentAction + " to " + action);
             CurrentAction = action;
             currentCancelLevel = 0;
-            Action(action);
+            //Action(action);
         }
 
-        public int FindPriorityLevel(AnimationClip clip)
+        public object[] GetPriorityLevelsRaw()
         {
-            foreach (int levelIndex in MovesetPriorityMap.Keys)
-            {
-                PriorityLevel level = MovesetPriorityMap[levelIndex];
-                foreach (Move move in level.Moves)
-                {
-                    if (move.AnimationClip == clip) { return levelIndex; }
-                }
-            }
-
-            foreach (AnimationClip animation in animationMapping.StateAnimationMap.AnimationToPriorityIndexMap.Keys)
-            {
-                if (animation == clip) { return animationMapping.StateAnimationMap.AnimationToPriorityIndexMap[animation]; }
-            }
-            Debug.Log(clip.name);
-            throw new ArgumentOutOfRangeException("Unable to find Priority Level of clip " + clip.name);
+            return animationMapping.PriorityMap;
         }
     }
 }

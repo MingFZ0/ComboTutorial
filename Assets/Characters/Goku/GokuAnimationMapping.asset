@@ -13,5 +13,154 @@ MonoBehaviour:
   m_Name: GokuAnimationMapping
   m_EditorClassIdentifier: 
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
-  ActionAnimationMap: {fileID: 11400000, guid: fe346fac4fe041c409545edb10204be0, type: 2}
-  StateAnimationMap: {fileID: 11400000, guid: dd8fa0f3c92d0e642b5bef088a84b79e, type: 2}
+  ActionAnimationMap:
+    PriorityLevels:
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 1
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 1
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 1
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 1
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 0
+    - LevelInput: {fileID: 0}
+      Moves: []
+      Fold: 0
+  StateAnimationMap:
+    AnimatorController: {fileID: 0}
+    StateAnimations:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    inputs: 030000000100000008000000
+    priorityIndexInputs: 05000000090000000b000000
+  MovementAnimationMap:
+    MovementMoveLevel:
+      LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 220d341d34be902448c52318dd6d99f3, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 5
+      - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 3728157d1352ab24f85dca2820becd0b, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 13
+      Fold: 1
+    DashMoveLevel:
+      LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: 0}
+        AnimationClip: {fileID: 7400000, guid: 5b9bf2a0fa4e32a439ece3a0df915998, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 17
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 2
+              outSlope: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 2
+              outSlope: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      - DirectionalInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 0
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 34
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
