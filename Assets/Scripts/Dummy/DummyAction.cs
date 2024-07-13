@@ -17,6 +17,11 @@ public class DummyAction : ActionScript
     //    _animatorScript = GetComponent<AnimatorScript>();
     //}
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         //if (Action(SelectedMove.name) == false && CurrentAction == "Idle")

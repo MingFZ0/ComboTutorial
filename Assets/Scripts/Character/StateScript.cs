@@ -11,7 +11,6 @@ public class StateScript : MonoBehaviour
     public int LandingFrames;
     private int currentFrame;
     private bool landed;
-    [SerializeField] private StateAnimationMap stateMap;
     
     private MovementScript movementScript;
     private AttackScript attackScript;
@@ -29,7 +28,7 @@ public class StateScript : MonoBehaviour
         movementScript = GetComponent<MovementScript>();
         actionScript = GetComponent<ActionScript>();
         attackScript = GetComponent<AttackScript>();
-        stateAnimationMap = stateMap.StateStringToAnimationMap;
+        stateAnimationMap = actionScript.StateAnimationMap.StateStringToAnimationMap;
     }
 
     private void Start()
@@ -38,6 +37,7 @@ public class StateScript : MonoBehaviour
         //{
         //    Debug.Log(key + ": " + stateMap.StateAnimationMap[key].name);
         //}
+        Debug.Log(stateAnimationMap.Count);
     }
 
     // Update is called once per frame

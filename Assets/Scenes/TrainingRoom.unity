@@ -1437,21 +1437,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 3
+  jumpMovementCurve:
+    VerticalAccerationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    HorizontalAccerationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   jumpLayerMask:
     serializedVersion: 2
     m_Bits: 64
   groundDetectionBoxHeight: 0.15
-  jumpForce: {x: 10, y: 20}
-  fallForce: 1.94
-  risingHorizontalMovementMultiplier: 1
-  fallingHorizontalMovementMultiplier: 0.968
-  risingVerticalMovementMultiplier: 0.802
-  fallingVerticalMovementMultiplier: 1.2
   isJumping: 0
-  dashForce: 20
-  dashMovementMultiplier: 0.91
   dashBufferMemory: 20
-  dashForceStoppingLimit: 2
 --- !u!114 &1880588100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,7 +1469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationMapping: {fileID: 11400000, guid: 3c529d43b96bc614888cb6f3bf3f27ec, type: 2}
-  playerAnimator: {fileID: 0}
 --- !u!114 &1880588101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,7 +1719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LandingFrames: 0
-  stateMap: {fileID: 11400000, guid: dd8fa0f3c92d0e642b5bef088a84b79e, type: 2}
 --- !u!1 &1883007038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,7 +2175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationMapping: {fileID: 0}
-  playerAnimator: {fileID: 0}
   MoveInputInt: 0
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
   SelectedMove: {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}

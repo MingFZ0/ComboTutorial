@@ -180,10 +180,10 @@ public class AnimationMapEditorScript : Editor
         //EditorGUILayout.TextField(tabs[tabIndex].ToString());
         string[] levelNames = Enum.GetNames(typeof(ActionEnum));
 
-        for (int i = 0; i < animationMap.ActionAnimationMap.PriorityLevels.Length; i++)
+        for (int i = 0; i < animationMap.AttackAnimationMap.PriorityLevels.Length; i++)
         {
-            PriorityLevel<AttackMove> priorityLevel = animationMap.ActionAnimationMap.PriorityLevels[i];
-            int levelIndex = ActionAnimationMap.StartingPriorityLevelIndex + i;
+            PriorityLevel<AttackMove> priorityLevel = animationMap.AttackAnimationMap.PriorityLevels[i];
+            int levelIndex = AttackAnimationMap.StartingPriorityLevelIndex + i;
 
             priorityLevel.Fold = EditorGUILayout.BeginFoldoutHeaderGroup(priorityLevel.Fold, levelNames[levelIndex]);
 
@@ -247,7 +247,7 @@ public class AnimationMapEditorScript : Editor
                 EditorGUI.indentLevel--;
             }
 
-            animationMap.ActionAnimationMap.PriorityLevels[i] = priorityLevel;
+            animationMap.AttackAnimationMap.PriorityLevels[i] = priorityLevel;
             animationMap.PriorityMap[levelIndex] = priorityLevel;
 
 
@@ -263,6 +263,7 @@ public class AnimationMapEditorScript : Editor
     {
         //EditorGUILayout.TextField(tabs[tabIndex].ToString());
         StateAnimationMap stateAnimationMap = animationMap.StateAnimationMap;
+
         int[] inputs = MyAnimationClipEditorDisplayUtil.CreateEmptyIntArray(Enum.GetNames(typeof(StateAnimation)).Length);
         int[] priorityLevelInputs = MyAnimationClipEditorDisplayUtil.CreateEmptyIntArray(Enum.GetNames(typeof(StateAnimation)).Length);
         if (stateAnimationMap.inputs.Length > 0) { inputs = stateAnimationMap.inputs; }
@@ -281,9 +282,13 @@ public class AnimationMapEditorScript : Editor
             EditorGUIUtility.labelWidth = 50;
             inputs[i] = EditorGUILayout.Popup(animationMap.StateAnimationMap.stateAnimationEnumStrings[i], inputs[i], clipNames, GUILayout.Width(200));
             EditorGUILayout.EndHorizontal();
+
+            stateAnimationMap.StateAnimations[i] = clips[i];
         }
         stateAnimationMap.inputs = inputs;
         stateAnimationMap.priorityIndexInputs = priorityLevelInputs;
+
+        //stateAnimationMap.UpdateAnimatorController(animationMap.AnimatorController
         //serializedObject.ApplyModifiedProperties();
     }
 }

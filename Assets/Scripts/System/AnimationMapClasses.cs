@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using JetBrains.Annotations;
 
 [Serializable]
-public class ActionAnimationMap
+public class AttackAnimationMap
 {
     public static readonly int StartingPriorityLevelIndex = 2;
     [SerializeField] public PriorityLevel<AttackMove>[] PriorityLevels =
@@ -34,26 +34,25 @@ public class StateAnimationMap
 {
     public Dictionary<string, AnimationClip> StateStringToAnimationMap;
     public Dictionary<AnimationClip, int> AnimationToPriorityIndexMap;
-    public RuntimeAnimatorController AnimatorController;
+    //private RuntimeAnimatorController animatorController;
     public AnimationClip[] StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
 
     public readonly string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
     public int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
     public int[] priorityIndexInputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
 
+    //public void UpdateAnimatorController(RuntimeAnimatorController animatorController) { this.animatorController = animatorController; }
 
     public void UpdateDictMap()
     {
-        if (AnimatorController != null)
+        this.StateStringToAnimationMap = new();
+        this.AnimationToPriorityIndexMap = new();
+        for (int i = 0; i < inputs.Length; i++)
         {
-            StateStringToAnimationMap = new();
-            AnimationToPriorityIndexMap = new();
-            for (int i = 0; i < inputs.Length; i++)
-            {
-                StateStringToAnimationMap.Add(stateAnimationEnumStrings[i], AnimatorController.animationClips[inputs[i]]);
-                AnimationToPriorityIndexMap.Add(AnimatorController.animationClips[inputs[i]], priorityIndexInputs[i]);
-            }
+            this.StateStringToAnimationMap.Add(stateAnimationEnumStrings[i], StateAnimations[i]);
+            this.AnimationToPriorityIndexMap.Add(StateAnimations[i], priorityIndexInputs[i]);
         }
+       
     }
 }
 

@@ -11,13 +11,14 @@ namespace Player
     {
         [SerializeField] private AnimationMap animationMapping;
 
-        public ActionAnimationMap ActionAnimationMap { get; private set; }
+        public AttackAnimationMap AttackAnimationMap { get; private set; }
         public MovementAnimationMap MovementAnimationMap { get; private set; }
+        public StateAnimationMap StateAnimationMap { get; private set; }
 
         protected PlayerControlsInput playerControlsInput;
         protected AttackScript attackScript;
         protected MovementScript playerMovement;
-        public AnimatorScript playerAnimator;
+        protected AnimatorScript playerAnimator;
 
         public AnimationClip CurrentAction { get; protected set; }
         private int currentCancelLevel;
@@ -42,6 +43,9 @@ namespace Player
             playerControlsInput = new PlayerControlsInput();
             playerControlsInput.Player.Enable();
 
+            AttackAnimationMap = animationMapping.AttackAnimationMap;
+            MovementAnimationMap = animationMapping.MovementAnimationMap;
+            StateAnimationMap = animationMapping.StateAnimationMap;
         }
 
         private void Update()

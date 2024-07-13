@@ -24,17 +24,18 @@ public class AttackScript : MonoBehaviour
 
     private void Start()
     {
-        priorityLevels = actionScript.ActionAnimationMap.PriorityLevels;
+        priorityLevels = actionScript.AttackAnimationMap.PriorityLevels;
     }
 
     private void Update()
     {
-        for (int i = 2; i < 6; i++)
+        for (int i = 0; i < priorityLevels.Length; i++)
         {
             PriorityLevel<AttackMove> attackPriorityLevel = priorityLevels[i];
             InputActionReference movesetLevelInput = attackPriorityLevel.LevelInput;
 
-            if (movesetLevelInput.action.WasPressedThisFrame())
+            if (movesetLevelInput == null) { throw new MissingReferenceException("Unsure what attack button to look for within the current attack priority level of " + attackPriorityLevel.PriorityLevelIndex); }
+            else if (movesetLevelInput.action.WasPressedThisFrame())
             {
                 foreach (AttackMove move in attackPriorityLevel.Moves)
                 {

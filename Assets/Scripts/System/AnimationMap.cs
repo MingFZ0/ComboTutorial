@@ -7,7 +7,7 @@ using UnityEngine;
 public class AnimationMap : ScriptableObject
 {
     public RuntimeAnimatorController AnimatorController;
-    [SerializeField] public ActionAnimationMap ActionAnimationMap = new();
+    [SerializeField] public AttackAnimationMap AttackAnimationMap = new();
     public StateAnimationMap StateAnimationMap = new();
     public MovementAnimationMap MovementAnimationMap = new();
 
@@ -19,6 +19,11 @@ public class AnimationMap : ScriptableObject
         new PriorityLevel<AttackMove>(4),   //Heavy
         new PriorityLevel<AttackMove>(5),   //Unique
     };
+
+    private void OnEnable()
+    {
+        StateAnimationMap.UpdateDictMap();
+    }
     //public object[] PriorityMap = new object[Enum.GetValues(typeof(ActionEnum)).Length];
 }
 

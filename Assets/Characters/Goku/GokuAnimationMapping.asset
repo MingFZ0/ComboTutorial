@@ -13,34 +13,203 @@ MonoBehaviour:
   m_Name: GokuAnimationMapping
   m_EditorClassIdentifier: 
   AnimatorController: {fileID: 9100000, guid: d2d93439a94476941bcd0dce4565ae95, type: 2}
-  ActionAnimationMap:
+  AttackAnimationMap:
     PriorityLevels:
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
-    - LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
+    - LevelInput: {fileID: -3589342827003247629, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: 0}
+        AnimationClip: {fileID: 7400000, guid: 220d341d34be902448c52318dd6d99f3, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 5
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        HitstunCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
+    - LevelInput: {fileID: 3574836709747228949, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: 0}
+        AnimationClip: {fileID: 7400000, guid: 744741408c6d9494cbb36e6a010c0c14, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 6
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        HitstunCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
+    - LevelInput: {fileID: 8998540626519294621, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: 0}
+        AnimationClip: {fileID: 7400000, guid: 1dfdf7f18c9e5494dbfabcec7d2c5a69, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 8
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        HitstunCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
+    - LevelInput: {fileID: 3882237718976943560, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: 0}
+        AnimationClip: {fileID: 7400000, guid: 725b1591f373a124fbf87a0130142519, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 11
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        HitstunCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
   StateAnimationMap:
-    AnimatorController: {fileID: 0}
     StateAnimations:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    inputs: 000000000000000000000000
-    priorityIndexInputs: 000000000000000000000000
+    - {fileID: 7400000, guid: 27109f764c6b5f947aa7fea724b3132d, type: 2}
+    - {fileID: 7400000, guid: f8f3b13e4b9c04245922f5994f216545, type: 2}
+    - {fileID: 7400000, guid: bc3831db6e4c1564ea2525fadbbd5ed2, type: 2}
+    inputs: 000000001100000012000000
+    priorityIndexInputs: 0000000001000000e7030000
   MovementAnimationMap:
     MovementMoveLevel:
-      LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
+      LevelInput: {fileID: -5988884264903789548, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+      Moves:
+      - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: bc3831db6e4c1564ea2525fadbbd5ed2, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 2
+      - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: f8f3b13e4b9c04245922f5994f216545, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 1
+      - DirectionalInput: {fileID: -8400938800616411025, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 3728157d1352ab24f85dca2820becd0b, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 13
+      - DirectionalInput: {fileID: -7393066620773184155, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 0c4a9cdb366739e4994c2ab67bcbea8e, type: 2}
+        Grounded: 0
+        AnimationClipIndexInput: 12
+      Fold: 1
     DashMoveLevel:
       LevelInput: {fileID: 0}
-      Moves: []
-      Fold: 0
+      Moves:
+      - DirectionalInput: {fileID: 2669622783163594480, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: fe2972113984251459a4dfb1c5d25891, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 4
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      - DirectionalInput: {fileID: -9103429248276408080, guid: 99de7882508f4d042afd4ee596858f24, type: 3}
+        AnimationClip: {fileID: 7400000, guid: 4259f069e682b3e45b88080aa63cd40e, type: 2}
+        Grounded: 1
+        AnimationClipIndexInput: 3
+        MovementCurve:
+          VerticalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          HorizontalAccerationCurve:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      Fold: 1
