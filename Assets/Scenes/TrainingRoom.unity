@@ -1440,13 +1440,94 @@ MonoBehaviour:
   jumpMovementCurve:
     VerticalAccerationCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0013885498
+        value: 20.180746
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.10265437
+        value: 14.428168
+        inSlope: -186.3053
+        outSlope: -186.3053
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.09657306
+        outWeight: 0.33177358
+      - serializedVersion: 3
+        time: 0.16442163
+        value: 2.3358226
+        inSlope: -94.617035
+        outSlope: -94.617035
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.28696603
+      - serializedVersion: 3
+        time: 0.24362676
+        value: 0.3120458
+        inSlope: -6.525561
+        outSlope: -6.525561
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.41283935
+      - serializedVersion: 3
+        time: 0.34364182
+        value: -10.343151
+        inSlope: -265.5116
+        outSlope: -265.5116
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20495303
+        outWeight: 0.09222059
+      - serializedVersion: 3
+        time: 0.36653066
+        value: -15.010178
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     HorizontalAccerationCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0042266846
+        value: 6.6490765
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.34892923
+        value: 5.034594
+        inSlope: -14.591812
+        outSlope: -14.591812
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.19359651
+      - serializedVersion: 3
+        time: 0.5332147
+        value: 1.985932
+        inSlope: -28.486425
+        outSlope: -28.486425
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.09268216
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -2161,7 +2242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2111489419
 MonoBehaviour:
   m_ObjectHideFlags: 0

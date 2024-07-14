@@ -197,6 +197,7 @@ public class AnimationMapEditorScript : Editor
                 EditorGUI.indentLevel++;
 
                 AnimationClip[] allClips = animationMap.AnimatorController.animationClips;
+
                 string[] allClipNames = new string[allClips.Length];
                 for (int clipIndex = 0; clipIndex < allClips.Length; clipIndex++) { allClipNames[clipIndex] = allClips[clipIndex].name; }
 
@@ -234,7 +235,7 @@ public class AnimationMapEditorScript : Editor
                 EditorGUILayout.BeginHorizontal();
                 if (EditorGUILayout.DropdownButton(new GUIContent("Add Move"), FocusType.Passive))
                 {
-                    priorityLevel.Moves.Add(new AttackMove(i));
+                    priorityLevel.Moves.Add(new AttackMove(levelIndex));
                 }
                 if (EditorGUILayout.DropdownButton(new GUIContent("Remove Move"), FocusType.Passive))
                 {
@@ -283,7 +284,10 @@ public class AnimationMapEditorScript : Editor
             inputs[i] = EditorGUILayout.Popup(animationMap.StateAnimationMap.stateAnimationEnumStrings[i], inputs[i], clipNames, GUILayout.Width(200));
             EditorGUILayout.EndHorizontal();
 
-            stateAnimationMap.StateAnimations[i] = clips[i];
+            StateMove move = new StateMove(priorityLevelInputs[i]);
+            move.AnimationClip = clips[inputs[i]];
+
+            stateAnimationMap.StateMoves[i] = move;
         }
         stateAnimationMap.inputs = inputs;
         stateAnimationMap.priorityIndexInputs = priorityLevelInputs;
