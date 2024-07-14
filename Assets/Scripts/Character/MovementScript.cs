@@ -96,7 +96,7 @@ namespace Player
                 {
                     foreach (DashMove dashMove in dashMoveList)
                     {
-                        if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove.AnimationClip))
+                        if (dashMove.DirectionalInput.name == _dashBufferedMove.DirectionalInput.name && actionScript.Action(dashMove))
                         {
                             _dashMove = dashMove;
                             _dashTotalHorizontalTime = _dashMove.MovementCurve.HorizontalAccerationCurve[_dashMove.MovementCurve.HorizontalAccerationCurve.length - 1].time;
@@ -117,7 +117,7 @@ namespace Player
                     ButtonJumpingMovement(movement);
                 }
                 if (movement.y == 0) { ButtonHorizontalMovement(movement); }
-                else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove.AnimationClip);}
+                else if (movement.y < 0 && !isJumping && IsGrounded() == crouchMove.Grounded) {actionScript.Action(crouchMove);}
 
             }
             //if (IsGrounded() == false && rb2d.velocity.y < 0) { rb2d.velocity -= Vector2.down * (Physics2D.gravity.y * fallForce) * Time.deltaTime; }
@@ -125,7 +125,7 @@ namespace Player
 
         private void ButtonJumpingMovement(Vector2 movement) 
         { 
-            if (actionScript.Action(jumpMove.AnimationClip)) 
+            if (actionScript.Action(jumpMove)) 
             {
                 Debug.Log("Jumping");
                 isJumping = true;
@@ -143,7 +143,7 @@ namespace Player
             {
                 if (move.DirectionalInput.action.IsPressed() && !isJumping && IsGroundedWithJumping() == move.Grounded)
                 {
-                    if (actionScript.Action(move.AnimationClip))
+                    if (actionScript.Action(move))
                     {
                         if (_dashInputCoroutine == null && move.DirectionalInput.action.WasPressedThisFrame()) { 
                             _dashInputCoroutine = StartCoroutine(PrepareDash(move));
@@ -181,7 +181,7 @@ namespace Player
                 RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundDetectionBoxHeight, jumpLayerMask);
                 Vector2 surface = Physics2D.ClosestPoint(transform.position, raycastHit.collider) + Vector2.up * 2;
                 transform.position = new Vector2(transform.position.x, surface.y + groundDetectionBoxHeight);
-                isJumping = false; 
+                isJumping = false;
             }
         }
 

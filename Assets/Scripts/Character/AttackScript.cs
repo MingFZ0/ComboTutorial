@@ -40,7 +40,7 @@ public class AttackScript : MonoBehaviour
                 foreach (AttackMove move in attackPriorityLevel.Moves)
                 {
                     //Debug.Log(i + " level was pressed");
-                    if (move.DirectionalInput.action.IsPressed() && stateScript.IsGrounded() == move.Grounded) 
+                    if ((move.DirectionalInput == null  || move.DirectionalInput.action.IsPressed()) && stateScript.IsGrounded() == move.Grounded) 
                     {
                         Debug.Log(move + " should be ran pressed");
                         if (actionScript.Action(move))

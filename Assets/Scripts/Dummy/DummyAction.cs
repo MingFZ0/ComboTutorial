@@ -35,15 +35,15 @@ public class DummyAction : ActionScript
     public override bool Action(AnimationClip action)
     {
         bool result = base.playerAnimator.ChangeAnimation(action);
-        base.CurrentAction = action;
+        //base.CurrentAction = action;
 
         return result;
     }
 
     public override void ResetAction()
     {
-        AnimationClip idle = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
-        AnimationClip falling = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
+        StateMove idle = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
+        StateMove falling = dummyAnimationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
 
         Action(idle);
     }

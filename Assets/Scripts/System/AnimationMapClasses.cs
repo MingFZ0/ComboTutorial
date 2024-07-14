@@ -32,10 +32,10 @@ public class MovementAnimationMap
 [Serializable]
 public class StateAnimationMap
 {
-    public Dictionary<string, AnimationClip> StateStringToAnimationMap;
-    public Dictionary<AnimationClip, int> AnimationToPriorityIndexMap;
+    public Dictionary<string, StateMove> StateStringToAnimationMap;
+    public Dictionary<StateMove, int> AnimationToPriorityIndexMap;
     //private RuntimeAnimatorController animatorController;
-    public AnimationClip[] StateAnimations = new AnimationClip[Enum.GetValues(typeof(StateAnimation)).Length];
+    public StateMove[] StateMoves = new StateMove[Enum.GetValues(typeof(StateAnimation)).Length];
 
     public readonly string[] stateAnimationEnumStrings = Enum.GetNames(typeof(StateAnimation));
     public int[] inputs = new int[Enum.GetNames(typeof(StateAnimation)).Length];
@@ -49,8 +49,8 @@ public class StateAnimationMap
         this.AnimationToPriorityIndexMap = new();
         for (int i = 0; i < inputs.Length; i++)
         {
-            this.StateStringToAnimationMap.Add(stateAnimationEnumStrings[i], StateAnimations[i]);
-            this.AnimationToPriorityIndexMap.Add(StateAnimations[i], priorityIndexInputs[i]);
+            this.StateStringToAnimationMap.Add(stateAnimationEnumStrings[i], StateMoves[i]);
+            this.AnimationToPriorityIndexMap.Add(StateMoves[i], priorityIndexInputs[i]);
         }
        
     }
@@ -83,6 +83,13 @@ public class PriorityLevel<MoveType>
 }
 
 [Serializable]
+public class StateMove : Move
+{
+    public StateMove(int priorityLevelIndex) : base (priorityLevelIndex) { }
+
+}
+
+[Serializable]
 public class AttackMove : Move
 {
     [SerializeField] public Motion MovementCurve = new();
@@ -112,7 +119,7 @@ public class Move
     [SerializeField] public InputActionReference DirectionalInput;
     [SerializeField] public AnimationClip AnimationClip;
     [SerializeField] public bool Grounded;
-    public readonly int PriorityLevelIndex;
+    public int PriorityLevelIndex;
     public int AnimationClipIndexInput;
 
     public Move(int priorityLevelIndex)
@@ -120,11 +127,12 @@ public class Move
         PriorityLevelIndex = priorityLevelIndex;
     }
 
-    public Move(InputActionReference directionalInput, AnimationClip animationClip, bool grounded)
+    public Move(InputActionReference directionalInput, AnimationClip animationClip, bool grounded, int priorityLevelIndex)
     {
         DirectionalInput = directionalInput;
         AnimationClip = animationClip;
         Grounded = grounded;
+        this.PriorityLevelIndex = priorityLevelIndex;
     }
 
     public override string ToString()

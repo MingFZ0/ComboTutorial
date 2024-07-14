@@ -20,7 +20,7 @@ namespace Player
         protected MovementScript playerMovement;
         protected AnimatorScript playerAnimator;
 
-        public AnimationClip CurrentAction { get; protected set; }
+        public Move CurrentAction { get; protected set; }
         private int currentCancelLevel;
 
         private List<AnimationClip> usedMoves = new();
@@ -84,6 +84,10 @@ namespace Player
             else return false;
         }
 
+        public bool Action(StateMove action) { return CheckMoveForAction(action); }
+
+        public bool Action(Move action) { return CheckMoveForAction(action); }
+
         public bool CheckMoveForAction(Move action)
         {
             bool result = true;
@@ -100,7 +104,7 @@ namespace Player
             //Debug.Log(action);
             if (playerAnimator.ChangeAnimation(action.AnimationClip)) /*{ currentCancelLevel = CheckPriorityLevel(action); }*/
             {
-                CurrentAction = action.AnimationClip;
+                CurrentAction = action;
                 currentCancelLevel = levelIndex;
                 usedMoves.Add(action.AnimationClip);
                 if (levelIndex == 0)
@@ -131,15 +135,16 @@ namespace Player
         public virtual void ResetAction()
         {
             Debug.Log("Reset Action");
-            AnimationClip idle = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
-            AnimationClip falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
-            AnimationClip action;
+            StateMove idle = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Idle.ToString()];
+            StateMove falling = animationMapping.StateAnimationMap.StateStringToAnimationMap[StateAnimation.Falling.ToString()];
+            StateMove action;
 
-            if (playerMovement.IsGroundedWithJumping() == false ) 
+            if (playerMovement.IsGroundedWithJumping() == false)
             {
                 action = falling;
             }
-            else { 
+            else
+            {
                 action = idle;
                 playerMovement.SetJumpingFalse();
             }
@@ -147,7 +152,7 @@ namespace Player
             Debug.Log("Switching from " + CurrentAction + " to " + action);
             CurrentAction = action;
             currentCancelLevel = 0;
-            //Action(action);
+            Action(action);
         }
 
         public object[] GetPriorityLevelsRaw()
